@@ -18,6 +18,17 @@ export default {
   display: flex;
   flex-direction: column;
 }
+.page {
+  height:100%;
+  display:flex;
+  flex-direction: column;
+}
+.page_bd {
+  flex:1;
+  height: 100%;
+  overflow:hidden;
+}
+
 .flex{
   display:flex;
 }

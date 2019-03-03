@@ -1,252 +1,138 @@
 <template>
   <div class="container" >
     <div class="tabbar_pages">
-      <div v-if="current === 'jishi'" class="page" >
+      <div v-if="tabCurr === 'home'" class="page" >
         <scroll-view scroll-y style="height:100%;" >
-          <div class="card_wrap">
-            <div v-for="item in list" :key="item.id" class="card">
-              <div class="card_bd flex flex_column">
-                <div class="flex_item">
-                 <div class="title">{{item.title}}</div>
-                 <div class="sub_title">{{item.subTitle}}</div>
-                </div>
-                <div>
-                 <i-avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="default"></i-avatar> 歪歪
-                </div>
+          <div style="padding-top:42rpx;"></div>
+          <div class="weui-flex padding15-h padding-bottom15 ">
+            <div class="weui-flex__item home_bl">
+              <div class="home_bl_top_fs">收益</div>
+              <div class="home_big_fs">1000</div>
+              <div  class="home_bl_small">今日：¥ 30</div>
+            </div>
+            <div style="padding:15rpx;"></div>
+            <div class="weui-flex__item home_bl">
+              <div class="home_bl_top_fs">兑换</div>
+              <div  class="home_big_fs">120</div>
+              <div class="home_bl_small">今日：10</div>
+            </div>
+          </div>
+          <div class="weui-flex padding15-h">
+            <div class="weui-flex__item home_bl">
+              <div class="home_bl_top_fs">到店扫码</div>
+              <div  class="home_big_fs">1000</div>
+              <div  class="home_bl_small">今日：¥ 30</div>
+            </div>
+            <div style="padding:15rpx;"></div>
+            <div class="weui-flex__item home_bl">
+                <div class="home_bl_top_fs">品牌获赞</div>
+                <div  class="home_big_fs">120</div>
+                <div  class="home_bl_small">今日：10</div>
+            </div> 
+          </div>
+          <div class="section" style="padding-top:37rpx;">
+            <div class="weui-cells__title home_title">
+              <image class="home_title_icon" src="../../static/img/home/shop_title_icon.png" ></image>
+              <span>我的门店</span></div>
+            <div >
+              <div class="weui-cells weui-cells_after-title card_cells">
+                  <div @click="routeToShop" class="weui-cell home_cell">
+                    <div class="weui-cell__hd">
+                      <image class="home_cell_img" src="../../static/img/home/shop_icon.png" ></image>
+                    </div>
+                    <div class="weui-cell__bd padding-left15">
+                      <p class="home_cell_title" >鹿角巷天河北门店</p>
+                      <p class="home_cell_sub_title">天河区天河路北路99号 B302</p>
+                    </div>
+                    <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+                  </div>
+                  <div @click="routeToShop" class="weui-cell home_cell">
+                      <div class="weui-cell__hd">
+                        <!-- <i-icon class="home_cell_img" type="browse" size="16" /> -->
+                        <image class="home_cell_img" src="../../static/img/home/shop_icon.png" ></image>
+                      </div>
+                      <div class="weui-cell__bd padding-left15">
+                        <p class="home_cell_title" >鹿角巷天河北门店</p>
+                        <p class="home_cell_sub_title">天河区天河路北路99号 B302</p>
+                      </div>
+                      <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+                  </div>
               </div>
-              <div class="card_ft flex">
-                <div class="flex_item">
-                  <span>{{item.text}}</span>
-                </div>
-                <div class="card_op">
-                  <i-icon type="like" size="28"/>
-                  <i-icon type="message" size="28" />
-                  <i-icon type="send"  size="28"/>
-                </div>
+            </div>
+          </div>
+          <div class="section" style="padding-top:40rpx;">
+            <div class="weui-cells__title home_title">
+              <image class="home_title_icon" src="../../static/img/home/shop_title_icon.png" ></image>
+              <span>品牌学院</span>
+              </div>
+            <div >
+              <div class="weui-cells weui-cells_after-title card_cells">
+                  <div @click="routeToShop" class="weui-cell home_cell">
+                    <div class="weui-cell__hd">
+                      <image class="home_cell_img" src="../../static/img/home/shop_icon.png" ></image>
+                    </div>
+                    <div class="weui-cell__bd padding-left15">
+                      <p class="home_cell_title" >品牌打造分享</p>
+                      <p class="home_cell_sub_title">打造自己的品牌，为顾客提供最好的服务</p>
+                    </div>
+                    <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+                  </div>
               </div>
             </div>
           </div>
-          <!-- <div class="userinfo" @click="bindViewTap">
-            <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
-            <div class="userinfo-nickname">
-              <card :text="userInfo.nickName"></card>
-            </div>
-          </div>
-
-          <div class="usermotto">
-            <div class="user-motto">
-              <card :text="motto"></card>
-            </div>
-          </div>
-
-          <form class="form-container">
-            <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-            <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-          </form>
-          <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
-          {{current}} -->
        </scroll-view>
     </div>
     <!-- <div v-if="current === 'fabu'" class="page">
         我是发布页面
     </div> -->
-      <div v-if="current === 'my'" class="page my flex flex_column">
-          <div class="my_hd flex "  style="height:65px;">
-            <div class="avator_wrap" style="margin-right:15px;width:65px;height:65px;border-radius:100%;background:#f0f0f0;">
-            
-            </div>
-            <div class="my_op flex_item flex_item_center">
-              <ul class="flex">
-                <li class="flex_item ">
-                  <div class="icon_op"><i-icon type="brush" size="28"/></div>
-                  <p>草稿</p>
-                </li>
-                <li  class="flex_item">
-                  <div  class="icon_op"><i-icon type="remind" size="28"/>
+      <div v-if="tabCurr === 'my'" class="page my flex flex_column">
+        <div class="weui-cells route_cell weui-cells_after-title ">
+              <div @click="routeToShop" class="weui-cell my_head_cell ">
+                <div class="weui-cell__hd">
+                  <image class="my_cell_img" src="../../static/img/home/head.png" ></image>
+                </div>
+                <div class="weui-cell__bd padding-left15">
+                  <p class="fs15 dark_16" >Miss米奇</p>
+                  <p class="fs12 main_color">主账号 B302</p>
+                </div>
+                <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+              </div>
+                <div @click="routeToShop" class="weui-cell ">
+                  <div class="weui-cell__bd padding-left15">
+                    <p class="home_cell_title" >我的钱包</p>
                   </div>
-                  <p>消息</p>
-                </li>              
-                <li  class="flex_item">
-                  <div  class="icon_op"><i-icon type="browse" size="28" /></div>
-                  <p>我看过的</p>
-                </li>                
-                <li  class="flex_item">
-                  <div  class="icon_op"><i-icon type="picture" size="28"/></div>
-                  <p>海报</p>
-                </li>
-              </ul>
+                  <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+                </div>
+                <div @click="routeToShop" class="weui-cell ">
+                    <div class="weui-cell__bd padding-left15">
+                      <p class="home_cell_title" >库存管理</p>
+                    </div>
+                    <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+                </div>
+                <div @click="routeToShop" class="weui-cell ">
+                    <div class="weui-cell__bd padding-left15">
+                      <p class="home_cell_title" >账号管理</p>
+                    </div>
+                    <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+                </div>
+                <div @click="routeToShop" class="weui-cell ">
+                    <div class="weui-cell__bd padding-left15">
+                      <p class="home_cell_title" >联系客服</p>
+                    </div>
+                    <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+                </div>
             </div>
-          </div>
-          <div class="my_bd flex_item" style="overflow:hidden;height:100%;">
-
-            <scroll-view scroll-y style="height:100%;" >
-               <ul class="action_list">
-                 <li class="year_title">
-                   2018 年
-                 </li>
-                 <li class="day_action flex">
-                   <div>
-                     <p class="date">10月<span>07</span></p>
-                     <p class="position"><i-icon type="coordinates" size="16" />广州</p>
-                   </div>
-                   <div class="action_img_wrap"></div>
-                   <div class="flex_item">
-                     <p class="action_title">繁星10月</p>
-                     <div class="flex action_op">
-                       <span class="flex_item"><i-icon type="browse" size="16" /> 300</span>
-                       <span class="flex_item"><i-icon type="like" size="16"/>  201</span>
-                       <span class="flex_item"><i-icon type="message" size="16" /> 277</span>
-                     </div>
-                   </div>
-                 </li>
-                 <li class="day_action flex">
-                   <div>
-                     <p class="date">10月<span>05</span></p>
-                     <p class="position"><i-icon type="coordinates" size="16" />广州</p>
-                   </div>
-                   <div class="action_img_wrap"></div>
-                   <div class="flex_item">
-                     <p class="action_title">仰望星空，只要只要踮起脚尖梦想其实离你并不会太遥远</p>
-                      <div class="flex action_op">
-                       <span class="flex_item"><i-icon type="browse" size="16" /> 300</span>
-                       <span class="flex_item"><i-icon type="like" size="16"/>  201</span>
-                       <span class="flex_item"><i-icon type="message" size="16" /> 277</span>
-                     </div>
-                   </div>
-                 </li>
-                                  <li class="day_action flex">
-                   <div>
-                     <p class="date">10月<span>07</span></p>
-                     <p class="position"><i-icon type="coordinates" size="16" />广州</p>
-                   </div>
-                   <div class="action_img_wrap"></div>
-                   <div class="flex_item">
-                     <p class="action_title">繁星10月</p>
-                     <div class="flex action_op">
-                       <span class="flex_item"><i-icon type="browse" size="16" /> 300</span>
-                       <span class="flex_item"><i-icon type="like" size="16"/>  201</span>
-                       <span class="flex_item"><i-icon type="message" size="16" /> 277</span>
-                     </div>
-                   </div>
-                 </li>
-                 <li class="day_action flex">
-                   <div>
-                     <p class="date">10月<span>05</span></p>
-                     <p class="position"><i-icon type="coordinates" size="16" />广州</p>
-                   </div>
-                   <div class="action_img_wrap"></div>
-                   <div class="flex_item">
-                     <p class="action_title">仰望星空，只要只要踮起脚尖梦想其实离你并不会太遥远</p>
-                      <div class="flex action_op">
-                       <span class="flex_item"><i-icon type="browse" size="16" /> 300</span>
-                       <span class="flex_item"><i-icon type="like" size="16"/>  201</span>
-                       <span class="flex_item"><i-icon type="message" size="16" /> 277</span>
-                     </div>
-                   </div>
-                 </li>
-                                  <li class="day_action flex">
-                   <div>
-                     <p class="date">10月<span>07</span></p>
-                     <p class="position"><i-icon type="coordinates" size="16" />广州</p>
-                   </div>
-                   <div class="action_img_wrap"></div>
-                   <div class="flex_item">
-                     <p class="action_title">繁星10月</p>
-                     <div class="flex action_op">
-                       <span class="flex_item"><i-icon type="browse" size="16" /> 300</span>
-                       <span class="flex_item"><i-icon type="like" size="16"/>  201</span>
-                       <span class="flex_item"><i-icon type="message" size="16" /> 277</span>
-                     </div>
-                   </div>
-                 </li>
-                 <li class="day_action flex">
-                   <div>
-                     <p class="date">10月<span>05</span></p>
-                     <p class="position"><i-icon type="coordinates" size="16" />广州</p>
-                   </div>
-                   <div class="action_img_wrap"></div>
-                   <div class="flex_item">
-                     <p class="action_title">仰望星空，只要只要踮起脚尖梦想其实离你并不会太遥远</p>
-                      <div class="flex action_op">
-                       <span class="flex_item"><i-icon type="browse" size="16" /> 300</span>
-                       <span class="flex_item"><i-icon type="like" size="16"/>  201</span>
-                       <span class="flex_item"><i-icon type="message" size="16" /> 277</span>
-                     </div>
-                   </div>
-                 </li>
-                                  <li class="day_action flex">
-                   <div>
-                     <p class="date">10月<span>07</span></p>
-                     <p class="position"><i-icon type="coordinates" size="16" />广州</p>
-                   </div>
-                   <div class="action_img_wrap"></div>
-                   <div class="flex_item">
-                     <p class="action_title">繁星10月</p>
-                     <div class="flex action_op">
-                       <span class="flex_item"><i-icon type="browse" size="16" /> 300</span>
-                       <span class="flex_item"><i-icon type="like" size="16"/>  201</span>
-                       <span class="flex_item"><i-icon type="message" size="16" /> 277</span>
-                     </div>
-                   </div>
-                 </li>
-                 <li class="day_action flex">
-                   <div>
-                     <p class="date">10月<span>05</span></p>
-                     <p class="position"><i-icon type="coordinates" size="16" />广州</p>
-                   </div>
-                   <div class="action_img_wrap"></div>
-                   <div class="flex_item">
-                     <p class="action_title">仰望星空，只要只要踮起脚尖梦想其实离你并不会太遥远</p>
-                      <div class="flex action_op">
-                       <span class="flex_item"><i-icon type="browse" size="16" /> 300</span>
-                       <span class="flex_item"><i-icon type="like" size="16"/>  201</span>
-                       <span class="flex_item"><i-icon type="message" size="16" /> 277</span>
-                     </div>
-                   </div>
-                 </li>
-                                  <li class="day_action flex">
-                   <div>
-                     <p class="date">10月<span>07</span></p>
-                     <p class="position"><i-icon type="coordinates" size="16" />广州</p>
-                   </div>
-                   <div class="action_img_wrap"></div>
-                   <div class="flex_item">
-                     <p class="action_title">繁星10月</p>
-                     <div class="flex action_op">
-                       <span class="flex_item"><i-icon type="browse" size="16" /> 300</span>
-                       <span class="flex_item"><i-icon type="like" size="16"/>  201</span>
-                       <span class="flex_item"><i-icon type="message" size="16" /> 277</span>
-                     </div>
-                   </div>
-                 </li>
-                 <li class="day_action flex">
-                   <div>
-                     <p class="date">10月<span>05</span></p>
-                     <p class="position"><i-icon type="coordinates" size="16" />广州</p>
-                   </div>
-                   <div class="action_img_wrap"></div>
-                   <div class="flex_item">
-                     <p class="action_title">仰望星空，只要只要踮起脚尖梦想其实离你并不会太遥远</p>
-                      <div class="flex action_op">
-                       <span class="flex_item"><i-icon type="browse" size="16" /> 300</span>
-                       <span class="flex_item"><i-icon type="like" size="16"/>  201</span>
-                       <span class="flex_item"><i-icon type="message" size="16" /> 277</span>
-                     </div>
-                   </div>
-                 </li>
-               </ul>
-            </scroll-view>
-          </div>
-
-      </div>
+        </div>
     </div>
 
     <div class="tabbar_warp" style="width:100%">
-      <i-tab-bar :current="current" @change="handleChange">
-        <i-tab-bar-item key="jishi" icon="homepage" current-icon="homepage_fill" title="记事鹿"></i-tab-bar-item>
-        <i-tab-bar-item key="fabu" icon="group" current-icon="group_fill" title="发布"></i-tab-bar-item>
+      <!-- <card :text="tabCurr"></card> -->
+      <mytabbar :value="tabCurr" @input="handleTab" :list="tabList"></mytabbar>
+      <!-- <i-tab-bar :current="current" @change="handleChange">
+        <i-tab-bar-item key="jishi" icon="homepage" current-icon="homepage_fill" title="首页"></i-tab-bar-item>
+        <i-tab-bar-item key="fabu" icon="group" current-icon="group_fill" title="兑换"></i-tab-bar-item>
         <i-tab-bar-item key="my" icon="mine" current-icon="mine_fill" dot title="我的"></i-tab-bar-item>
-      </i-tab-bar>
+      </i-tab-bar> -->
     </div>
 
   </div>
@@ -254,12 +140,18 @@
 
 <script>
 import card from '@/components/card'
-
+import mytabbar from '@/components/tabbar'
 export default {
   data () {
     return {
-      current: 'my',
+      current: 'jishi',
       motto: 'Hello World1112',
+      tabCurr: 'home',
+      tabList: [
+        {name: '首页', value: 'home', url: '../../static/img/tabbar/home.png', urlHover: '../../static/img/tabbar/home_hover.png'},
+        {name: '兑换', value: 'scan', notxt: 'true', url: '../../static/img/tabbar/scan.png', urlHover: '../../static/img/tabbar/scan.png'},
+        {name: '我的', value: 'my', url: '../../static/img/tabbar/my.png', urlHover: '../../static/img/tabbar/my_hover.png'}
+      ],
       list: [
         {id: 1, title: '繁星十月', subTitle: '我们故事的情节，发生在烂漫签约，夜空中繁星点点，你说情话的瞬间，我所有的小细节，没人比你更了解，沉浸在只有幸福的世界', text: '我是外星人1'},
         {id: 2, title: '繁星十月', subTitle: '我们故事的情节，发生在烂漫签约，夜空中繁星点点，你说情话的瞬间，我所有的小细节，没人比你更了解，沉浸在只有幸福的世界', text: '我是外星人2'},
@@ -276,10 +168,22 @@ export default {
   },
 
   components: {
-    card
+    card,
+    mytabbar
   },
 
   methods: {
+    handleTab (val) {
+      if (val === 'scan') {
+        wx.scanCode({
+          success (res) {
+            console.log(res)
+          }
+        })
+      } else {
+        this.tabCurr = val
+      }
+    },
     handleChange (e) {
       console.log(e.mp.detail)
       if (e.mp.detail.key === 'fabu') {
@@ -291,6 +195,10 @@ export default {
     bindViewTap () {
       const url = '../logs/main'
       wx.navigateTo({ url })
+    },
+    routeToShop () {
+      const url = '../shopManage/main'
+      return wx.navigateTo({ url })
     },
     getUserInfo () {
       // 调用登录接口
@@ -319,7 +227,77 @@ export default {
 </script>
 
 <style  scoped>
-
+.home_bl{
+  height:230rpx;
+  padding: 30rpx;
+  box-shadow:0 10rpx 30rpx rgba(202,204,220,0.5);
+  border-radius:20rpx;
+}
+.home_big_fs {
+  color:#162641;
+  font-size:60rpx;
+  line-height:80rpx;
+  font-weight:600;
+}
+.home_bl_small {
+  background:rgba(237,241,249,1);
+  border-radius:10rpx;
+  font-size:26rpx;
+  height:54rpx;
+  color:rgba(142,151,168,1);
+  padding: 0 30rpx;
+  line-height:54rpx;
+}
+.home_bl_top_fs {
+  font-size:26rpx;
+  color:rgba(142,151,168,1);
+}
+.home_cell {
+  padding: 30rpx 40rpx;
+}
+.home_cell_img {
+  width:90rpx;
+  height:90rpx;
+  display:inline-block;
+  border-radius:50%;
+}
+.home_cell_title {
+  font-size:30rpx;
+  color:rgba(22,38,65,1);
+}
+.home_cell_sub_title {
+  font-size:24rpx;
+  color:rgba(142,151,169,1);
+}
+.section .home_title{
+  height:90rpx;
+  font-size:30rpx;
+  color:rgba(22,38,65,1);
+  line-height:90rpx;
+ 
+}
+.section .home_title > span {
+ vertical-align:middle;
+ padding-left:18rpx;
+}
+.section .home_title_icon {
+  width:42rpx;
+  height:42rpx;
+  vertical-align:middle;
+}
+.page.my .route_cell .weui-cell {
+  height:114rpx;
+}
+.page.my .route_cell:before{
+  border-top: 0;
+}
+.page.my .route_cell .my_head_cell{
+  height:237rpx;
+}
+.my_cell_img {
+  height:120rpx;
+  width:120rpx;
+}
 .card_wrap {
   padding:15px;
 }
@@ -357,7 +335,7 @@ export default {
   height:100%;
 }
 .tabbar_warp {
-  height:100rpx;
+  height:98rpx;
 }
 .userinfo {
   display: flex;

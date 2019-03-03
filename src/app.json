@@ -1,6 +1,23 @@
 {
   "pages": [
+    "pages/userCenter/main",
+    "pages/shopInfo/main",
+    
+    "pages/exchange/list/main",
+    "pages/exchange/detail/main",
+    "pages/income/list/main",
+    "pages/income/detail/main",
+    "pages/shopScan/list/main",
+    "pages/shopScan/detail/main",
+    "pages/brand/list/main",
+    "pages/brand/detail/main",
     "pages/index/main",
+    "pages/shopManage/main",
+    
+    "pages/login/main",
+   
+    "pages/detail/main",
+    
     "pages/publish/main",
    
     "pages/logs/main",
@@ -9,7 +26,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "记事鹿",
+    "navigationBarTitleText": "米奇猩商户平台",
     "navigationBarTextStyle": "black"
   }
 }

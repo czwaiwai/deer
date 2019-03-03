@@ -22,7 +22,7 @@
             </i-cell-group>
           </form>
           </scroll-view>
-      </div>>
+      </div>
 
     </div>
     <div class="page_ft flex">
