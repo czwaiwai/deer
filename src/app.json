@@ -1,17 +1,22 @@
 {
   "pages": [
+    "pages/index/main",
+    "pages/cash/main",
+    "pages/subAcct/main",
+    "pages/stock/main",
+    "pages/income/detail/main",
+    "pages/income/list/main",
     "pages/userCenter/main",
     "pages/shopInfo/main",
     
     "pages/exchange/list/main",
     "pages/exchange/detail/main",
-    "pages/income/list/main",
-    "pages/income/detail/main",
+
     "pages/shopScan/list/main",
     "pages/shopScan/detail/main",
     "pages/brand/list/main",
     "pages/brand/detail/main",
-    "pages/index/main",
+    
     "pages/shopManage/main",
     
     "pages/login/main",

@@ -26,7 +26,7 @@ export default {
 .page_bd {
   flex:1;
   height: 100%;
-  overflow:hidden;
+  overflow:auto;
 }
 
 .flex{

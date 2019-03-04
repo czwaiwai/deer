@@ -5,26 +5,26 @@
         <scroll-view scroll-y style="height:100%;" >
           <div style="padding-top:42rpx;"></div>
           <div class="weui-flex padding15-h padding-bottom15 ">
-            <div class="weui-flex__item home_bl">
+            <div @click="routeTo('../income/list/main')" class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">收益</div>
               <div class="home_big_fs">1000</div>
               <div  class="home_bl_small">今日：¥ 30</div>
             </div>
             <div style="padding:15rpx;"></div>
-            <div class="weui-flex__item home_bl">
+            <div  @click="routeTo('../income/list/main')" class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">兑换</div>
               <div  class="home_big_fs">120</div>
               <div class="home_bl_small">今日：10</div>
             </div>
           </div>
           <div class="weui-flex padding15-h">
-            <div class="weui-flex__item home_bl">
+            <div @click="routeTo('../income/list/main')" class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">到店扫码</div>
               <div  class="home_big_fs">1000</div>
               <div  class="home_bl_small">今日：¥ 30</div>
             </div>
             <div style="padding:15rpx;"></div>
-            <div class="weui-flex__item home_bl">
+            <div @click="routeTo('../income/list/main')" class="weui-flex__item home_bl">
                 <div class="home_bl_top_fs">品牌获赞</div>
                 <div  class="home_big_fs">120</div>
                 <div  class="home_bl_small">今日：10</div>
@@ -87,7 +87,7 @@
     </div> -->
       <div v-if="tabCurr === 'my'" class="page my flex flex_column">
         <div class="weui-cells route_cell weui-cells_after-title ">
-              <div @click="routeToShop" class="weui-cell my_head_cell ">
+              <div @click="routeto('../userCenter/main')" class="weui-cell my_head_cell ">
                 <div class="weui-cell__hd">
                   <image class="my_cell_img" src="../../static/img/home/head.png" ></image>
                 </div>
@@ -97,30 +97,30 @@
                 </div>
                 <div class="weui-cell__ft weui-cell__ft_in-access"></div>
               </div>
-                <div @click="routeToShop" class="weui-cell ">
+                <div @click="routeto('../cash/main')" class="weui-cell ">
                   <div class="weui-cell__bd padding-left15">
                     <p class="home_cell_title" >我的钱包</p>
                   </div>
                   <div class="weui-cell__ft weui-cell__ft_in-access"></div>
                 </div>
-                <div @click="routeToShop" class="weui-cell ">
+                <div @click="routeto('../stock/main')" class="weui-cell ">
                     <div class="weui-cell__bd padding-left15">
                       <p class="home_cell_title" >库存管理</p>
                     </div>
                     <div class="weui-cell__ft weui-cell__ft_in-access"></div>
                 </div>
-                <div @click="routeToShop" class="weui-cell ">
+                <div @click="routeto('../subAcct/main')" class="weui-cell ">
                     <div class="weui-cell__bd padding-left15">
                       <p class="home_cell_title" >账号管理</p>
                     </div>
                     <div class="weui-cell__ft weui-cell__ft_in-access"></div>
                 </div>
-                <div @click="routeToShop" class="weui-cell ">
+                <button open-type="contact"  class="btn_empty weui-cell ">
                     <div class="weui-cell__bd padding-left15">
                       <p class="home_cell_title" >联系客服</p>
                     </div>
                     <div class="weui-cell__ft weui-cell__ft_in-access"></div>
-                </div>
+                </button>
             </div>
         </div>
     </div>
@@ -200,6 +200,9 @@ export default {
       const url = '../shopManage/main'
       return wx.navigateTo({ url })
     },
+    routeto (url) {
+      return wx.navigateTo({url})
+    },
     getUserInfo () {
       // 调用登录接口
       console.log('aaa')
@@ -227,6 +230,17 @@ export default {
 </script>
 
 <style  scoped>
+button.btn_empty:after {
+  content:'';
+  border:none;
+  border-radius: 0;
+}
+button.btn_empty {
+  border:none;
+  border-radius: 0;
+  background:transparent;
+  text-align:left;
+}
 .home_bl{
   height:230rpx;
   padding: 30rpx;
