@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="weui-flex padding15-h padding-bottom15 ">
-                <div class="weui-flex__item weui-flex shop_mg_bl">
+                <div @click="routeTo('../releaseAct/main')" class="weui-flex__item weui-flex shop_mg_bl">
                     <div><image class="shop_mg_icon" src="../../static/img/shopManage/icon_01.png" ></image></div>
                     <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">运营活动</div>
                 </div>
@@ -67,6 +67,9 @@ export default {
   created () {},
 
   methods: {
+    routeTo (url) {
+      return wx.navigateTo({url})
+    },
     handleSubmit (e) {
       console.log(e)
       console.log(this.formObj)

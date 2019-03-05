@@ -91,13 +91,24 @@ view {
     padding:10rpx;
     background:#EDF1F9;
 }
+.relative {
+    position:relative;
+}
 .img_54 {
     width:54rpx;
     height:54rpx;
 }
+.img_90 {
+    width: 90rpx;
+    height: 90rpx;
+}
 .img_120 {
     width:120rpx;
     height:120rpx;
+}
+.img_150 {
+    width:150rpx;
+    height:150rpx;
 }
 .no_before_border.weui-cells:before{
     border-top: none;
@@ -107,4 +118,14 @@ view {
 }
 .bg {
    background: #EDF1F9
+}
+.ft_btn {
+    background:#1CD1C2;
+    color:#FFF;
+    border:none;
+    border-radius:0;
+}
+.ft_btn:after{
+    border:none;
+    border-radius:0;
 }

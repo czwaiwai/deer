@@ -10,7 +10,7 @@
               <div class="weui-cell__hd fs15">提现至</div>
               <div class="weui-cell__bd "></div>
             </div>
-            <div class="weui-cell " style="height:150rpx;">
+            <div class="weui-cell "  @click="routeTo('../bindAcct/main')"  style="height:150rpx;">
               <div class="weui-cell__hd">
                 <image class="img_54" src="../../static/img/shopManage/head.png" ></image>
               </div>
@@ -19,8 +19,8 @@
             </div>
         </div>
         <div class="dark_line"></div>
-      <div class="weui-cells no_before_border  weui-cells_after-title ">
-          <div class="weui-cell" style="height:100rpx;">
+        <div class="weui-cells no_before_border  weui-cells_after-title ">
+            <div @click="routeTo('../cashDetail/main')" class="weui-cell" style="height:100rpx;">
               <div class="weui-cell__hd fs15">提现金额</div>
               <div class="weui-cell__bd "></div>
               <div class="weui-cell__ft  weui-cell__ft_in-access fs15">明细</div>
@@ -56,7 +56,11 @@ export default {
 
   created () {},
 
-  methods: {}
+  methods: {
+    routeTo (url) {
+      return wx.navigateTo({url})
+    }
+  }
 }
 </script>
 <style>
