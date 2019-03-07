@@ -11,8 +11,13 @@
         <div class="input_item padding15-h relative  weui-flex">
             <div class="padding-right15 fs15">密码</div>
             <div class="weui-flex__item"> 
-              <input class="login_input" name="pwd" v-model="formObj.pwd"  type="text" placeholder="请输入验证码" />
+              <input class="login_input" name="pwd" v-model="formObj.pwd" :password="!showPwd" type="text" placeholder="请输入验证码" />
+              <!-- <input class="login_input" name="pwd" v-model="formObj.pwd"  type="text" placeholder="请输入验证码" /> -->
               <!-- <button class="sms_btn main_color fs15">获取验证码</button> -->
+            </div>
+            <div @click="handleEye" class="input_item_ft pwd_ft_wrap">
+              <image v-if="showPwd" class="eye_icon" mode="aspectFit"  src="../../static/img/other/eye_show_icon.png"></image>
+              <image v-if="!showPwd" class="eye_icon" mode="aspectFit"  src="../../static/img/other/eye_close_icon.png"></image>
             </div>
         </div>
       </form>
@@ -33,7 +38,8 @@ export default {
       formObj: {
         username: '',
         pwd: ''
-      }
+      },
+      showPwd: false
     }
   },
 
@@ -41,14 +47,36 @@ export default {
 
   created () {},
 
-  methods: {}
+  methods: {
+    handleEye () {
+      this.showPwd = !this.showPwd
+    }
+  }
 }
 </script>
-<style>
-.add_acct .input_item{
+<style class="scoped">
+.input_item{
   height:112rpx;
+  line-height:111rpx;
 }
-.add_acct .input_item .weui-flex__item {
+.input_item .weui-flex__item {
   border-bottom:1rpx solid #ECEEF2;
+  padding-left:30rpx;
+}
+.input_item_ft {
+  border-bottom:1rpx solid #ECEEF2;
+  padding-left:30rpx;
+}
+.input_item input{
+  font-size:30rpx;
+  height:111rpx;
+  line-height:111rpx;
+}
+.eye_icon{
+  width:57rpx;
+  height:57rpx;
+}
+.pwd_ft_wrap  {
+  line-height:140rpx;
 }
 </style>

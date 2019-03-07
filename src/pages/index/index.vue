@@ -87,7 +87,7 @@
     </div> -->
       <div v-if="tabCurr === 'my'" class="page my flex flex_column">
         <div class="weui-cells route_cell weui-cells_after-title ">
-              <div @click="routeto('../userCenter/main')" class="weui-cell my_head_cell ">
+              <div @click="routeTo('../userCenter/main')" class="weui-cell my_head_cell ">
                 <div class="weui-cell__hd">
                   <image class="my_cell_img" src="../../static/img/home/head.png" ></image>
                 </div>
@@ -97,19 +97,19 @@
                 </div>
                 <div class="weui-cell__ft weui-cell__ft_in-access"></div>
               </div>
-                <div @click="routeto('../cash/main')" class="weui-cell ">
+                <div @click="routeTo('../cash/main')" class="weui-cell ">
                   <div class="weui-cell__bd padding-left15">
                     <p class="home_cell_title" >我的钱包</p>
                   </div>
                   <div class="weui-cell__ft weui-cell__ft_in-access"></div>
                 </div>
-                <div @click="routeto('../stock/main')" class="weui-cell ">
+                <div @click="routeTo('../stock/main')" class="weui-cell ">
                     <div class="weui-cell__bd padding-left15">
                       <p class="home_cell_title" >库存管理</p>
                     </div>
                     <div class="weui-cell__ft weui-cell__ft_in-access"></div>
                 </div>
-                <div @click="routeto('../subAcct/main')" class="weui-cell ">
+                <div @click="routeTo('../subAcct/main')" class="weui-cell ">
                     <div class="weui-cell__bd padding-left15">
                       <p class="home_cell_title" >账号管理</p>
                     </div>
@@ -175,11 +175,13 @@ export default {
   methods: {
     handleTab (val) {
       if (val === 'scan') {
-        wx.scanCode({
-          success (res) {
-            console.log(res)
-          }
-        })
+        wx.navigateTo({ url: '../scanExchange/main' })
+        // wx.scanCode({
+        //   success (res) {
+        //    wx.navigateTo({ url: '../scanExchange/main' })
+        //     console.log(res)
+        //   }
+        // })
       } else {
         this.tabCurr = val
       }
@@ -200,7 +202,7 @@ export default {
       const url = '../shopManage/main'
       return wx.navigateTo({ url })
     },
-    routeto (url) {
+    routeTo (url) {
       return wx.navigateTo({url})
     },
     getUserInfo () {

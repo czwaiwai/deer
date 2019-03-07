@@ -32,7 +32,7 @@
               <p class="title fs15">鹿角巷天河北总店</p>
               <div class="weui-flex padding42">
                 <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
-                <a class="main_color fs12">查看明细</a>
+                <a @click="routeTo('../detail/main')" class="main_color fs12">查看明细</a>
               </div>
               <div class="item_nums weui-flex text-center ">
                 <div class="weui-flex__item" >
@@ -123,7 +123,11 @@ export default {
 
   created () {},
 
-  methods: {}
+  methods: {
+    routeTo (url) {
+      return wx.navigateTo({url})
+    }
+  }
 }
 </script>
 <style scoped>

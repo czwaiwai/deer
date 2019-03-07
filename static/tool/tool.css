@@ -29,6 +29,9 @@ view {
 .text-center {
     text-align:center;
 }
+.text-right {
+    text-align:right;
+}
 .item_center {
     align-self: center;
 }
@@ -91,6 +94,9 @@ view {
     padding:10rpx;
     background:#EDF1F9;
 }
+.vertical-middle {
+    vertical-align: middle;
+}
 .relative {
     position:relative;
 }
@@ -109,6 +115,10 @@ view {
 .img_150 {
     width:150rpx;
     height:150rpx;
+}
+.img_360 {
+    width:360rpx;
+    height:360rpx;
 }
 .no_before_border.weui-cells:before{
     border-top: none;

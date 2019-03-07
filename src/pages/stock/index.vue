@@ -4,7 +4,7 @@
   <div class="page">
     <div class="page_bd bg">
       <div class="padding15-h padding-top15">
-        <div class="stock_wrap ">
+        <div @click="routeTo('../stockDetail/main')" class="stock_wrap ">
           <div class="weui-flex stock_top">
             <div>
               <image  src="../../static/img/home/shop_icon.png" class="img_120"></image>
@@ -76,7 +76,11 @@ export default {
 
   created () {},
 
-  methods: {}
+  methods: {
+    routeTo (url) {
+      return wx.navigateTo({url})
+    }
+  }
 }
 </script>
 <style scoped>
