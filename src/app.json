@@ -1,12 +1,13 @@
 {
   "pages": [
+    "pages/income/list/main",
+    "pages/income/detail/main",
     "pages/userCenter/main",
     "pages/shopInfo/main",
     
     "pages/exchange/list/main",
     "pages/exchange/detail/main",
-    "pages/income/list/main",
-    "pages/income/detail/main",
+
     "pages/shopScan/list/main",
     "pages/shopScan/detail/main",
     "pages/brand/list/main",
