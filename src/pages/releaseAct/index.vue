@@ -4,16 +4,16 @@
   <div class="page">
     <div class="page_bd">
       <ul class="padding15">
-        <li>
+        <li @click="routeTo('../releaseActList/main')">
           <image class="act_banner" src="../../static/img/other/act_banner_02.png"></image>
         </li>
-        <li class="banner_wrap">
+        <li @click="routeTo('../releaseActList/main')" class="banner_wrap">
           <image class="act_banner" src="../../static/img/other/act_banner_01.png"></image>
         </li>
       </ul>
     </div>
     <div class="page_ft">
-      <button  class="ft_btn">发布活动</button>
+      <button @click="routeTo('../releaseEvent/main')" class="ft_btn" >发布活动</button>
     </div>
   </div>
 </div>
@@ -31,7 +31,11 @@ export default {
 
   created () {},
 
-  methods: {}
+  methods: {
+    routeTo (url) {
+      wx.navigateTo({url})
+    }
+  }
 }
 </script>
 <style>

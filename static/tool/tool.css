@@ -43,7 +43,10 @@ view {
     padding-left:30rpx;
     padding-right:30rpx;
 }
-
+.padding15-v {
+    padding-bottom: 30rpx;
+    padding-top: 30rpx;
+}
 .padding-v {
     padding-top: 20rpx;
     padding-bottom:20rpx;
@@ -84,6 +87,9 @@ view {
 .dark_9a {
     color:#9a9a9a;
 }
+.dark_ca {
+    color:#CACCDA;
+}
 .dark_8e {
     color:#8E97A8
 }
@@ -103,6 +109,14 @@ view {
 .img_54 {
     width:54rpx;
     height:54rpx;
+}
+.img_60 {
+    width:60rpx;
+    height:60rpx;
+}
+.img_72 {
+    width:72rpx;
+    height:72rpx;
 }
 .img_90 {
     width: 90rpx;
