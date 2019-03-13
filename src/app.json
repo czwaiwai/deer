@@ -1,10 +1,17 @@
 {
   "pages": [
-    "pages/income/list/main",
+
+    "pages/index/main",
+    "pages/cash/main",
+    "pages/subAcct/main",
+    "pages/stock/main",
     "pages/income/detail/main",
+    "pages/income/list/main",
     "pages/userCenter/main",
     "pages/shopInfo/main",
-    
+    "pages/merchantUpdate/main",
+    "pages/relatedShop/main",
+    "pages/stockDetail/main",
     "pages/exchange/list/main",
     "pages/exchange/detail/main",
 
@@ -12,9 +19,20 @@
     "pages/shopScan/detail/main",
     "pages/brand/list/main",
     "pages/brand/detail/main",
-    "pages/index/main",
+    "pages/brandSpace/main",
+    "pages/brandSpaceAdd/main",
+    
+    "pages/bindAcct/main",
     "pages/shopManage/main",
     
+    "pages/fansFocusList/main",
+    "pages/cashDetail/main",
+
+    "pages/releaseAct/main",
+    "pages/releaseActList/main",
+    "pages/releaseEvent/main",
+    "pages/scanExchange/main",
+
     "pages/login/main",
    
     "pages/detail/main",

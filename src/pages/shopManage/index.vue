@@ -10,34 +10,34 @@
        </div>
        <div class="setion">
             <div class="weui-flex padding15-h padding-bottom15 ">
-                <div class="weui-flex__item weui-flex shop_mg_bl">
+                <div  @click="routeTo('../shopInfo/main')" class="weui-flex__item weui-flex shop_mg_bl">
                     <div><image class="shop_mg_icon" src="../../static/img/shopManage/icon_05.png" ></image></div>
                     <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">门店信息</div>
                 </div>
                 <div style="padding:15rpx;"></div>
-                <div class="weui-flex__item weui-flex shop_mg_bl">
+                <div @click="routeTo('../brandSpace/main')" class="weui-flex__item weui-flex shop_mg_bl">
                     <div><image class="shop_mg_icon" src="../../static/img/shopManage/icon_06.png" ></image></div>
                     <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">品牌动态</div>
                 </div>
             </div>
             <div class="weui-flex padding15-h padding-bottom15 ">
-                <div class="weui-flex__item weui-flex shop_mg_bl">
+                <div  @click="routeTo('../income/list/main')" class="weui-flex__item weui-flex shop_mg_bl">
                     <div><image class="shop_mg_icon" src="../../static/img/shopManage/icon_03.png" ></image></div>
                     <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">好物推荐</div>
                 </div>
                 <div style="padding:15rpx;"></div>
-                <div class="weui-flex__item weui-flex shop_mg_bl">
+                <div  @click="routeTo('../income/list/main')" class="weui-flex__item weui-flex shop_mg_bl">
                     <div><image class="shop_mg_icon" src="../../static/img/shopManage/icon_04.png" ></image></div>
                     <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">积分礼物</div>
                 </div>
             </div>
             <div class="weui-flex padding15-h padding-bottom15 ">
-                <div class="weui-flex__item weui-flex shop_mg_bl">
+                <div @click="routeTo('../releaseAct/main')" class="weui-flex__item weui-flex shop_mg_bl">
                     <div><image class="shop_mg_icon" src="../../static/img/shopManage/icon_01.png" ></image></div>
                     <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">运营活动</div>
                 </div>
                 <div style="padding:15rpx;"></div>
-                <div class="weui-flex__item weui-flex shop_mg_bl">
+                <div  @click="routeTo('../fansFocusList/main')" class="weui-flex__item weui-flex shop_mg_bl">
                     <div><image class="shop_mg_icon" src="../../static/img/shopManage/icon_02.png" ></image></div>
                     <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">粉丝关注</div>
                 </div>
@@ -67,6 +67,9 @@ export default {
   created () {},
 
   methods: {
+    routeTo (url) {
+      return wx.navigateTo({url})
+    },
     handleSubmit (e) {
       console.log(e)
       console.log(this.formObj)

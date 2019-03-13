@@ -26,7 +26,84 @@
           </div>
         </div>
       </div>
-      <div class="section">
+      <div class="section" >
+        <ul class="ul_list " style="padding-bottom:40rpx;" >
+           <li class="li_item light_bg ">
+              <p class="title fs15">鹿角巷天河北总店</p>
+              <div class="weui-flex padding42">
+                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
+                <a @click="routeTo('../detail/main')" class="main_color fs12">查看明细</a>
+              </div>
+              <div class="item_nums weui-flex text-center ">
+                <div class="weui-flex__item" >
+                  <p class="main_txt">30</p>
+                  <p class="sub_txt dark_8e fs12">今日</p>
+                </div>
+                <div class="weui-flex__item" >
+                  <p class="main_txt">30</p>
+                  <p class="sub_txt dark_8e fs12">昨日</p>
+                </div>
+                <div class="weui-flex__item" >
+                  <p class="main_txt">30</p>
+                  <p class="sub_txt dark_8e fs12">累计</p>
+                </div>
+              </div>
+              <div class="weui-flex" style="padding-top:36rpx;">
+                <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
+                <div class="dark_8e fs12">投放中</div>
+              </div>
+          </li>
+          <li class="li_item light_bg ">
+              <p class="title fs15">鹿角巷天河北总店</p>
+              <div class="weui-flex padding42">
+                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
+                <a class="main_color fs12">查看明细</a>
+              </div>
+              <div class="item_nums weui-flex text-center ">
+                <div class="weui-flex__item" >
+                  <p class="main_txt">30</p>
+                  <p class="sub_txt dark_8e fs12">今日</p>
+                </div>
+                <div class="weui-flex__item" >
+                  <p class="main_txt">30</p>
+                  <p class="sub_txt dark_8e fs12">昨日</p>
+                </div>
+                <div class="weui-flex__item" >
+                  <p class="main_txt">30</p>
+                  <p class="sub_txt dark_8e fs12">累计</p>
+                </div>
+              </div>
+              <div class="weui-flex" style="padding-top:36rpx;">
+                <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
+                <div class="dark_8e fs12">投放中</div>
+              </div>
+          </li>
+          <li class="li_item light_bg ">
+              <p class="title fs15">鹿角巷天河北总店</p>
+              <div class="weui-flex padding42">
+                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
+                <a class="main_color fs12">查看明细</a>
+              </div>
+              <div class="item_nums weui-flex text-center ">
+                <div class="weui-flex__item" >
+                  <p class="main_txt">30</p>
+                  <p class="sub_txt dark_8e fs12">今日</p>
+                </div>
+                <div class="weui-flex__item" >
+                  <p class="main_txt">30</p>
+                  <p class="sub_txt dark_8e fs12">昨日</p>
+                </div>
+                <div class="weui-flex__item" >
+                  <p class="main_txt">30</p>
+                  <p class="sub_txt dark_8e fs12">累计</p>
+                </div>
+              </div>
+              <div class="weui-flex" style="padding-top:36rpx;">
+                <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
+                <div class="dark_8e fs12">投放中</div>
+              </div>
+          </li>
+        </ul>
         
       </div>
     </div>
@@ -46,10 +123,17 @@ export default {
 
   created () {},
 
-  methods: {}
+  methods: {
+    routeTo (url) {
+      return wx.navigateTo({url})
+    }
+  }
 }
 </script>
-<style>
+<style scoped>
+.top_wrap {
+  padding-bottom:72rpx;
+}
 .top_bd {
   width:750rpx;
   height:180rpx;
@@ -61,8 +145,8 @@ export default {
   height:222rpx; 
   background:#FFF;
   box-shadow:0px 13px 24px 0px rgba(202,204,219,0.3);
-  border-radius:30px;
-  padding:66rpx 30rpx;
+  border-radius:30rpx;
+  padding:66rpx 0;
   text-align:center;
 }
 .top_main .small_txt {
@@ -73,5 +157,28 @@ export default {
   font-size:48rpx;
   font-weight:bold;
   color:rgba(22,38,65,1);
+}
+.main_txt {
+  font-size:42rpx;
+}
+.ul_list {
+  background:#EDF1F9;
+}
+.li_item {
+  padding:36rpx 30rpx;
+  margin-bottom:20rpx;
+}
+.li_item .title {
+  line-height:36rpx;
+  padding-bottom:20rpx;
+}
+.li_item .item_nums {
+  height:144rpx;
+  padding:22rpx 0;
+  background:rgba(247,249,252,1);
+  border-radius:10rpx;
+}
+.li_item .padding42 {
+  padding-bottom:36rpx;
 }
 </style>
