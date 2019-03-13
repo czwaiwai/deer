@@ -167,7 +167,7 @@
 
 <script>
 import card from '@/components/card'
-import { spaceIndex } from '@/api/home'
+import { spaceIndex } from '@/api'
 import mytabbar from '@/components/tabbar'
 export default {
   data () {
@@ -328,7 +328,7 @@ export default {
     }
   },
 
-  created () {
+  mounted () {
     // 调用应用实例的方法获取全局数据
     // this.getUserInfo()
     this.getPageData()

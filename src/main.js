@@ -5,9 +5,11 @@ import '../static/tool/tool.css'
 import http from './utils/request'
 import loading from './utils/loading'
 import toast from './utils/toast'
+import store from './store/index'
 Vue.http = Vue.prototype.$http = http
 Vue.toast = Vue.prototype.$toast = toast
 Vue.loading = Vue.prototype.$loading = loading
+Vue.store = Vue.prototype.$store = store
 Vue.config.productionTip = false
 App.mpType = 'app'
 

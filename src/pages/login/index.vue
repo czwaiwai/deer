@@ -31,12 +31,18 @@
                         value="1" />
               记住账号密码
             </label>
-          </div>'
-          <div class="padding15-h">
-            <button form-type="submit"
+          </div>
+          <div class="padding15-h padding-top15">
+            <div v-if="canAuth">
+              <button form-type="submit"
                     open-type="getUserInfo"
                     bindgetuserinfo="bindGetUserInfo"
-                    class="login_btn">登录</button></div>
+                    class="login_btn">登录</button>
+            </div>
+            <div v-if="!canAuth" >
+              <button  class="login_btn" form-type="submit">登录</button>
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -44,11 +50,7 @@
 </template>
 
 <script>
-function double (x, fn) {
-  return function (y, fn) {
-    fn(x, y)
-  }
-}
+// import { maOauth, merLogin} from '@/api/common'
 export default {
   name: 'login',
   components: {},
@@ -62,7 +64,11 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    canAuth () {
+      return this.formObj.username && this.formObj.pwd
+    }
+  },
 
   created () { },
 

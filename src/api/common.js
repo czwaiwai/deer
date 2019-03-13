@@ -11,6 +11,12 @@ export function maOauth (data) {
   return http.post('/mer/wechat/ma-oauth', data)
 }
 
+// 商户授权-登录
+// /mer/login
+export function merLogin (data) {
+  return http.post('/mer/login', data)
+}
+
 // 小程序 保存 formid
 // /mer/wechat/ma-formid
 export function maFormId (data) {
