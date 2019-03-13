@@ -1,6 +1,6 @@
 {
   "pages": [
-
+    "pages/login/main",
     "pages/index/main",
     "pages/cash/main",
     "pages/subAcct/main",
@@ -21,10 +21,10 @@
     "pages/brand/detail/main",
     "pages/brandSpace/main",
     "pages/brandSpaceAdd/main",
-    
+
     "pages/bindAcct/main",
     "pages/shopManage/main",
-    
+
     "pages/fansFocusList/main",
     "pages/cashDetail/main",
 
@@ -33,12 +33,10 @@
     "pages/releaseEvent/main",
     "pages/scanExchange/main",
 
-    "pages/login/main",
-   
     "pages/detail/main",
-    
+
     "pages/publish/main",
-   
+
     "pages/logs/main",
     "pages/counter/main"
   ],

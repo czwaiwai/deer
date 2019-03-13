@@ -1,34 +1,54 @@
 <!-- index.vue -->
 <template>
-<div class="container">
-  <div class="page">
-    <div class="page_bd">
-       <div class="top_bl text-center">
-           <h1 style="padding-top:150rpx;font-size:66rpx;">米奇猩</h1>
-           <p class="fs15 dark_8e">商户助手</p>
-       </div>
-       <form @submit="handleSubmit">
-            <div class="padding15-h">
-                <input class="login_input" name="username" v-model="formObj.username" type="number" placeholder="请输入手机号" />
-            </div>
-            <div class="padding15-h">
-                <input class="login_input" name="pwd" v-model="formObj.pwd" password type="text" placeholder="请输入密码" />
-            </div>
-            <div  class="padding15-h">
-                <label class="checkbox login_check" >
-                        <checkbox v-model="autoLogin" name="autoLogin"  value="1" />
-                        记住账号密码
-                    </label>
-            </div>'
-            <div class="padding15-h"><button form-type="submit" class="login_btn" >登录</button></div>
-            
-       </form>
+  <div class="container">
+    <div class="page">
+      <div class="page_bd">
+        <div class="top_bl text-center">
+          <h1 style="padding-top:150rpx;font-size:66rpx;">米奇猩</h1>
+          <p class="fs15 dark_8e">商户助手</p>
+        </div>
+        <form @submit="handleSubmit"
+              report-submit="true">
+          <div class="padding15-h">
+            <input class="login_input"
+                   name="username"
+                   v-model="formObj.username"
+                   type="number"
+                   placeholder="请输入手机号" />
+          </div>
+          <div class="padding15-h">
+            <input class="login_input"
+                   name="pwd"
+                   v-model="formObj.pwd"
+                   password
+                   type="text"
+                   placeholder="请输入密码" />
+          </div>
+          <div class="padding15-h">
+            <label class="checkbox login_check">
+              <checkbox v-model="autoLogin"
+                        name="autoLogin"
+                        value="1" />
+              记住账号密码
+            </label>
+          </div>'
+          <div class="padding15-h">
+            <button form-type="submit"
+                    open-type="getUserInfo"
+                    bindgetuserinfo="bindGetUserInfo"
+                    class="login_btn">登录</button></div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
+function double (x, fn) {
+  return function (y, fn) {
+    fn(x, y)
+  }
+}
 export default {
   name: 'login',
   components: {},
@@ -44,9 +64,57 @@ export default {
 
   computed: {},
 
-  created () {},
+  created () { },
 
   methods: {
+    formHandle (form, user) {
+      let userInfo = (user && user.UserInfo) ? user.UserInfo : ''
+      this.triggerEvent('submit', {
+        formId: form.detail.formId,
+        userInfo: userInfo,
+        auth: true
+      })
+    },
+    formNoLoginHandle (e) {
+      this.allReady('form', e)
+    },
+    bindGetUserInfo (e) {
+      if (!e.detail.userInfo) {
+        console.log('未允许授权')
+        this.triggerEvent('submit', {
+          formId: '',
+          userInfo: ''
+          // auth: false,
+        })
+        this.fns = {}
+        return
+      }
+      if (!this.data.isLogin) {
+        // login(e).then(res => {
+        //   this.setData({
+        //     isLogin: true
+        //   })
+        //   this.allReady('user', res)
+        // }).catch(err => {
+        //   // 授权失败时重置并放弃提交
+        //   console.log(err)
+        //   this.fns = {}
+        // })
+      }
+    },
+    allReady (typeName, res) {
+      if (!this.fns) {
+        this.fns = {}
+      }
+      this.fns[typeName] = res
+      if (this.fns['user'] && this.fns['form']) {
+        this.formHandle(this.fns['form'], this.fns['user'])
+        this.fns = {}
+      }
+    },
+    toggerFn (a, b) {
+
+    },
     handleSubmit (e) {
       console.log(e)
       console.log(this.formObj)
@@ -56,23 +124,23 @@ export default {
 </script>
 <style>
 .top_bl {
-    height:406rpx;
+  height: 406rpx;
 }
 .login_input {
-    background:#EDF1F9;
-    height:120rpx;
-    font-size:30rpx;
-    border-radius:10rpx;
-    padding-left:54rpx;
-    margin-bottom:40rpx;
+  background: #edf1f9;
+  height: 120rpx;
+  font-size: 30rpx;
+  border-radius: 10rpx;
+  padding-left: 54rpx;
+  margin-bottom: 40rpx;
 }
 .login_check {
-    font-size:24rpx;
+  font-size: 24rpx;
 }
 .login_btn {
-    background:#2ED0C1;
-    height:120rpx;
-    line-height:120rpx;
-    color:#FFF;
+  background: #2ed0c1;
+  height: 120rpx;
+  line-height: 120rpx;
+  color: #fff;
 }
 </style>

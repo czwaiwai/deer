@@ -2,6 +2,12 @@ import Vue from 'vue'
 import App from './App'
 import '../static/weui/weui.css'
 import '../static/tool/tool.css'
+import http from './utils/request'
+import loading from './utils/loading'
+import toast from './utils/toast'
+Vue.http = Vue.prototype.$http = http
+Vue.toast = Vue.prototype.$toast = toast
+Vue.loading = Vue.prototype.$loading = loading
 Vue.config.productionTip = false
 App.mpType = 'app'
 
