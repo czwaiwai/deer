@@ -109,10 +109,10 @@
                class="weui-cell my_head_cell ">
             <div class="weui-cell__hd">
               <image class="my_cell_img"
-                     src="../../static/img/home/head.png"></image>
+                     :src="user.avatar"></image>
             </div>
             <div class="weui-cell__bd padding-left15">
-              <p class="fs15 dark_16">Miss米奇</p>
+              <p class="fs15 dark_16">{{user.nickname}}</p>
               <p class="fs12 main_color">主账号 B302</p>
             </div>
             <div class="weui-cell__ft weui-cell__ft_in-access"></div>
@@ -166,8 +166,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import card from '@/components/card'
-import { spaceIndex } from '@/api'
+import { merCenter, spaceIndex } from '@/api'
 import mytabbar from '@/components/tabbar'
 export default {
   data () {
@@ -175,6 +176,8 @@ export default {
       current: 'jishi',
       motto: 'Hello World1112',
       tabCurr: 'home',
+      homePage: {},
+      centerPage: {},
       tabList: [
         {
           name: '首页',
@@ -269,7 +272,12 @@ export default {
     card,
     mytabbar
   },
-
+  computed: {
+    ...mapGetters({
+      user: 'user',
+      isLogin: 'isLogin'
+    })
+  },
   methods: {
     handleTab (val) {
       if (val === 'scan') {
@@ -282,6 +290,12 @@ export default {
         // })
       } else {
         this.tabCurr = val
+      }
+    },
+    async changeCenter () {
+      if (this.centerPage.user_id) {
+        let res = await merCenter
+        this.centerPage = res
       }
     },
     handleChange (e) {
@@ -327,7 +341,16 @@ export default {
       console.log('clickHandle:', msg, ev)
     }
   },
-
+  onLoad () {
+    if (!this.isLogin) {
+      wx.navigateTo({
+        url: '../login/main'
+      })
+    }
+  },
+  created () {
+    console.log('是否登陆', this.isLogin)
+  },
   mounted () {
     // 调用应用实例的方法获取全局数据
     // this.getUserInfo()
@@ -417,6 +440,7 @@ button.btn_empty {
 .my_cell_img {
   height: 120rpx;
   width: 120rpx;
+  border-radius: 100%;
 }
 .card_wrap {
   padding: 15px;

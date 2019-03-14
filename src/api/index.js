@@ -103,7 +103,7 @@ export function scanReceive (data) {
 // 我的-个人中心页
 // /mer/mer-center
 export function merCenter (data) {
-  return http.post('/mer/mer-center', data)
+  return http.get('/mer/mer-center', data)
 }
 
 // 发送验证码

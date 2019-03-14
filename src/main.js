@@ -6,6 +6,8 @@ import http from './utils/request'
 import loading from './utils/loading'
 import toast from './utils/toast'
 import store from './store/index'
+import wxHelper from './utils/wxHelper'
+Vue.wx = Vue.prototype.$wx = wxHelper
 Vue.http = Vue.prototype.$http = http
 Vue.toast = Vue.prototype.$toast = toast
 Vue.loading = Vue.prototype.$loading = loading

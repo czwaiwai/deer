@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/login/main",    
-    "pages/cash/main",
+    "pages/login/main",
     "pages/index/main",
+
+    "pages/cash/main",
     "pages/subAcct/main",
     "pages/stock/main",
     "pages/income/detail/main",
@@ -15,7 +16,6 @@
     "pages/exchange/list/main",
     "pages/exchange/detail/main",
 
-    
     "pages/shopScan/list/main",
     "pages/shopScan/detail/main",
     "pages/brand/list/main",

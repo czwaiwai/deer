@@ -33,15 +33,16 @@
             </label>
           </div>
           <div class="padding15-h padding-top15">
-            <div v-if="canAuth">
+            <div>
               <button form-type="submit"
-                    open-type="getUserInfo"
-                    bindgetuserinfo="bindGetUserInfo"
-                    class="login_btn">登录</button>
+                      open-type="getUserInfo"
+                      @getuserinfo="bindGetUserInfo"
+                      class="login_btn">登录</button>
             </div>
-            <div v-if="!canAuth" >
-              <button  class="login_btn" form-type="submit">登录</button>
-            </div>
+            <!-- <div v-if="!canAuth">
+              <button class="login_btn"
+                      form-type="submit">登录</button>
+            </div> -->
           </div>
         </form>
       </div>
@@ -50,12 +51,17 @@
 </template>
 
 <script>
-// import { maOauth, merLogin} from '@/api/common'
+// maOauth, merLogin
+import { mapGetters } from 'vuex'
+import validators from '@/utils/validators'
+import { maKey, maFormId, maOauth, merLogin } from '@/api/common'
 export default {
   name: 'login',
   components: {},
   data () {
     return {
+      canIUse: wx.canIUse('button.open-type.getUserInfo'),
+      formId: '',
       formObj: {
         username: '',
         pwd: '',
@@ -65,11 +71,22 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      user: 'user',
+      token: 'token',
+      isLogin: 'isLogin'
+    }),
     canAuth () {
       return this.formObj.username && this.formObj.pwd
     }
   },
-
+  onLoad () {
+    if (this.isLogin) {
+      wx.redirectTo({
+        url: '../index/main'
+      })
+    }
+  },
   created () { },
 
   methods: {
@@ -84,47 +101,91 @@ export default {
     formNoLoginHandle (e) {
       this.allReady('form', e)
     },
+    validator () {
+      let errs = validators.validator(this.formObj, {
+        username: ['required@请输入手机号'],
+        pwd: ['required@请输入密码', 'pwd|5']
+      })
+      if (errs && errs.length > 0) {
+        this.$toast(errs[0].errMsg)
+        return false
+      } else {
+        return true
+      }
+    },
     bindGetUserInfo (e) {
-      if (!e.detail.userInfo) {
+      console.log(this.formObj, '----formObj----')
+      if (!e.mp.detail.userInfo) {
         console.log('未允许授权')
-        this.triggerEvent('submit', {
-          formId: '',
-          userInfo: ''
-          // auth: false,
-        })
-        this.fns = {}
-        return
-      }
-      if (!this.data.isLogin) {
-        // login(e).then(res => {
-        //   this.setData({
-        //     isLogin: true
-        //   })
-        //   this.allReady('user', res)
-        // }).catch(err => {
-        //   // 授权失败时重置并放弃提交
-        //   console.log(err)
-        //   this.fns = {}
-        // })
-      }
-    },
-    allReady (typeName, res) {
-      if (!this.fns) {
-        this.fns = {}
-      }
-      this.fns[typeName] = res
-      if (this.fns['user'] && this.fns['form']) {
-        this.formHandle(this.fns['form'], this.fns['user'])
-        this.fns = {}
+        this.$toast('未允许授权')
+      } else {
+        if (this.user) {
+          if (!this.validator()) return
+          this.promise = merLogin({
+            account: this.formObj.username,
+            password: this.formObj.pwd,
+            remember: this.formObj.autoLogin ? 1 : 0
+          }).then(res => this.loginSucc(res))
+        } else {
+          this.promise = this.$wx.login()
+            .then(code => maKey({ code }))
+            .then(res => maOauth({
+              encryptedData: e.mp.detail.encryptedData,
+              iv: e.mp.detail.iv
+            }))
+            .then(user => {
+              this.$store.commit('setUser', user)
+              if (!this.validator()) return Promise.reject(new Error('验证失败'))
+              return merLogin({
+                account: this.formObj.username,
+                password: this.formObj.pwd,
+                remember: this.formObj.autoLogin ? 1 : 0
+              })
+            })
+            .then(res => this.loginSucc(res))
+        }
       }
     },
-    toggerFn (a, b) {
-
-    },
-    handleSubmit (e) {
-      console.log(e)
-      console.log(this.formObj)
+    loginSucc (res) {
+      this.$store.commit('setLogin', true)
+      this.$toast('登陆成功~')
+      const url = '../index/main'
+      wx.redirectTo({ url })
     }
+    // if (!this.data.isLogin) {
+    //   // login(e).then(res => {
+    //   //   this.setData({
+    //   //     isLogin: true
+    //   //   })
+    //   //   this.allReady('user', res)
+    //   // }).catch(err => {
+    //   //   // 授权失败时重置并放弃提交
+    //   //   console.log(err)
+    //   //   this.fns = {}
+    //   // })
+    // }
+  },
+  allReady (typeName, res) {
+    if (!this.fns) {
+      this.fns = {}
+    }
+    this.fns[typeName] = res
+    if (this.fns['user'] && this.fns['form']) {
+      this.formHandle(this.fns['form'], this.fns['user'])
+      this.fns = {}
+    }
+  },
+  handleSubmit (e) {
+    setTimeout(() => {
+      if (this.promise) {
+        this.promise.then(res => {
+          this.formId = e.target.formId
+          maFormId({
+            form_id: this.formId
+          })
+        })
+      }
+    }, 15)
   }
 }
 </script>
