@@ -33,7 +33,7 @@ export function listActive (data) {
 // 统计
 // /mer/mer-statistics
 export function merStatistics (data) {
-  return http.post('/mer/mer-statistics', data)
+  return http.get('/mer/statistics', data)
 }
 // 收入统计接口
 // /mer/mer-income-statistics
@@ -55,7 +55,7 @@ export function saveStore (data) {
 
 // 门店信息获取接口
 // /mer/store
-export function store (data) {
+export function merStoreInfo (data) {
   return http.get('/mer/store', data)
 }
 

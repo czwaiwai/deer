@@ -15,9 +15,14 @@
     "pages/stockDetail/main",
     "pages/exchange/list/main",
     "pages/exchange/detail/main",
+    "pages/storeGift/list/main",
+    "pages/storeGift/detail/main",
+    "pages/goodThings/list/main",
+    "pages/goodThings/detail/main",
 
     "pages/shopScan/list/main",
     "pages/shopScan/detail/main",
+
     "pages/brand/list/main",
     "pages/brand/detail/main",
     "pages/brandSpace/main",

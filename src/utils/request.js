@@ -34,7 +34,7 @@ function request (url, method = 'GET', data = {}, header) {
           }
           resolve(data)
         } else {
-          if (code === 204) {
+          if ([204, 401].includes(code)) {
             toast(msg)
           }
           reject(msg)

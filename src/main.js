@@ -7,6 +7,8 @@ import loading from './utils/loading'
 import toast from './utils/toast'
 import store from './store/index'
 import wxHelper from './utils/wxHelper'
+import * as api from './api'
+Vue.api = Vue.prototype.$api = api
 Vue.wx = Vue.prototype.$wx = wxHelper
 Vue.http = Vue.prototype.$http = http
 Vue.toast = Vue.prototype.$toast = toast

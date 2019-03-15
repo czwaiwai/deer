@@ -10,30 +10,30 @@
             <div @click="routeTo('../income/list/main')"
                  class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">收益</div>
-              <div class="home_big_fs">1000</div>
-              <div class="home_bl_small">今日：¥ 30</div>
+              <div class="home_big_fs">{{homePage.total_income}}</div>
+              <div class="home_bl_small">今日：¥ {{homePage.today_income}}</div>
             </div>
             <div style="padding:15rpx;"></div>
             <div @click="routeTo('../income/list/main')"
                  class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">兑换</div>
-              <div class="home_big_fs">120</div>
-              <div class="home_bl_small">今日：10</div>
+              <div class="home_big_fs">{{homePage.total_receives}}</div>
+              <div class="home_bl_small">今日：{{homePage.today_receives}}</div>
             </div>
           </div>
           <div class="weui-flex padding15-h">
             <div @click="routeTo('../income/list/main')"
                  class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">到店扫码</div>
-              <div class="home_big_fs">1000</div>
-              <div class="home_bl_small">今日：¥ 30</div>
+              <div class="home_big_fs">{{homePage.total_scans}}</div>
+              <div class="home_bl_small">今日：{{homePage.today_scans}}</div>
             </div>
             <div style="padding:15rpx;"></div>
             <div @click="routeTo('../income/list/main')"
                  class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">品牌获赞</div>
-              <div class="home_big_fs">120</div>
-              <div class="home_bl_small">今日：10</div>
+              <div class="home_big_fs">{{homePage.total_likes}}</div>
+              <div class="home_bl_small">今日：{{homePage.today_likes}}</div>
             </div>
           </div>
           <div class="section"
@@ -45,19 +45,21 @@
             </div>
             <div>
               <div class="weui-cells weui-cells_after-title card_cells">
-                <div @click="routeToShop"
+                <div v-for="(item,index) in homePage.stores"
+                     :key="index"
+                     @click="routeToShop(item)"
                      class="weui-cell home_cell">
                   <div class="weui-cell__hd">
                     <image class="home_cell_img"
-                           src="../../static/img/home/shop_icon.png"></image>
+                           :src="item.logo"></image>
                   </div>
                   <div class="weui-cell__bd padding-left15">
-                    <p class="home_cell_title">鹿角巷天河北门店</p>
-                    <p class="home_cell_sub_title">天河区天河路北路99号 B302</p>
+                    <p class="home_cell_title">{{item.store_name}}</p>
+                    <p class="home_cell_sub_title">{{item.store_addr}}</p>
                   </div>
                   <div class="weui-cell__ft weui-cell__ft_in-access"></div>
                 </div>
-                <div @click="routeToShop"
+                <div @click="routeToShop({id:2})"
                      class="weui-cell home_cell">
                   <div class="weui-cell__hd">
                     <!-- <i-icon class="home_cell_img" type="browse" size="16" /> -->
@@ -73,7 +75,7 @@
               </div>
             </div>
           </div>
-          <div class="section"
+          <!-- <div class="section"
                style="padding-top:40rpx;">
             <div class="weui-cells__title home_title">
               <image class="home_title_icon"
@@ -96,7 +98,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </scroll-view>
       </div>
       <!-- <div v-if="current === 'fabu'" class="page">
@@ -168,7 +170,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import card from '@/components/card'
-import { merCenter, spaceIndex } from '@/api'
+import { merStatistics, merCenter, spaceIndex } from '@/api'
 import mytabbar from '@/components/tabbar'
 export default {
   data () {
@@ -198,73 +200,7 @@ export default {
           url: '../../static/img/tabbar/my.png',
           urlHover: '../../static/img/tabbar/my_hover.png'
         }
-      ],
-      list: [
-        {
-          id: 1,
-          title: '繁星十月',
-          subTitle:
-            '我们故事的情节，发生在烂漫签约，夜空中繁星点点，你说情话的瞬间，我所有的小细节，没人比你更了解，沉浸在只有幸福的世界',
-          text: '我是外星人1'
-        },
-        {
-          id: 2,
-          title: '繁星十月',
-          subTitle:
-            '我们故事的情节，发生在烂漫签约，夜空中繁星点点，你说情话的瞬间，我所有的小细节，没人比你更了解，沉浸在只有幸福的世界',
-          text: '我是外星人2'
-        },
-        {
-          id: 3,
-          title: '繁星十月',
-          subTitle:
-            '我们故事的情节，发生在烂漫签约，夜空中繁星点点，你说情话的瞬间，我所有的小细节，没人比你更了解，沉浸在只有幸福的世界',
-          text: '我是外星人3'
-        },
-        {
-          id: 4,
-          title: '繁星十月',
-          subTitle:
-            '我们故事的情节，发生在烂漫签约，夜空中繁星点点，你说情话的瞬间，我所有的小细节，没人比你更了解，沉浸在只有幸福的世界',
-          text: '我是外星人4'
-        },
-        {
-          id: 5,
-          title: '繁星十月',
-          subTitle:
-            '我们故事的情节，发生在烂漫签约，夜空中繁星点点，你说情话的瞬间，我所有的小细节，没人比你更了解，沉浸在只有幸福的世界',
-          text: '我是外星人5'
-        },
-        {
-          id: 6,
-          title: '繁星十月',
-          subTitle:
-            '我们故事的情节，发生在烂漫签约，夜空中繁星点点，你说情话的瞬间，我所有的小细节，没人比你更了解，沉浸在只有幸福的世界',
-          text: '我是外星人6'
-        },
-        {
-          id: 7,
-          title: '繁星十月',
-          subTitle:
-            '我们故事的情节，发生在烂漫签约，夜空中繁星点点，你说情话的瞬间，我所有的小细节，没人比你更了解，沉浸在只有幸福的世界',
-          text: '我是外星人7'
-        },
-        {
-          id: 8,
-          title: '繁星十月',
-          subTitle:
-            '我们故事的情节，发生在烂漫签约，夜空中繁星点点，你说情话的瞬间，我所有的小细节，没人比你更了解，沉浸在只有幸福的世界',
-          text: '我是外星人8'
-        },
-        {
-          id: 9,
-          title: '繁星十月',
-          subTitle:
-            '我们故事的情节，发生在烂漫签约，夜空中繁星点点，你说情话的瞬间，我所有的小细节，没人比你更了解，沉浸在只有幸福的世界',
-          text: '我是外星人9'
-        }
-      ],
-      userInfo: {}
+      ]
     }
   },
 
@@ -281,20 +217,22 @@ export default {
   methods: {
     handleTab (val) {
       if (val === 'scan') {
-        wx.navigateTo({ url: '../scanExchange/main' })
-        // wx.scanCode({
-        //   success (res) {
-        //    wx.navigateTo({ url: '../scanExchange/main' })
-        //     console.log(res)
-        //   }
-        // })
+        this.$wx.scanCode().then(res => {
+          wx.navigateTo({ url: '../scanExchange/main' })
+          console.log(res)
+        })
       } else {
         this.tabCurr = val
       }
     },
-    async changeCenter () {
-      if (this.centerPage.user_id) {
-        let res = await merCenter
+    async homePageData () {
+      // mer-statistics
+      let res = await merStatistics()
+      this.homePage = res
+    },
+    async centerPageData () {
+      if (!this.centerPage.user_id) {
+        let res = await merCenter()
         this.centerPage = res
       }
     },
@@ -310,8 +248,8 @@ export default {
       const url = '../logs/main'
       wx.navigateTo({ url })
     },
-    routeToShop () {
-      const url = '../shopManage/main'
+    routeToShop (item) {
+      const url = '../shopManage/main?id=' + item.id
       return wx.navigateTo({ url })
     },
     routeTo (url) {
@@ -354,7 +292,9 @@ export default {
   mounted () {
     // 调用应用实例的方法获取全局数据
     // this.getUserInfo()
-    this.getPageData()
+    this.homePageData()
+    this.centerPageData()
+    // this.getPageData()
   }
 }
 </script>
