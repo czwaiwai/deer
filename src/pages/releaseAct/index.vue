@@ -28,13 +28,18 @@ export default {
   name: 'releaseAct',
   components: {},
   data () {
-    return {}
+    return {
+      storeId: ''
+    }
   },
 
   computed: {},
 
   created () { },
-
+  onLoad (query) {
+    console.log(query, 'query===')
+    this.storeId = query.storeId
+  },
   methods: {
     routeTo (url) {
       wx.navigateTo({ url })

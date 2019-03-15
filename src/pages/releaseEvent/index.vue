@@ -12,8 +12,8 @@
                class="form_item weui-flex">
             <div class="form_item_hd flex_item_center"
                  style="padding-top:10rpx;">
-              <image class="img_60"
-                     src="../../static/img/shopManage/head.png"></image>
+              <img class="img_60"
+                     :src="formObj.image" />
             </div>
             <div class="weui-flex__item form_item_bd">
               <div class="span_placeholder fs15">请上传活动奖品图</div>
@@ -26,7 +26,7 @@
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">奖品名称</div>
             <div class="weui-flex__item form_item_bd">
-              <input v-model="formObj.active_name"
+              <input v-model="formObj.active_name" name="active_name"
                      placeholder="请输入奖品名称"
                      placeholder-style="color:#CACCDB">
             </div>
@@ -35,30 +35,28 @@
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">奖品价值</div>
             <div class="weui-flex__item form_item_bd">
-              <input v-model="formObj.price"
-                     placeholder="请输入奖品价值"
-                     placeholder-style="color:#CACCDB">
+              <input v-model="formObj.price" name="price" placeholder="请输入奖品价值" placeholder-style="color:#CACCDB">
             </div>
             <div class="form_item_ft"></div>
           </div>
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">开始时间</div>
-            <div class="weui-flex__item form_item_bd">
-              <div class="span_placeholder fs15">请选择开始时间</div>
-            </div>
+            <picker @change="handleDateStart" class="weui-flex__item form_item_bd" mode="date"  >
+                <div v-if="!formObj.start_time" class="span_placeholder fs15">请选择开始时间</div>
+                <div v-else class="fs15">{{formObj.start_time}}</div>
+            </picker>
             <div class="form_item_ft flex_item_center">
-              <image class="dirt_right"
-                     src="../../static/img/other/right_icon.png"></image>
+              <image class="dirt_right" src="../../static/img/other/right_icon.png"></image>
             </div>
           </div>
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">结束时间</div>
-            <div class="weui-flex__item form_item_bd">
-              <div class="span_placeholder fs15">请选择结束时间</div>
-            </div>
+             <picker @change="handleDateEnd" class="weui-flex__item form_item_bd" mode="date"  :start="formObj.start_time"   >
+                <div v-if="!formObj.end_time" class="span_placeholder fs15">请选择结束时间</div>
+                <div v-else class="fs15">{{formObj.end_time}}</div>
+            </picker>
             <div class="form_item_ft flex_item_center">
-              <image class="dirt_right"
-                     src="../../static/img/other/right_icon.png"></image>
+              <image class="dirt_right" src="../../static/img/other/right_icon.png"></image>
             </div>
           </div>
           <div class="form_item weui-flex">
@@ -90,10 +88,13 @@
 
       </div>
     </form>
+   <van-dialog id="van-dialog" />
   </div>
 </template>
 
 <script>
+import validators from '@/utils/validators'
+import Dialog from '../../../static/vant/dialog/dialog'
 export default {
   name: 'detail',
   components: {},
@@ -117,17 +118,47 @@ export default {
 
   created () { },
   onLoad (query) {
+    console.log(query, 'query===')
     this.formObj.store_id = this.storeId = query.storeId
   },
   methods: {
+    handleDateStart (e) {
+      this.formObj.start_time = e.mp.detail.value
+    },
+    handleDateEnd (e) {
+      console.log(e)
+      this.formObj.end_time = e.mp.detail.value
+      console.log(this.formObj, ' date----')
+    },
     handleUploadImg () {
       console.log('执行了么')
-      this.$wx.uploadImg().then(res => {
-        console.log(res)
+      this.$wx.uploadImg().then(url => {
+        this.formObj.image = url
       })
     },
-    handleSubmit () {
-
+    async handleSubmit (e) {
+      console.log(this.formObj, '-----')
+      let errArr = validators.validator(this.formObj, {
+        active_name: 'required@奖品名称不能为空',
+        image: 'required@奖品图片不能为空',
+        integral: ['required@需要积分不能为空', 'integer@需要积分必须为数字'],
+        price: ['required@送出数量不能为空', 'amount@奖品价值请输入有效金额'],
+        out_num: ['required@送出数量不能为空', 'integer@送出数量必须为数字'],
+        start_time: 'required@开始时间不能为空',
+        end_time: 'required@结束时间不能为空'
+      })
+      this.formObj.start_time = this.formObj.start_time + ' 00:00:00'
+      this.formObj.end_time = this.formObj.end_time + ' 00:00:00'
+      if (errArr && errArr[0]) {
+        return this.$toast(errArr[0].errMsg)
+      }
+      let res = await this.$api.saveActive(this.formObj)
+      console.log(res)
+      await Dialog.alert({
+        title: '标题',
+        message: '弹窗内容'
+      })
+      this.$wx.back()
     }
   }
 }

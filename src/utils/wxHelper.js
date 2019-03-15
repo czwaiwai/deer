@@ -1,4 +1,6 @@
 import config from '../config'
+import sign from './sign'
+import store from '../store/index'
 function login (e) {
   return new Promise((resolve, reject) => {
     wx.login({
@@ -22,17 +24,28 @@ function scanCode () {
 }
 function uploadImg (data) {
   return new Promise((resolve, reject) => {
-    wx.choodeImage({
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
       success (res) {
         const tempFilePaths = res.tempFilePaths
+        const params = sign({
+          type: 'image',
+          token: store.getters.token
+        })
         wx.uploadFile({
           url: config.baseUrl + '/mer/upload/image',
           filePath: tempFilePaths[0],
           name: 'image_file',
-          formData: {
-            type: 'image'
+          formData: params,
+          success (res) {
+            let json = JSON.parse(res.data)
+            if (json.code === 1) {
+              resolve(json.data.url)
+            } else {
+              reject(json.msg)
+            }
           },
-          success: resolve,
           fail: reject
         })
       },
@@ -42,9 +55,15 @@ function uploadImg (data) {
     })
   })
 }
+function back (times = 1) {
+  wx.navigateBack({
+    delta: times
+  })
+}
 const wxHelper = {
   login,
   uploadImg,
-  scanCode
+  scanCode,
+  back
 }
 export default wxHelper

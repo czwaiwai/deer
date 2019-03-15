@@ -13,6 +13,7 @@
   "dependencies": {
     "js-md5": "^0.7.3",
     "mpvue": "^1.0.11",
+    "vant-weapp": "^0.5.7",
     "vuex": "^3.1.0",
     "vuex-persistedstate": "^2.5.4",
     "webpack-mpvue-vendor-plugin": "^2.0.3"

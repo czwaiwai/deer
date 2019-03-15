@@ -25,12 +25,12 @@
                    placeholder="请输入密码" />
           </div>
           <div class="padding15-h">
-            <label class="checkbox login_check">
-              <checkbox v-model="autoLogin"
-                        name="autoLogin"
-                        value="1" />
-              记住账号密码
-            </label>
+            <checkbox-group @change="handleCheck">
+              <label class="checkbox login_check">
+                <checkbox  name="autoLogin"  value="1" />
+                记住账号密码
+              </label>
+            </checkbox-group>
           </div>
           <div class="padding15-h padding-top15">
             <div>
@@ -74,6 +74,7 @@ export default {
     ...mapGetters({
       user: 'user',
       token: 'token',
+      account: 'account',
       isLogin: 'isLogin'
     }),
     canAuth () {
@@ -86,10 +87,14 @@ export default {
         url: '../index/main'
       })
     }
+    this.formObj.username = this.account
   },
   created () { },
 
   methods: {
+    handleCheck (e) {
+      this.formObj.autoLogin = e.mp.detail.value[0] || 0
+    },
     formHandle (form, user) {
       let userInfo = (user && user.UserInfo) ? user.UserInfo : ''
       this.triggerEvent('submit', {
@@ -114,18 +119,16 @@ export default {
       }
     },
     bindGetUserInfo (e) {
-      console.log(this.formObj, '----formObj----')
       if (!e.mp.detail.userInfo) {
         console.log('未允许授权')
         this.$toast('未允许授权')
       } else {
         if (this.user) {
           if (!this.validator()) return
-          this.promise = merLogin({
-            account: this.formObj.username,
-            password: this.formObj.pwd,
-            remember: this.formObj.autoLogin ? 1 : 0
-          }).then(res => this.loginSucc(res))
+          if (this.formObj.autoLogin) {
+            this.$store.commit('setAccount', this.formObj.autoLogin)
+          }
+          this.promise = this.loginAction().then(res => this.loginSucc(res))
         } else {
           this.promise = this.$wx.login()
             .then(code => maKey({ code }))
@@ -135,16 +138,22 @@ export default {
             }))
             .then(user => {
               this.$store.commit('setUser', user)
-              if (!this.validator()) return Promise.reject(new Error('验证失败'))
-              return merLogin({
-                account: this.formObj.username,
-                password: this.formObj.pwd,
-                remember: this.formObj.autoLogin ? 1 : 0
-              })
+              return this.loginAction()
             })
             .then(res => this.loginSucc(res))
         }
       }
+    },
+    loginAction () {
+      if (!this.validator()) return Promise.reject(new Error('验证失败'))
+      if (this.formObj.autoLogin) {
+        this.$store.commit('setAccount', this.formObj.autoLogin)
+      }
+      return merLogin({
+        account: this.formObj.username,
+        password: this.formObj.pwd,
+        remember: this.formObj.autoLogin
+      })
     },
     loginSucc (res) {
       this.$store.commit('setLogin', true)

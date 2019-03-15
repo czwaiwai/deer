@@ -9,6 +9,13 @@ export default [
     }
   },
   {
+    name: 'integer',
+    errMsg: '必须为整数',
+    validFunc: (val) => {
+      return /^\d+$/.test(val)
+    }
+  },
+  {
     name: 'mobileTel',
     errMsg: '无效的手机号码',
     validFunc: function (val) {
@@ -44,10 +51,10 @@ export default [
     }
   },
   {
-    name: 'amountDot',
+    name: 'amount',
     errMsg: '请输入有效金额',
     validFunc: function (val) {
-      if (/^([1-9][\d]{0,7}|0)(\.[\d]{1,2),?$/.test(val)) {
+      if (/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/.test(val)) {
         return true
       } else {
         return false
