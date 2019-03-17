@@ -1,9 +1,7 @@
 <!-- index.vue -->
 <template>
   <div class="container">
-    <form class="form_wrap"
-          @submit="handleSubmit"
-          report-submit="true">
+    <form class="form_wrap"  @submit="handleSubmit" report-submit="true">
       <div class="page">
 
         <div class="page_bd">
@@ -82,8 +80,7 @@
 
         </div>
         <div class="page_ft">
-          <button form-type="submit"
-                  class="ft_btn">立即发布</button>
+          <button form-type="submit"  class="ft_btn">立即发布</button>
         </div>
 
       </div>

@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "创建子账号"
+    "navigationBarTitleText": "账号管理",
+    "usingComponents": {
+        "van-dialog": "../../static/vant/dialog/index"
+      }
 }

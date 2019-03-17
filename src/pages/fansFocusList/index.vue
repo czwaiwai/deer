@@ -16,7 +16,7 @@
             </div>
             <div class="weui-flex__item border_left">
               <p class="dark_e8 fs12">粉丝数</p>
-              <p class="main_color main_txt">{{total_scans}}</p>
+              <p class="main_color main_txt">{{info.total_scans}}</p>
             </div>
           </div>
         </div>
@@ -31,57 +31,9 @@
                 :key="index"
                 class="list_item weui-flex ">
               <image class="img_72 flex_item_center"
-                     src="../../static/img/home/head.png"></image>
+                     :src="item.avatar || '../../static/img/home/head.png'"></image>
               <div class="weui-flex__item padding-left15 fs15 dark_8e">{{item.nickname}}</div>
-              <div class="dark_8e fs15">2019-02-10</div>
-            </li>
-            <li class="list_item weui-flex ">
-              <image class="img_72 flex_item_center"
-                     src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item padding-left15 fs15 dark_8e">Miss米奇</div>
-              <div class="dark_8e fs15">2019-02-10</div>
-            </li>
-            <li class="list_item weui-flex ">
-              <image class="img_72 flex_item_center"
-                     src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item padding-left15 fs15 dark_8e">Miss米奇</div>
-              <div class="dark_8e fs15">2019-02-10</div>
-            </li>
-            <li class="list_item weui-flex ">
-              <image class="img_72 flex_item_center"
-                     src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item padding-left15 fs15 dark_8e">Miss米奇</div>
-              <div class="dark_8e fs15">2019-02-10</div>
-            </li>
-            <li class="list_item weui-flex ">
-              <image class="img_72 flex_item_center"
-                     src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item padding-left15 fs15 dark_8e">Miss米奇</div>
-              <div class="dark_8e fs15">2019-02-10</div>
-            </li>
-            <li class="list_item weui-flex ">
-              <image class="img_72 flex_item_center"
-                     src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item padding-left15 fs15 dark_8e">Miss米奇</div>
-              <div class="dark_8e fs15">2019-02-10</div>
-            </li>
-            <li class="list_item weui-flex ">
-              <image class="img_72 flex_item_center"
-                     src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item padding-left15 fs15 dark_8e">Miss米奇</div>
-              <div class="dark_8e fs15">2019-02-10</div>
-            </li>
-            <li class="list_item weui-flex ">
-              <image class="img_72 flex_item_center"
-                     src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item padding-left15 fs15 dark_8e">Miss米奇</div>
-              <div class="dark_8e fs15">2019-02-10</div>
-            </li>
-            <li class="list_item weui-flex ">
-              <image class="img_72 flex_item_center"
-                     src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item padding-left15 fs15 dark_8e">Miss米奇</div>
-              <div class="dark_8e fs15">2019-02-10</div>
+              <div class="dark_8e fs15">{{item.scan_date}}</div>
             </li>
             <li class="list_item weui-flex ">
               <image class="img_72 flex_item_center"
@@ -113,6 +65,7 @@ export default {
   created () { },
   onLoad (query) {
     this.storeId = query.storeId
+    this.getPageData()
   },
   methods: {
     async getPageData () {

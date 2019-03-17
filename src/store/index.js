@@ -3,13 +3,15 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 import user from './modules/user'
+import home from './modules/home'
 
 Vue.use(Vuex)
 
 // 引入vuex-persistedstate，将vuex的数据持久化到本地
 export default new Vuex.Store({
   modules: {
-    user
+    user,
+    home
   },
   plugins: [
     createPersistedState({

@@ -1,30 +1,31 @@
 <!-- index.vue -->
 <template>
 <div class="container">
+  <form  class="form_wrap" @submit="handleSubmit" report-submit="true">
   <div class="page">
     <div class="page_bd">
-      <form bindsubmit="bindFormSubmit">
         <div class="padding15">
           <div class="textarea_wrap padding15">
-            <textarea placeholder="点击输入内容" maxlength="250" name="textarea" />
+            <textarea v-model="formObj.content" placeholder="点击输入内容" maxlength="250" name="textarea" />
           </div>
           <div class="img_list_wrap">
             <ul>
-              <li>
-                <image class="img_add" src="../../static/img/other/img_add.png"></image>
+              <li v-for="(item, index) in images" :key="index">
+                <img class="img_add" :src="item" mode="aspectFit" >
               </li>
-              <li>
+              <li v-if="images.length<=6" @click="uploadImg">
                 <image class="img_add" src="../../static/img/other/img_add.png"></image>
               </li>
             </ul>
           </div>
         </div>
-      </form>
+      
     </div>
     <div class="page_ft">
-      <button class="ft_btn">立即发布</button>
+      <button  form-type="submit" class="ft_btn">立即发布</button>
     </div>
   </div>
+  </form>
 </div>
 </template>
 
@@ -34,6 +35,7 @@ export default {
   components: {},
   data () {
     return {
+      images: [],
       formObj: {
         content: ''
       }
@@ -43,8 +45,29 @@ export default {
   computed: {},
 
   created () {},
-
-  methods: {}
+  onLoad (query) {
+    this.storeId = query.storeId
+  },
+  mounted () {
+    // this.getPageData()
+  },
+  methods: {
+    async uploadImg () {
+      let url = await this.$wx.uploadImg()
+      this.images.push(url)
+    },
+    async handleSubmit (e) {
+      console.log(e.mp)
+      let res = await this.$api.suPublish({
+        store_id: this.storeId,
+        context: this.formObj.content,
+        images: this.images.join(',')
+      })
+      console.log(res)
+      this.$toast('发布成功～')
+      this.$wx.back()
+    }
+  }
 }
 </script>
 <style scoped>

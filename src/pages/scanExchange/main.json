@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "扫码兑换"
+    "navigationBarTitleText": "扫码兑换",
+    "usingComponents": {
+        "van-dialog": "../../static/vant/dialog/index"
+      }
 }

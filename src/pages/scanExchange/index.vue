@@ -4,46 +4,104 @@
   <div class="page">
     <div class="page_bd">
       <div class="scan_hd weui-flex">
-        <div class="weui-flex__item">待领取</div>
+        <div class="weui-flex__item flex_item_center">
+          <p class="big_txt" v-if="info.status===0">待领取</p>
+          <div  class="main_color"  v-if="info.status===1">
+            <p class="big_txt main_color" >已领取</p>
+            <p class="fs12 main_color">超过30天未领取，请联系平台退款</p>
+          </div>
+          <div class="dark_8e" v-if="info.status===-1">
+            <p class="big_txt dark_8e" >已过期</p>
+            <p class="fs12 dark_8e">超过30天未领取，请联系平台退款</p>
+          </div>
+
+        </div>
         <div class="flex_item_center">
-          <image class="img_54 vertical-middle " src="../../static/img/home/head.png"></image>
-          <span class="padding-left fs13 vertical-middle ">Miss米奇</span>
+          <img class="img_54 vertical-middle " :src="info.avatar || '../../static/img/home/head.png'" />
+          <span class="padding-left fs13 vertical-middle ">{{info.nickname}}</span>
         </div>
       </div>
       <div class="scan_bd">
         <div>
-          <image class="img_360" src="../../static/img/other/good.png"></image>
+          <img class="img_360" :src="info.goods_image || '../../static/img/other/good.png'" />
         </div>
-        <p class="fs18">夏日条纹薄荷绿包包</p>
+        <p class="fs18">{{info.goods_name}}</p>
       </div>
       <div class="scan_ft">
-        <p class="fs14 dark_8e">门店号：MD902930</p>
-        <p class="fs14 dark_8e">兑换门店：鹿角巷天河北门店</p>
+        <p class="fs14 dark_8e">门店号：{{info.store_no}}</p>
+        <p class="fs14 dark_8e">兑换门店：{{info.store_addr}}</p>
       </div>
       <div class="scan_tip">
         <p class="fs14 dark_8e">注：确认兑换后，现场进行发放</p>
       </div>
     </div>
     <div class="page_ft">
-      <button  class="ft_btn">确定兑换</button>
+      <form v-if="info.status===0" @submit="handleSubmit" report-submit="true" >
+        <button form-type="submit"   class="ft_btn">确定兑换</button>
+      </form>
+      <button v-else disabled class="ft_btn">确认兑换</button>
     </div>
   </div>
+  <van-dialog id="van-dialog" />
 </div>
 </template>
 
 <script>
+import Dialog from '../../../static/vant/dialog/dialog'
 export default {
   name: 'detail',
   components: {},
   data () {
-    return {}
+    return {
+      info: {}
+    }
   },
 
   computed: {},
 
   created () {},
-
-  methods: {}
+  onLoad (query) {
+    this.storeNo = query.store_no || 'MD92053350'
+    this.goodsId = query.goods_id || '5'
+    this.userId = query.user_id || '1'
+    this.giftId = query.gift_id || ''
+    this.activeId = query.active_id || ''
+    this.code = query.code || '345652'
+    this.getPageData()
+  },
+  methods: {
+    async getPageData () {
+      let res = await this.$api.scanDetail({
+        goods_id: this.goodsId,
+        gift_id: this.giftId,
+        user_id: this.userId,
+        active_id: this.activeId,
+        code: this.code,
+        store_no: this.storeNo
+      })
+      this.info = res
+      console.log(res)
+    },
+    async handleSubmit (e) {
+      await Dialog.confirm({
+        title: '提示',
+        message: '你确定要兑换么？'
+      })
+      let res = await this.$api.scanReceive({
+        goods_id: this.goodsId,
+        gift_id: this.giftId,
+        user_id: this.userId,
+        active_id: this.activeId,
+        code: this.code,
+        store_no: this.storeNo
+      })
+      this.$toast('兑换成功')
+      setTimeout(() => {
+        this.$wx.back()
+      }, 2000)
+      console.log(res)
+    }
+  }
 }
 </script>
 <style>
@@ -52,8 +110,7 @@ export default {
   padding: 0 30rpx;
   border-bottom:1rpx solid #ECEEF2;
 }
-.scan_hd .weui-flex__item {
-  line-height:153rpx;
+.scan_hd .weui-flex__item .big_txt{
   font-size:48rpx;
 }
 .scan_bd {

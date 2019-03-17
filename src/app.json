@@ -2,7 +2,6 @@
   "pages": [
     "pages/login/main",
     "pages/index/main",
-
     "pages/cash/main",
     "pages/subAcct/main",
     "pages/stock/main",

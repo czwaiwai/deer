@@ -3,76 +3,47 @@
   <div class="container">
     <div class="page">
       <div class="page_bd bg">
-        <div class="padding15-h padding-top15">
-          <div @click="routeTo('../stockDetail/main')"
+        <div v-for="(item, index) in list" :key="index" class="padding15-h padding-top15">
+          <div @click="routeTo('../stockDetail/main?storeId='+ item.store_id)"
                class="stock_wrap ">
             <div class="weui-flex stock_top">
               <div>
-                <image src="../../static/img/home/shop_icon.png"
-                       class="img_120"></image>
+                <img :src="item.store_image || '../../static/img/home/shop_icon.png'" class="img_120"/>
               </div>
               <div class="weui-flex__item padding-left15 flex_item_center">
-                <p class="fs14">鹿角巷天河北门店</p>
-                <p class="fs12 dark_8e">天河区天河路北路99号 B302</p>
+                <p class="fs14">{{item.store_name}}</p>
+                <p class="fs12 dark_8e">{{item.store_addr}}</p>
               </div>
             </div>
             <div class="weui-flex text-center padding-top">
               <div class="weui-flex__item">
-                <p class="fs24">20</p>
+                <p class="fs24">{{item.received_num}}</p>
                 <p class="fs12 dark_8e">已兑换</p>
               </div>
               <div class="weui-flex__item">
-                <p class="fs24">80</p>
+                <p class="fs24">{{item.lave_stock}}</p>
                 <p class="fs12 dark_8e">剩余库存</p>
               </div>
               <div class="weui-flex__item">
-                <p class="fs24">100</p>
+                <p class="fs24">{{item.total_stock}}</p>
                 <p class="fs12 dark_8e">累计库存</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="padding15-h padding-top15">
-          <div class="stock_wrap ">
-            <div class="weui-flex stock_top">
-              <div>
-                <image src="../../static/img/home/shop_icon.png"
-                       class="img_120"></image>
-              </div>
-              <div class="weui-flex__item padding-left15 flex_item_center">
-                <p class="fs14">鹿角巷天河北门店</p>
-                <p class="fs12 dark_8e">天河区天河路北路99号 B302</p>
-              </div>
-            </div>
-            <div class="weui-flex text-center padding-top">
-              <div class="weui-flex__item">
-                <p class="fs24">20</p>
-                <p class="fs12 dark_8e">已兑换</p>
-              </div>
-              <div class="weui-flex__item">
-                <p class="fs24">80</p>
-                <p class="fs12 dark_8e">剩余库存</p>
-              </div>
-              <div class="weui-flex__item">
-                <p class="fs24">100</p>
-                <p class="fs12 dark_8e">累计库存</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { stockGoodsList } from '@/api'
 export default {
   name: 'detail',
   components: {},
   data () {
-    return {}
+    return {
+      list: []
+    }
   },
 
   computed: {},
@@ -82,11 +53,13 @@ export default {
     this.getPageData()
   },
   methods: {
-    getPageData () {
-      stockGoodsList({
-        page: 1,
-        per_page: 10
-      })
+    async getPageData () {
+      let res = await this.$api.merStock()
+      this.list = res.list
+      // stockGoodsList({
+      //   page: 1,
+      //   per_page: 10
+      // })
     },
     routeTo (url) {
       return wx.navigateTo({ url })

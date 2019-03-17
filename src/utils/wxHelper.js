@@ -60,10 +60,16 @@ function back (times = 1) {
     delta: times
   })
 }
+function refreshPrevent () {
+  var pages = getCurrentPages()
+  var prevPage = pages[pages.length - 2] // 上一个页面
+  prevPage.onLoad(prevPage.options)
+}
 const wxHelper = {
   login,
   uploadImg,
   scanCode,
+  refreshPrevent,
   back
 }
 export default wxHelper

@@ -14,7 +14,7 @@
               <div class="home_bl_small">今日：¥ {{homePage.today_income}}</div>
             </div>
             <div style="padding:15rpx;"></div>
-            <div @click="routeTo('../income/list/main')"
+            <div @click="routeTo('../exchange/list/main')"
                  class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">兑换</div>
               <div class="home_big_fs">{{homePage.total_receives}}</div>
@@ -22,14 +22,14 @@
             </div>
           </div>
           <div class="weui-flex padding15-h">
-            <div @click="routeTo('../income/list/main')"
+            <div @click="routeTo('../shopScan/list/main')"
                  class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">到店扫码</div>
               <div class="home_big_fs">{{homePage.total_scans}}</div>
               <div class="home_bl_small">今日：{{homePage.today_scans}}</div>
             </div>
             <div style="padding:15rpx;"></div>
-            <div @click="routeTo('../income/list/main')"
+            <div @click="routeTo('../brand/list/main')"
                  class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">品牌获赞</div>
               <div class="home_big_fs">{{homePage.total_likes}}</div>
@@ -59,10 +59,9 @@
                   </div>
                   <div class="weui-cell__ft weui-cell__ft_in-access"></div>
                 </div>
-                <div @click="routeToShop({id:2})"
+                <!-- <div @click="routeToShop({id:2})"
                      class="weui-cell home_cell">
                   <div class="weui-cell__hd">
-                    <!-- <i-icon class="home_cell_img" type="browse" size="16" /> -->
                     <image class="home_cell_img"
                            src="../../static/img/home/shop_icon.png"></image>
                   </div>
@@ -71,7 +70,7 @@
                     <p class="home_cell_sub_title">天河区天河路北路99号 B302</p>
                   </div>
                   <div class="weui-cell__ft weui-cell__ft_in-access"></div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -218,9 +217,12 @@ export default {
     handleTab (val) {
       if (val === 'scan') {
         this.$wx.scanCode().then(res => {
-          wx.navigateTo({ url: '../scanExchange/main' })
-          console.log(res)
-        })
+          console.log(res, '----------')
+          let url = res.result
+          wx.navigateTo({url: '/' + url})
+          // wx.navigateTo({ url: '../scanExchange/main' })
+          // console.log(res)
+        }).catch(e => console.log(e))
       } else {
         this.tabCurr = val
       }
@@ -228,6 +230,8 @@ export default {
     async homePageData () {
       // mer-statistics
       let res = await merStatistics()
+      let {stores, ...other} = res
+      this.$store.commit('setHomeTotal', other)
       this.homePage = res
     },
     async centerPageData () {

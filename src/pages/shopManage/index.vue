@@ -22,7 +22,7 @@
               <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">门店信息</div>
             </div>
             <div style="padding:15rpx;"></div>
-            <div @click="routeTo('../brandSpace/main')"
+            <div @click="routeTo('../brandSpace/main?storeId='+ storeId)"
                  class="weui-flex__item weui-flex shop_mg_bl">
               <div>
                 <image class="shop_mg_icon"

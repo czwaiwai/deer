@@ -9,22 +9,22 @@
             <div style="height:69rpx;border-radius:0 0 750rpx 750rpx;background:#FFF;"></div>
           </div> -->
           </div>
-          <div class="top_main">
+          <!-- <div class="top_main">
             <div class="weui-flex">
               <div class="weui-flex__item">
                 <p class="small_txt">待提收益</p>
-                <p class="big_txt">100</p>
+                <p class="big_txt">{{info.aa}}</p>
               </div>
               <div class="weui-flex__item">
                 <p class="small_txt">已提收益</p>
-                <p class="big_txt">100</p>
+                <p class="big_txt">{{info.aa}}</p>
               </div>
               <div class="weui-flex__item">
                 <p class="small_txt">收益预期</p>
-                <p class="big_txt">100</p>
+                <p class="big_txt">{{info.aa}}</p>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="section">
           <ul class="ul_list "
@@ -138,8 +138,9 @@ export default {
   },
   methods: {
     async getPageData () {
-      let res = await this.$api.storeGift({ store_id: this.storeId })
-      this.info = res
+      let {devices, ...info} = await this.$api.storeGift({ store_id: this.storeId })
+      this.info = info
+      this.list = devices
     },
     routeTo (url) {
       return wx.navigateTo({ url })

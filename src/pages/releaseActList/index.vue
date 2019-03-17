@@ -2,7 +2,13 @@
 <template>
 <div class="container">
   <div class="page">
-    <div class="page_bd" style="background:#EDF1F9;">
+    <!-- <div class="page_bd" style="background:#EDF1F9;"> -->
+    <scroll-view
+    class="page_bd"
+    scroll-y
+    style="background:#EDF1F9;"
+    @scrolltolower="lower"
+    >
       <ul class="act_list">
         <li class="act_item">
           <div class="act_item_bd weui-flex">
@@ -40,8 +46,27 @@
             <button class="act_btn flex_item_center">下线</button>
           </div>
         </li>
+        <li class="act_item">
+          <div class="act_item_bd weui-flex">
+            <image class="img_150" src="../../static/img/other/act_goods.png"></image>
+            <div class="weui-flex__item padding-left15">
+              <p class="fs15 padding-bottom15">草莓水果茶一杯</p>
+              <p class="dark_8e fs12">价值：¥26</p>
+              <p class="dark_8e fs12">积分：15</p>
+            </div>
+          </div>
+          <div class="act_item_line weui-flex padding15-v">
+            <div class="weui-flex__item dark_8e text-left fs12">开始时间：2019-01-01</div>
+            <div class="weui-flex__item dark_8e text-right fs12">结束时间：2019-03-31</div>
+          </div>
+          <div class="act_item_line weui-flex " style="height:95rpx;">
+            <div class="weui-flex__item flex_item_center text-left dark_8e fs12">送出数量：1</div>
+            <button class="act_btn flex_item_center">下线</button>
+          </div>
+        </li>
       </ul>
-    </div>
+    </scroll-view>
+    <!-- </div> -->
   </div>
 </div>
 </template>
@@ -51,14 +76,39 @@ export default {
   name: 'detail',
   components: {},
   data () {
-    return {}
+    return {
+      status: 1,
+      list: []
+    }
   },
 
   computed: {},
 
   created () {},
-
-  methods: {}
+  onLoad (query) {
+    this.status = query.status
+    this.storeId = query.storeId
+  },
+  mounted () {
+    this.getPageData()
+  },
+  methods: {
+    // upper () {
+    //   console.log('上')
+    // },
+    async getPageData () {
+      let res = await this.$api.listActive({
+        status: this.status,
+        store_id: this.storeId,
+        page: 1,
+        per_page: 20
+      })
+      this.list = res.list
+    },
+    lower () {
+      console.log('下')
+    }
+  }
 }
 </script>
 <style>

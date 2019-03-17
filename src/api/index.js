@@ -38,7 +38,12 @@ export function merStatistics (data) {
 // 收入统计接口
 // /mer/mer-income-statistics
 export function merIncomeStatistics (data) {
-  return http.post('/mer/mer-income-statistics', data)
+  return http.get('/mer/income-statistics', data)
+}
+// 兑换扫码品牌统计接口
+// /mer/category-statistics
+export function categoryStatistics (data) {
+  return http.get('/mer/category-statistics', data)
 }
 
 // 商户门店
@@ -92,7 +97,7 @@ export function scanUsers (data) {
 // 扫码兑奖-详情
 // /mer/scan-detail
 export function scanDetail (data) {
-  return http.post('/mer/scan-detail', data)
+  return http.get('/mer/scan-detail', data)
 }
 // 扫码兑奖-提交
 // /mer/scan-receive
@@ -170,5 +175,5 @@ export function authStoreList (data) {
 // 我的-门店授权（操作）
 // /mer/auth-store
 export function authStore (data) {
-  return http.post(' /mer/authStore', data)
+  return http.post('/mer/auth-store', data)
 }

@@ -4,18 +4,17 @@
     <div class="page shop_info">
       <div class="page_bd">
         <div class="weui-cells route_cell weui-cells_after-title ">
-          <div @click="routeToShop"
+          <div @click="handleUploadImg"
                class="weui-cell ">
             <div class="weui-cell__hd">
-              <image v-if="info.logo"
+              <image v-if="formObj.logo"
                      class="shop_info_cell_img"
-                     :src="info.logo"></image>
+                     :src="formObj.logo"></image>
             </div>
             <div class="weui-cell__bd "></div>
             <div class="weui-cell__ft weui-cell__ft_in-access">更换logo</div>
           </div>
-          <div @click="routeToShop"
-               class="weui-cell ">
+          <div  class="weui-cell ">
             <div class="weui-cell__hd">
               <div class="color_cir"
                    :style="{'background': info.bg_image}"></div>
@@ -23,30 +22,32 @@
             <div class="weui-cell__bd "></div>
             <div class="weui-cell__ft weui-cell__ft_in-access">更换背景</div>
           </div>
-          <div @click="routeToShop"
-               class="weui-cell ">
-            <div class="weui-cell__bd ">门店名称</div>
-            <div class="weui-cell__ft weui-cell__ft_in-access">{{info.store_name}}</div>
+          <div class="weui-cell ">
+            <div class="weui-cell__hd ">门店名称</div>
+            <div class="weui-cell__bd "><input class="store_input" v-model="formObj.store_name" type="text" placeholder="请输入门店名称" /></div>
+            <div class="weui-cell__ft weui-cell__ft_in-access"></div>
           </div>
-          <div @click="routeToShop"
-               class="weui-cell ">
-            <div class="weui-cell__bd ">门店地址</div>
-            <div class="weui-cell__ft weui-cell__ft_in-access">{{info.store_addr}}</div>
+          <div  class="weui-cell ">
+            <div class="weui-cell__hd ">门店地址</div>
+            <div class="weui-cell__bd "><input class="store_input"  v-model="formObj.store_addr" type="text" placeholder="请输入门店地址" /></div>
+            <div class="weui-cell__ft weui-cell__ft_in-access"></div>
           </div>
-          <div @click="routeToShop"
-               class="weui-cell ">
-            <div class="weui-cell__bd ">联系人</div>
-            <div class="weui-cell__ft weui-cell__ft_in-access">{{info.contact}}</div>
+          <div  class="weui-cell ">
+            <div class="weui-cell__hd ">联系人</div>
+            <div class="weui-cell__bd "><input class="store_input"  v-model="formObj.contact" type="text" placeholder="请输入门店联系人" /></div>
+            <div class="weui-cell__ft weui-cell__ft_in-access"></div>
           </div>
-          <div @click="routeToShop"
-               class="weui-cell ">
-            <div class="weui-cell__bd">联系电话</div>
-            <div class="weui-cell__ft weui-cell__ft_in-access">{{info.phone}}</div>
+          <div  class="weui-cell ">
+            <div class="weui-cell__hd">联系电话</div>
+            <div class="weui-cell__bd "><input class="store_input"  v-model="formObj.phone" type="text" placeholder="请输入门店联系电话" /></div>
+            <div class="weui-cell__ft weui-cell__ft_in-access"></div>
           </div>
         </div>
       </div>
       <div class="page_ft">
-        <button class="ft_btn">更新门店信息</button>
+        <form  @submit="handleSubmit" report-submit="true">
+          <button  form-type="submit"  class="ft_btn">更新门店信息</button>
+        </form>
       </div>
     </div>
   </div>
@@ -59,7 +60,16 @@ export default {
   components: {},
   data () {
     return {
-      info: {}
+      info: {},
+      formObj: {
+        store_id: '',
+        store_name: '',
+        store_addr: '',
+        logo: '',
+        bg_image: '',
+        contact: '',
+        phone: ''
+      }
     }
   },
 
@@ -78,15 +88,32 @@ export default {
         store_id: this.storeId
       })
       this.info = res
+      this.formObj = {...res}
       console.log(res)
     },
     routeToShop (e) {
       console.log(e)
+    },
+    handleUploadImg () {
+      this.$wx.uploadImg().then(url => {
+        this.formObj.logo = url
+      })
+    },
+    async handleSubmit (e) {
+      let res = await this.$api.saveStore({
+        store_id: this.formObj.id,
+        ...this.formObj
+      })
+      this.$toast('更新成功')
+      console.log(res)
     }
   }
 }
 </script>
 <style>
+.store_input {
+  text-align:right;
+}
 .shop_info_cell_img {
   width: 60rpx;
   height: 60rpx;

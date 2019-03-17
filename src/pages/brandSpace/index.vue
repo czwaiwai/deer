@@ -9,11 +9,11 @@
             <div class="brand_img_wrap">
               <image class="img_150" src="../../static/img/home/head.png"></image>
             </div>
-            <p class="text-center fs18">鹿角巷</p>
+            <p class="text-center fs18">{{info.store_name}}</p>
           </div>
           <div class="weui-flex brand_bottom lodash  ">
-            <image class="address_icon" src="../../static/img/other/address_icon.png"></image>
-            <div class="weui-flex__item padding-left15 fs12 dark_8e">广东省广州市海珠区琶洲商业大厦</div>
+            <image class="address_icon" :src="info.store_logo || '../../static/img/other/address_icon.png'"></image>
+            <div class="weui-flex__item padding-left15 fs12 dark_8e">{{info.store_addr}}</div>
             <div class="fs12 dark_8e">0.6km</div>
           </div>
         </div>
@@ -21,34 +21,44 @@
       <div class="brand_list">
         <div class="light_bg" style="padding-top: 120rpx;"></div>
         <ul>
-          <li class="brsp_item">
+          <li v-for="(item,index) in list" :key="index" class="brsp_item">
             <div class="weui-flex">
-              <image class="img_72 flex_item_center" src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item  flex_item_center fs13 padding-left15">Miss米奇</div>
+              <image class="img_72 flex_item_center" :src="item.avatar || '../../static/img/home/head.png'"></image>
+              <div class="weui-flex__item  flex_item_center fs13 padding-left15">{{item.nickname}}</div>
               <image class="img_more flex_item_center" src="../../static/img/other/more_icon.png"></image>
             </div>
             <div class="space_cont padding15-v" >
-              <p class="fs13">本店推出新品，首杯免费试喝，欢迎品尝，活动时间持续到11月底。</p>
+              <p class="fs13">{{item.context}}</p>
             </div>
-            <div class="img_show_list">
-              <div class="img_mode_01">
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
+            <div v-if ="item.images " class="img_show_list">
+              <div v-if="item.images.length === 1" class="img_mode_00">
+                <image  v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+              </div>
+              <div  v-if="item.images.length === 2"  class="img_mode_01">
+                <image  v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+              </div>
+              <div   v-if="item.images.length === 3"   class="img_mode_02">
+                <image  v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+              </div> 
+              <div   v-if="item.images.length === 4"   class="img_mode_03">
+                <image  v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+              </div> 
+             <div   v-if="item.images.length === 5"   class="img_mode_04">
+                <image  v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+              </div> 
+              <div   v-if="item.images.length === 6"   class="img_mode_04">
+                <image  v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
               </div> 
             </div>
             <div class="weui-flex padding-top">
               <div>
                 <image class="img_like vertical-middle" src="../../static/img/other/like_red.png"></image>
-                <span class="dark_8e  padding-left15 vertical-middle fs13">2000</span>
+                <span class="dark_8e  padding-left15 vertical-middle fs13">{{item.total_likes}}</span>
               </div>
               <div class="weui-flex__item"></div>
             </div>
           </li>
-          <li class="brsp_item">
+          <!-- <li class="brsp_item">
             <div class="weui-flex">
               <image class="img_72 flex_item_center" src="../../static/img/home/head.png"></image>
               <div class="weui-flex__item  flex_item_center fs13 padding-left15">Miss米奇</div>
@@ -144,7 +154,7 @@
               </div>
               <div class="weui-flex__item"></div>
             </div>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div class="padding15">
@@ -152,7 +162,7 @@
       </div>
     </div>
     <div>
-      <button @click="routeTo('../brandSpaceAdd/main')" class="cir_btn_ding">发布</button>
+      <button @click="routeTo('../brandSpaceAdd/main?storeId='+ storeId)" class="cir_btn_ding">发布</button>
     </div>
   </div>
 </div>
@@ -163,14 +173,30 @@ export default {
   name: 'detail',
   components: {},
   data () {
-    return {}
+    return {
+      info: {},
+      list: []
+    }
   },
 
   computed: {},
 
   created () {},
-
+  onLoad (query) {
+    this.storeId = query.storeId
+  },
+  mounted () {
+    this.getPageData()
+  },
   methods: {
+    async getPageData () {
+      let res = await this.$api.spaceIndex({
+        store_id: this.storeId
+      })
+      let {list, ...info} = res
+      this.info = info
+      this.list = list
+    },
     routeTo (url) {
       return wx.navigateTo({url})
     }
@@ -233,6 +259,7 @@ export default {
   position:absolute;
   bottom:100rpx;
   right:30rpx;
+  padding: 0;
 }
 .cir_btn_ding:after {
   border:none;
@@ -260,19 +287,25 @@ export default {
   height:227rpx;
   margin-bottom:6rpx;
 }
+.img_mode_00 .img_item{
+  width:456rpx;
+  height:456rpx;
+}
+
 .img_mode_01 {
   display:flex;
+  position:relative;
   flex-wrap:wrap;
   flex-basis: auto;
   justify-content: space-between;
 }
-.img_mode_01 .img_item{
-  width:227rpx;
-  height:227rpx;
-  margin-bottom:6rpx;
+.img_mode_01 .img_item:first-child {
+  width:456rpx;
+  height:456rpx;
 }
 .img_mode_02 {
   display:flex;
+  position:relative;
   flex-wrap:wrap;
   flex-basis: auto;
   justify-content: space-between;
@@ -286,6 +319,7 @@ export default {
   right:0;
   bottom:0;
 }
+
 .img_mode_03 {
   display:flex;
   flex-wrap:wrap;
@@ -295,8 +329,19 @@ export default {
 .img_mode_03 {
   padding-right:233rpx;
 }
-.img_mode_05 .img_item{
-  width:456rpx;
-  height:456rpx;
+
+.img_mode_04 {
+  display:flex;
+  flex-wrap:wrap;
+  flex-basis: auto;
+  justify-content: space-between;
 }
+.img_mode_04 .img_item{
+  width:227rpx;
+  height:227rpx;
+  margin-bottom:6rpx;
+}
+
+
+
 </style>

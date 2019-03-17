@@ -4,11 +4,11 @@
     <div class="page">
       <div class="page_bd">
         <ul class="padding15">
-          <li @click="routeTo('../releaseActList/main?storeId='+ storeId)">
+          <li @click="routeTo('../releaseActList/main?status=1&storeId='+ storeId)">
             <image class="act_banner"
                    src="../../static/img/other/act_banner_02.png"></image>
           </li>
-          <li @click="routeTo('../releaseActList/main?storeId='+ storeId)"
+          <li @click="routeTo('../releaseActList/main?status=0&storeId='+ storeId)"
               class="banner_wrap">
             <image class="act_banner"
                    src="../../static/img/other/act_banner_01.png"></image>

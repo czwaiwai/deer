@@ -13,19 +13,34 @@
       </div>
       <div class="padding15">
         <ul class="goods">
-          <li class="goods_item">
+          <li v-for="(item, index) in listGoods" :key="index" class="goods_item">
             <div class="weui-flex goods_bd">
-              <image class="img_150" src="../../static/img/other/good.png" ></image>
+              <img class="img_150" :src="item.goods_image || '../../static/img/other/good.png'" />
               <div class="weui-flex__item padding-left15">
-                <p class="fs14">夏日条纹薄荷绿包包</p>
-                <p class="error_color fs14 padding-bottom">收益: 20元/件</p>
-                <p class="dark_8e fs12">售价: ¥26  |  返积分: 15</p>
+                <p class="fs14">{{item.goods_name}}</p>
+                <p class="error_color fs14 padding-bottom">收益: {{item.every_income}}元/件</p>
+                <p class="dark_8e fs12">售价: ¥{{item.price}}  |  返积分: {{item.return_integral}}</p>
               </div>
             </div>
             <div class="goods_ft weui-flex text-center">
-              <div class="weui-flex__item dark_8e fs12">可兑换: 30</div>
-              <div class="weui-flex__item dark_8e fs12">已兑换: 30</div>
-              <div class="weui-flex__item dark_8e fs12">预计收益: 60</div>
+              <div class="weui-flex__item dark_8e fs12">剩余库存: {{item.lave_stock}}</div>
+              <div class="weui-flex__item dark_8e fs12">已兑换: {{item.received_num}}</div>
+              <div class="weui-flex__item dark_8e fs12">累计库存: {{item.total_stock}}</div>
+            </div>
+          </li>
+          <li v-for="(item, index) in listGifts" :key="index" class="goods_item">
+            <div class="weui-flex goods_bd">
+              <img class="img_150" :src="item.gift_image || '../../static/img/other/good.png'" />
+              <div class="weui-flex__item padding-left15">
+                <p class="fs14">{{item.gift_name}}</p>
+                <p class="dark_8e fs12">售价: ¥{{item.price}}</p>
+                <p class="dark_8e fs12">  返积分: {{item.return_integral}}</p>
+              </div>
+            </div>
+            <div class="goods_ft weui-flex text-center">
+              <div class="weui-flex__item dark_8e fs12">剩余库存: {{item.lave_stock}}</div>
+              <div class="weui-flex__item dark_8e fs12">已兑换: {{item.received_num}}</div>
+              <div class="weui-flex__item dark_8e fs12">累计库存: {{item.total_stock}}</div>
             </div>
           </li>
           <li class="goods_item">
@@ -33,23 +48,8 @@
               <image class="img_150" src="../../static/img/other/good.png" ></image>
               <div class="weui-flex__item padding-left15">
                 <p class="fs14">夏日条纹薄荷绿包包</p>
-                <p class="error_color fs14 padding-bottom">收益: 20元/件</p>
-                <p class="dark_8e fs12">售价: ¥26  |  返积分: 15</p>
-              </div>
-            </div>
-            <div class="goods_ft weui-flex text-center">
-              <div class="weui-flex__item dark_8e fs12">可兑换: 30</div>
-              <div class="weui-flex__item dark_8e fs12">已兑换: 30</div>
-              <div class="weui-flex__item dark_8e fs12">预计收益: 60</div>
-            </div>
-          </li>
-          <li class="goods_item">
-            <div class="weui-flex goods_bd">
-              <image class="img_150" src="../../static/img/other/good.png" ></image>
-              <div class="weui-flex__item padding-left15">
-                <p class="fs14">夏日条纹薄荷绿包包</p>
-                <p class="error_color fs14 padding-bottom">收益: 20元/件</p>
-                <p class="dark_8e fs12">售价: ¥26  |  返积分: 15</p>
+                <p class="dark_8e fs12">售价: ¥26</p>
+                <p class="dark_8e fs12">  返积分: 15</p>
               </div>
             </div>
             <div class="goods_ft weui-flex text-center">
@@ -70,14 +70,41 @@ export default {
   name: 'detail',
   components: {},
   data () {
-    return {}
+    return {
+      listGoods: [],
+      listGifts: []
+    }
   },
 
   computed: {},
 
   created () {},
+  onLoad (query) {
+    this.storeId = query.storeId
+  },
+  mounted () {
+    this.getPageData()
+    this.getGiftData()
+  },
+  methods: {
+    async getPageData () {
+      let res = await this.$api.stockGoodsList({
+        page: 1,
+        per_page: 10,
+        store_id: this.storeId
+      })
+      this.listGoods = res.list
+    },
+    async getGiftData () {
+      let res = await this.$api.stockGiftList({
+        page: 1,
+        per_page: 10,
+        store_id: this.storeId
+      })
+      this.listGifts = res.list
+    }
 
-  methods: {}
+  }
 }
 </script>
 <style scoped>

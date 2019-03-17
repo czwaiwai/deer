@@ -26,6 +26,11 @@ const user = {
       state.token = token
     }
   },
-  actions: {}
+  actions: {
+    logout ({commit}, data) {
+      commit('setLogin', false)
+      commit('setToken', '')
+    }
+  }
 }
 export default user

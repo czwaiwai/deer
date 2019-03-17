@@ -13,47 +13,47 @@
           <div class="weui-flex">
             <div class="weui-flex__item" >
               <p class="small_txt">待提收益</p>
-              <p class="big_txt">100</p>
+              <p class="big_txt">¥{{info.wait_withdraw_income}}</p>
             </div>
             <div class="weui-flex__item" >
               <p class="small_txt">已提收益</p>
-              <p class="big_txt">100</p>
+              <p class="big_txt">¥{{info.total_withdraw}}</p>
             </div>
             <div class="weui-flex__item" >
               <p class="small_txt">收益预期</p>
-              <p class="big_txt">100</p>
+              <p class="big_txt">¥{{info.goods_forecast_income}}</p>
             </div>
           </div>
         </div>
       </div>
       <div class="section" >
         <ul class="ul_list " style="padding-bottom:40rpx;" >
-           <li class="li_item light_bg ">
-              <p class="title fs15">鹿角巷天河北总店</p>
+           <li v-for="(item,index) in list" :key="index" class="li_item light_bg ">
+              <p class="title fs15">{{item.store_name}}</p>
               <div class="weui-flex padding42">
-                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
+                <div class="weui-flex__item fs12 dark_e8">门店编号：{{item.store_no}}</div>
                 <a @click="routeTo('../detail/main')" class="main_color fs12">查看明细</a>
               </div>
               <div class="item_nums weui-flex text-center ">
                 <div class="weui-flex__item" >
-                  <p class="main_txt">30</p>
+                  <p class="main_txt">{{item.today_income}}</p>
                   <p class="sub_txt dark_8e fs12">今日</p>
                 </div>
                 <div class="weui-flex__item" >
-                  <p class="main_txt">30</p>
+                  <p class="main_txt">{{item.yesterday_income}}</p>
                   <p class="sub_txt dark_8e fs12">昨日</p>
                 </div>
                 <div class="weui-flex__item" >
-                  <p class="main_txt">30</p>
+                  <p class="main_txt">{{item.total_income}}</p>
                   <p class="sub_txt dark_8e fs12">累计</p>
                 </div>
               </div>
               <div class="weui-flex" style="padding-top:36rpx;">
-                <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
+                <div class="weui-flex__item dark_8e fs12">设备编号：{{item.device_no}}</div>
                 <div class="dark_8e fs12">投放中</div>
               </div>
           </li>
-          <li class="li_item light_bg ">
+          <!-- <li class="li_item light_bg ">
               <p class="title fs15">鹿角巷天河北总店</p>
               <div class="weui-flex padding42">
                 <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
@@ -102,7 +102,7 @@
                 <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
                 <div class="dark_8e fs12">投放中</div>
               </div>
-          </li>
+          </li> -->
         </ul>
         
       </div>
@@ -116,14 +116,25 @@ export default {
   name: 'detail',
   components: {},
   data () {
-    return {}
+    return {
+      info: {},
+      list: []
+    }
   },
 
   computed: {},
 
   created () {},
-
+  mounted () {
+    this.getPageData()
+  },
   methods: {
+    async getPageData () {
+      let res = await this.$api.merIncomeStatistics()
+      let {stores, ...info} = res
+      this.list = stores
+      this.info = info
+    },
     routeTo (url) {
       return wx.navigateTo({url})
     }

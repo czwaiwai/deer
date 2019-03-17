@@ -87,11 +87,40 @@ export default {
         url: '../index/main'
       })
     }
+    // this.checkLocalToken().then(res => {
+    //   if (this.isLogin) {
+    //     wx.redirectTo({
+    //       url: '../index/main'
+    //     })
+    //   }
+    // })
     this.formObj.username = this.account
   },
   created () { },
 
   methods: {
+    // 检查本地token是否有效
+    checkLocalToken () {
+      return new Promise((resolve, reject) => {
+        wx.checkSession({
+          success: (res) => {
+            let token = this.token
+            if (!token) {
+              this.$store.commit('setToken', '')
+              this.$store.commit('setLogin', false)
+              reject(res)
+            }
+            resolve(token)
+          },
+          fail: (res) => {
+            console.log('登录状态已过期，需要重新登录')
+            this.$store.commit('setToken', '')
+            this.$store.commit('setLogin', false)
+            reject(res)
+          }
+        })
+      })
+    },
     handleCheck (e) {
       this.formObj.autoLogin = e.mp.detail.value[0] || 0
     },
@@ -123,25 +152,26 @@ export default {
         console.log('未允许授权')
         this.$toast('未允许授权')
       } else {
-        if (this.user) {
-          if (!this.validator()) return
-          if (this.formObj.autoLogin) {
-            this.$store.commit('setAccount', this.formObj.autoLogin)
-          }
-          this.promise = this.loginAction().then(res => this.loginSucc(res))
-        } else {
-          this.promise = this.$wx.login()
-            .then(code => maKey({ code }))
-            .then(res => maOauth({
-              encryptedData: e.mp.detail.encryptedData,
-              iv: e.mp.detail.iv
-            }))
-            .then(user => {
-              this.$store.commit('setUser', user)
-              return this.loginAction()
-            })
-            .then(res => this.loginSucc(res))
-        }
+        console.log(this.user, this.token)
+        // if (this.user && this.token) {
+        //   if (!this.validator()) return
+        //   if (this.formObj.autoLogin) {
+        //     this.$store.commit('setAccount', this.formObj.autoLogin)
+        //   }
+        //   this.promise = this.loginAction().then(res => this.loginSucc(res))
+        // } else {
+        this.promise = this.$wx.login()
+          .then(code => maKey({ code }))
+          .then(res => maOauth({
+            encryptedData: e.mp.detail.encryptedData,
+            iv: e.mp.detail.iv
+          }))
+          .then(user => {
+            this.$store.commit('setUser', user)
+            return this.loginAction()
+          })
+          .then(res => this.loginSucc(res))
+        // }
       }
     },
     loginAction () {

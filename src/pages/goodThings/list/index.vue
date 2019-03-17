@@ -12,16 +12,16 @@
           <div class="top_main">
             <div class="weui-flex">
               <div class="weui-flex__item">
-                <p class="small_txt">待提收益</p>
-                <p class="big_txt">100</p>
+                <p class="small_txt">可兑换</p>
+                <p class="big_txt">{{info.goods_can_reveives}}</p>
               </div>
               <div class="weui-flex__item">
-                <p class="small_txt">已提收益</p>
-                <p class="big_txt">100</p>
+                <p class="small_txt">已兑换</p>
+                <p class="big_txt">{{info.goods_already_receives}}</p>
               </div>
               <div class="weui-flex__item">
-                <p class="small_txt">收益预期</p>
-                <p class="big_txt">100</p>
+                <p class="small_txt">累计库存</p>
+                <p class="big_txt">{{info.goods_stock}}</p>
               </div>
             </div>
           </div>
@@ -30,78 +30,15 @@
           <ul class="ul_list "
               style="padding-bottom:40rpx;">
             <li class="li_item light_bg ">
-              <p class="title fs15">鹿角巷天河北总店</p>
+              <p class="title fs15">{{info.store_name}}</p>
               <div class="weui-flex padding42">
-                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
+                <div class="weui-flex__item fs12 dark_e8">门店编号：{{info.store_no}}</div>
                 <a @click="routeTo('../detail/main')"
                    class="main_color fs12">查看明细</a>
               </div>
-              <div class="item_nums weui-flex text-center ">
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">今日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">昨日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">累计</p>
-                </div>
-              </div>
-              <div class="weui-flex"
-                   style="padding-top:36rpx;">
-                <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
-                <div class="dark_8e fs12">投放中</div>
-              </div>
             </li>
             <li class="li_item light_bg ">
-              <p class="title fs15">鹿角巷天河北总店</p>
-              <div class="weui-flex padding42">
-                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
-                <a class="main_color fs12">查看明细</a>
-              </div>
-              <div class="item_nums weui-flex text-center ">
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">今日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">昨日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">累计</p>
-                </div>
-              </div>
-              <div class="weui-flex"
-                   style="padding-top:36rpx;">
-                <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
-                <div class="dark_8e fs12">投放中</div>
-              </div>
-            </li>
-            <li class="li_item light_bg ">
-              <p class="title fs15">鹿角巷天河北总店</p>
-              <div class="weui-flex padding42">
-                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
-                <a class="main_color fs12">查看明细</a>
-              </div>
-              <div class="item_nums weui-flex text-center ">
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">今日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">昨日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">累计</p>
-                </div>
-              </div>
+              <p class="title fs15">设备编号</p>
               <div class="weui-flex"
                    style="padding-top:36rpx;">
                 <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
@@ -122,6 +59,7 @@ export default {
   components: {},
   data () {
     return {
+      info: {},
       list: []
     }
   },
@@ -140,6 +78,9 @@ export default {
       let res = await this.$api.storeGoods({
         store_id: this.storeId
       })
+      let {devices, ...info} = res
+      this.info = info
+      this.list = devices
       console.log(res)
     },
     routeTo (url) {
