@@ -30,10 +30,6 @@
               <div class="weui-flex__item dark_e8">{{item.day}}</div>
               <div class="weui-flex__item dark_e8">{{item.value}}</div>
             </li>
-            <li class="list_item weui-flex text-center">
-              <div class="weui-flex__item dark_e8">2019-02-10</div>
-              <div class="weui-flex__item dark_e8">100</div>
-            </li>
           </ul>
         </div>
         <load-more v-if="loadType==='loading'" :loading="true" tip="正在加载"></load-more>
