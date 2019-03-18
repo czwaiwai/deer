@@ -1,9 +1,6 @@
 {
-    "navigationBarTitleText": "登录",
-    "usingComponents": {
-        "i-icon": "../../static/iview/icon/index",
-        "i-avatar": "../../static/iview/avatar/index",
-        "i-tab-bar": "../../static/iview/tab-bar/index",
-        "i-tab-bar-item": "../../static/iview/tab-bar-item/index"
-    }
+  "navigationBarTitleText": "兑换明细",
+  "usingComponents": {
+    "load-more": "../../../static/iview/load-more/index"
+  }
 }

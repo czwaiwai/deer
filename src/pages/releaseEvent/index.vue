@@ -1,32 +1,26 @@
 <!-- index.vue -->
 <template>
   <div class="container">
-    <form class="form_wrap"  @submit="handleSubmit" report-submit="true">
+    <form class="form_wrap" @submit="handleSubmit" report-submit="true">
       <div class="page">
 
         <div class="page_bd">
 
-          <div @click="handleUploadImg"
-               class="form_item weui-flex">
-            <div class="form_item_hd flex_item_center"
-                 style="padding-top:10rpx;">
-              <img class="img_60"
-                     :src="formObj.image" />
+          <div @click="handleUploadImg" class="form_item weui-flex">
+            <div class="form_item_hd flex_item_center" style="padding-top:10rpx;">
+              <img class="img_60" :src="formObj.image" />
             </div>
             <div class="weui-flex__item form_item_bd">
               <div class="span_placeholder fs15">请上传活动奖品图</div>
             </div>
             <div class="form_item_ft flex_item_center">
-              <image class="dirt_right"
-                     src="../../static/img/other/right_icon.png"></image>
+              <image class="dirt_right" src="../../static/img/other/right_icon.png"></image>
             </div>
           </div>
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">奖品名称</div>
             <div class="weui-flex__item form_item_bd">
-              <input v-model="formObj.active_name" name="active_name"
-                     placeholder="请输入奖品名称"
-                     placeholder-style="color:#CACCDB">
+              <input v-model="formObj.active_name" name="active_name" placeholder="请输入奖品名称" placeholder-style="color:#CACCDB">
             </div>
             <div class="form_item_ft"></div>
           </div>
@@ -39,9 +33,9 @@
           </div>
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">开始时间</div>
-            <picker @change="handleDateStart" class="weui-flex__item form_item_bd" mode="date"  >
-                <div v-if="!formObj.start_time" class="span_placeholder fs15">请选择开始时间</div>
-                <div v-else class="fs15">{{formObj.start_time}}</div>
+            <picker @change="handleDateStart" class="weui-flex__item form_item_bd" mode="date">
+              <div v-if="!formObj.start_time" class="span_placeholder fs15">请选择开始时间</div>
+              <div v-else class="fs15">{{formObj.start_time}}</div>
             </picker>
             <div class="form_item_ft flex_item_center">
               <image class="dirt_right" src="../../static/img/other/right_icon.png"></image>
@@ -49,9 +43,9 @@
           </div>
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">结束时间</div>
-             <picker @change="handleDateEnd" class="weui-flex__item form_item_bd" mode="date"  :start="formObj.start_time"   >
-                <div v-if="!formObj.end_time" class="span_placeholder fs15">请选择结束时间</div>
-                <div v-else class="fs15">{{formObj.end_time}}</div>
+            <picker @change="handleDateEnd" class="weui-flex__item form_item_bd" mode="date" :start="formObj.start_time">
+              <div v-if="!formObj.end_time" class="span_placeholder fs15">请选择结束时间</div>
+              <div v-else class="fs15">{{formObj.end_time}}</div>
             </picker>
             <div class="form_item_ft flex_item_center">
               <image class="dirt_right" src="../../static/img/other/right_icon.png"></image>
@@ -60,32 +54,26 @@
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">送出数量</div>
             <div class="weui-flex__item form_item_bd">
-              <input name="out_num"
-                     v-model="formObj.out_num"
-                     placeholder="请输入送出数量"
-                     placeholder-style="color:#CACCDB">
+              <input name="out_num" v-model="formObj.out_num" placeholder="请输入送出数量" placeholder-style="color:#CACCDB">
             </div>
             <div class="form_item_ft"></div>
           </div>
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">需要积分</div>
             <div class="weui-flex__item form_item_bd">
-              <input name="integral"
-                     v-model="formObj.integral"
-                     placeholder="请输入需要积分"
-                     placeholder-style="color:#CACCDB">
+              <input name="integral" v-model="formObj.integral" placeholder="请输入需要积分" placeholder-style="color:#CACCDB">
             </div>
             <div class="form_item_ft"></div>
           </div>
 
         </div>
         <div class="page_ft">
-          <button form-type="submit"  class="ft_btn">立即发布</button>
+          <button form-type="submit" class="ft_btn">立即发布</button>
         </div>
 
       </div>
     </form>
-   <van-dialog id="van-dialog" />
+    <van-dialog id="van-dialog" />
   </div>
 </template>
 
@@ -144,16 +132,16 @@ export default {
         start_time: 'required@开始时间不能为空',
         end_time: 'required@结束时间不能为空'
       })
-      this.formObj.start_time = this.formObj.start_time + ' 00:00:00'
-      this.formObj.end_time = this.formObj.end_time + ' 00:00:00'
+      this.formObj.start_time = this.formObj.start_time
+      this.formObj.end_time = this.formObj.end_time
       if (errArr && errArr[0]) {
         return this.$toast(errArr[0].errMsg)
       }
       let res = await this.$api.saveActive(this.formObj)
       console.log(res)
       await Dialog.alert({
-        title: '标题',
-        message: '弹窗内容'
+        title: '提示',
+        message: '操作成功'
       })
       this.$wx.back()
     }

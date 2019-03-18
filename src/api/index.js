@@ -29,6 +29,11 @@ export function closeActive (data) {
 export function listActive (data) {
   return http.post('/mer/list-active', data)
 }
+// 每日统计（支持收益，兑换，品牌点赞和到店扫码）
+// /mer/daily-statistics
+export function dailyStatistics (data) {
+  return http.post('/mer/daily-statistics', data)
+}
 
 // 统计
 // /mer/mer-statistics

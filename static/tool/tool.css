@@ -138,6 +138,9 @@ view {
   width: 360rpx;
   height: 360rpx;
 }
+.img_cir {
+  border-radius: 100%;
+}
 .no_before_border.weui-cells:before {
   border-top: none;
 }

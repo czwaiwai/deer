@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "粉丝关注"
+  "navigationBarTitleText": "粉丝关注",
+  "usingComponents": {
+    "load-more": "../../static/iview/load-more/index"
+  }
 }

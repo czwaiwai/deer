@@ -1,4 +1,7 @@
 {
-    "navigationBarTitleText": " ",
-    "navigationBarBackgroundColor": "#3ACFC1"
+  "navigationBarTitleText": " ",
+  "navigationBarBackgroundColor": "#3ACFC1",
+  "usingComponents": {
+    "load-more": "../../static/iview/load-more/index"
+  }
 }

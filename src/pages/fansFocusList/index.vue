@@ -2,8 +2,7 @@
 <template>
   <div class="container">
     <div class="page">
-      <div class="page_bd"
-           style="">
+      <scroll-view class="page_bd" scroll-y @scrolltolower="lower">
         <div class="detail_top">
           <div class="weui-flex text-center">
             <div class="weui-flex__item">
@@ -22,37 +21,32 @@
         </div>
         <div class="section light_bg">
           <ul>
-            <!-- <li class="list_hd weui-flex text-center">
-            <div class="weui-flex__item">日期</div>
-            <div class="weui-flex__item">收益</div>
-          </li> -->
-
-            <li v-for="(item, index) in list"
-                :key="index"
-                class="list_item weui-flex ">
-              <image class="img_72 flex_item_center"
-                     :src="item.avatar || '../../static/img/home/head.png'"></image>
+            <li v-for="(item, index) in list" :key="index" class="list_item weui-flex ">
+              <image class="img_72 flex_item_center" :src="item.avatar || '../../static/img/home/head.png'"></image>
               <div class="weui-flex__item padding-left15 fs15 dark_8e">{{item.nickname}}</div>
               <div class="dark_8e fs15">{{item.scan_date}}</div>
             </li>
-            <li class="list_item weui-flex ">
-              <image class="img_72 flex_item_center"
-                     src="../../static/img/home/head.png"></image>
+            <!-- <li class="list_item weui-flex ">
+              <image class="img_72 flex_item_center" src="../../static/img/home/head.png"></image>
               <div class="weui-flex__item padding-left15 fs15 dark_8e">Miss米奇</div>
               <div class="dark_8e fs15">2019-02-10</div>
-            </li>
+            </li> -->
 
           </ul>
         </div>
-      </div>
+        <load-more v-if="loadType==='loading'" :loading="true" tip="正在加载"></load-more>
+        <load-more v-if="loadType==='end'" :loading="false" tip="没有更多数据"></load-more>
+        <load-more v-if="loadType==='empty'" :loading="false" tip="暂无数据"></load-more>
+      </scroll-view>
     </div>
   </div>
 </template>
 
 <script>
+import loadmore from '@/utils/loadmore'
 export default {
   name: 'detail',
-  components: {},
+  mixins: [loadmore],
   data () {
     return {
       info: {},
@@ -65,19 +59,21 @@ export default {
   created () { },
   onLoad (query) {
     this.storeId = query.storeId
+    this.pageSize = 20
     this.getPageData()
   },
   methods: {
     async getPageData () {
       let res = await this.$api.scanUsers({
         store_id: this.storeId,
-        per_page: 10,
-        page: 1
+        per_page: this.pageSize,
+        page: this.page
       })
       let { users, ...info } = res
       let { list, ...other } = users
       this.info = { ...info, ...other }
-      this.list = list
+      // this.list = list
+      return this.listProcess(list)
     }
   }
 }

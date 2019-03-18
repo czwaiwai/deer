@@ -5,66 +5,53 @@
       <div class="page_bd">
         <div class="shop_mg_top_bl text-center">
           <div>
-            <image :src="info.logo?info.logo:'../../static/img/shopManage/head.png'"
-                   class="shop_mg_head_img"></image>
+            <image :src="info.logo?info.logo:'../../static/img/shopManage/head.png'" class="shop_mg_head_img img_cir"></image>
           </div>
           <h3 class="fs18  dark_18">{{info.store_name}}</h3>
           <p class="fs13 dark_8e">{{info.store_addr}}</p>
         </div>
         <div class="setion">
           <div class="weui-flex padding15-h padding-bottom15 ">
-            <div @click="routeTo('../shopInfo/main?storeId='+ storeId)"
-                 class="weui-flex__item weui-flex shop_mg_bl">
+            <div @click="routeTo('../shopInfo/main?storeId='+ storeId)" class="weui-flex__item weui-flex shop_mg_bl">
               <div>
-                <image class="shop_mg_icon"
-                       src="../../static/img/shopManage/icon_05.png"></image>
+                <image class="shop_mg_icon" src="../../static/img/shopManage/icon_05.png"></image>
               </div>
               <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">门店信息</div>
             </div>
             <div style="padding:15rpx;"></div>
-            <div @click="routeTo('../brandSpace/main?storeId='+ storeId)"
-                 class="weui-flex__item weui-flex shop_mg_bl">
+            <div @click="routeTo('../brandSpace/main?storeId='+ storeId)" class="weui-flex__item weui-flex shop_mg_bl">
               <div>
-                <image class="shop_mg_icon"
-                       src="../../static/img/shopManage/icon_06.png"></image>
+                <image class="shop_mg_icon" src="../../static/img/shopManage/icon_07.png"></image>
               </div>
               <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">品牌动态</div>
             </div>
           </div>
           <div class="weui-flex padding15-h padding-bottom15 ">
-            <div @click="routeTo('../goodThings/list/main?storeId='+ storeId)"
-                 class="weui-flex__item weui-flex shop_mg_bl">
+            <div @click="routeTo('../goodThings/list/main?storeId='+ storeId)" class="weui-flex__item weui-flex shop_mg_bl">
               <div>
-                <image class="shop_mg_icon"
-                       src="../../static/img/shopManage/icon_03.png"></image>
+                <image class="shop_mg_icon" src="../../static/img/shopManage/icon_03.png"></image>
               </div>
               <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">好物推荐</div>
             </div>
             <div style="padding:15rpx;"></div>
-            <div @click="routeTo('../storeGift/list/main?storeId='+ storeId)"
-                 class="weui-flex__item weui-flex shop_mg_bl">
+            <div @click="routeTo('../storeGift/list/main?storeId='+ storeId)" class="weui-flex__item weui-flex shop_mg_bl">
               <div>
-                <image class="shop_mg_icon"
-                       src="../../static/img/shopManage/icon_04.png"></image>
+                <image class="shop_mg_icon" src="../../static/img/shopManage/icon_04.png"></image>
               </div>
               <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">积分礼物</div>
             </div>
           </div>
           <div class="weui-flex padding15-h padding-bottom15 ">
-            <div @click="routeTo('../releaseAct/main?storeId='+ storeId)"
-                 class="weui-flex__item weui-flex shop_mg_bl">
+            <div @click="routeTo('../releaseAct/main?storeId='+ storeId)" class="weui-flex__item weui-flex shop_mg_bl">
               <div>
-                <image class="shop_mg_icon"
-                       src="../../static/img/shopManage/icon_01.png"></image>
+                <image class="shop_mg_icon" src="../../static/img/shopManage/icon_01.png"></image>
               </div>
               <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">运营活动</div>
             </div>
             <div style="padding:15rpx;"></div>
-            <div @click="routeTo('../fansFocusList/main?storeId='+ storeId)"
-                 class="weui-flex__item weui-flex shop_mg_bl">
+            <div @click="routeTo('../fansFocusList/main?storeId='+ storeId)" class="weui-flex__item weui-flex shop_mg_bl">
               <div>
-                <image class="shop_mg_icon"
-                       src="../../static/img/shopManage/icon_02.png"></image>
+                <image class="shop_mg_icon" src="../../static/img/shopManage/icon_02.png"></image>
               </div>
               <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">粉丝关注</div>
             </div>

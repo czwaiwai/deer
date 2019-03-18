@@ -1,9 +1,10 @@
 <!-- index.vue -->
 <template>
-<div class="container">
-  <div class="page">
-    <div class="page_bd" style="">
-      <div class="detail_top">
+  <div class="container">
+    <div class="page">
+      <!-- <div class="page_bd" style=""> -->
+      <scroll-view class="page_bd" scroll-y @scrolltolower="lower">
+        <div class="detail_top">
           <div class="weui-flex text-center">
             <div class="weui-flex__item">
               <p class="dark_e8 fs12">今日</p>
@@ -18,118 +19,105 @@
               <p class="main_color main_txt">200</p>
             </div>
           </div>
-      </div>
-      <div class="section light_bg">
-        <ul>
-          <li class="list_hd weui-flex text-center">
-            <div class="weui-flex__item">日期</div>
-            <div class="weui-flex__item">收益</div>
-          </li>
-          <li class="list_item weui-flex text-center">
-            <div class="weui-flex__item dark_e8">2019-02-10</div>
-            <div class="weui-flex__item dark_e8">100</div>
-          </li>
-          <li class="list_item weui-flex text-center">
-            <div class="weui-flex__item dark_e8">2019-02-10</div>
-            <div class="weui-flex__item dark_e8">100</div>
-          </li>
-          <li class="list_item weui-flex text-center">
-            <div class="weui-flex__item dark_e8">2019-02-10</div>
-            <div class="weui-flex__item dark_e8">100</div>
-          </li>
-          <li class="list_item weui-flex text-center">
-            <div class="weui-flex__item dark_e8">2019-02-10</div>
-            <div class="weui-flex__item dark_e8">100</div>
-          </li>
-          <li class="list_item weui-flex text-center">
-            <div class="weui-flex__item dark_e8">2019-02-10</div>
-            <div class="weui-flex__item dark_e8">100</div>
-          </li>
-          <li class="list_item weui-flex text-center">
-            <div class="weui-flex__item dark_e8">2019-02-10</div>
-            <div class="weui-flex__item dark_e8">100</div>
-          </li>
-          <li class="list_item weui-flex text-center">
-            <div class="weui-flex__item dark_e8">2019-02-10</div>
-            <div class="weui-flex__item dark_e8">100</div>
-          </li>
-          <li class="list_item weui-flex text-center">
-            <div class="weui-flex__item dark_e8">2019-02-10</div>
-            <div class="weui-flex__item dark_e8">100</div>
-          </li>
-          <li class="list_item weui-flex text-center">
-            <div class="weui-flex__item dark_e8">2019-02-10</div>
-            <div class="weui-flex__item dark_e8">100</div>
-          </li>
-          <li class="list_item weui-flex text-center">
-            <div class="weui-flex__item dark_e8">2019-02-10</div>
-            <div class="weui-flex__item dark_e8">100</div>
-          </li>
-          <li class="list_item weui-flex text-center">
-            <div class="weui-flex__item dark_e8">2019-02-10</div>
-            <div class="weui-flex__item dark_e8">100</div>
-          </li>
-        </ul>
-      </div>
+        </div>
+        <div class="section light_bg">
+          <ul>
+            <li class="list_hd weui-flex text-center">
+              <div class="weui-flex__item">日期</div>
+              <div class="weui-flex__item">收益</div>
+            </li>
+            <li v-for="(item,index) in list" :key="index" class="list_item weui-flex text-center">
+              <div class="weui-flex__item dark_e8">{{item.day}}</div>
+              <div class="weui-flex__item dark_e8">{{item.value}}</div>
+            </li>
+            <li class="list_item weui-flex text-center">
+              <div class="weui-flex__item dark_e8">2019-02-10</div>
+              <div class="weui-flex__item dark_e8">100</div>
+            </li>
+          </ul>
+        </div>
+        <load-more v-if="loadType==='loading'" :loading="true" tip="正在加载"></load-more>
+        <load-more v-if="loadType==='end'" :loading="false" tip="没有更多数据"></load-more>
+        <load-more v-if="loadType==='empty'" :loading="false" tip="暂无数据"></load-more>
+      </scroll-view>
+      <!-- </div> -->
     </div>
   </div>
-</div>
 </template>
 
 <script>
+
+import loadmore from '@/utils/loadmore'
 export default {
   name: 'detail',
-  components: {},
+  mixins: [loadmore],
   data () {
-    return {}
+    return {
+      list: []
+    }
   },
 
   computed: {},
-
-  created () {},
-
-  methods: {}
+  onLoad (query) {
+    this.storeId = query.storeId
+  },
+  mounted () {
+    this.getPageData()
+  },
+  methods: {
+    async getPageData () {
+      try {
+        let res = await this.$api.dailyStatistics({
+          store_id: this.storeId,
+          category: 'income'
+        })
+        this.listProcess(res.list)
+        console.log(res)
+      } catch (e) {
+        this.toEnd()
+      }
+    }
+  }
 }
 </script>
 <style scoped>
 .page_bd {
-  background:#EDF1F9;
+  background: #edf1f9;
 }
-.detail_top{
-  background:#FFF;
-  height:200rpx;
-  margin-bottom:20rpx;
-  padding:65rpx 0;
+.detail_top {
+  background: #fff;
+  height: 200rpx;
+  margin-bottom: 20rpx;
+  padding: 65rpx 0;
 }
 .detail_top .weui-flex__item {
-  position:relative;
+  position: relative;
 }
 .detail_top .weui-flex__item.border_left:after {
-  content: '';
-  border-left:1rpx solid #ECEEF2;
-  position:absolute;
-  left:0;
-  top:10rpx;
-  height:70rpx;
-
+  content: "";
+  border-left: 1rpx solid #eceef2;
+  position: absolute;
+  left: 0;
+  top: 10rpx;
+  height: 70rpx;
 }
 .main_txt {
-  font-size:48rpx;
-  font-weight:bold;
-  line-height:1.2;
+  font-size: 48rpx;
+  font-weight: bold;
+  line-height: 1.2;
 }
 .list_hd {
-  font-size:30rpx;
-  color:#101010;
-  height:113rpx;
-  line-height:113rpx;
-  border-bottom:1rpx solid #ECEEF2;
+  font-size: 30rpx;
+  color: #101010;
+  height: 113rpx;
+  line-height: 113rpx;
+  border-bottom: 1rpx solid #eceef2;
 }
 .list_item {
-  font-size:30rpx;
-  height:107rpx;
-  color:#8E97A8;
-  line-height:107rpx;
-  border-bottom:1rpx solid #ECEEF2;
+  font-size: 30rpx;
+  height: 107rpx;
+  color: #8e97a8;
+  line-height: 107rpx;
+  border-bottom: 1rpx solid #eceef2;
 }
 </style>

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/login/main",
+    "pages/cashDetail/main",
     "pages/index/main",
     "pages/cash/main",
     "pages/subAcct/main",
@@ -31,7 +32,6 @@
     "pages/shopManage/main",
 
     "pages/fansFocusList/main",
-    "pages/cashDetail/main",
 
     "pages/releaseAct/main",
     "pages/releaseActList/main",
