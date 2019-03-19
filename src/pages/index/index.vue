@@ -1,57 +1,45 @@
 <template>
   <div class="container">
     <div class="tabbar_pages">
-      <div v-if="tabCurr === 'home'"
-           class="page">
-        <scroll-view scroll-y
-                     style="height:100%;">
+      <div v-if="tabCurr === 'home'" class="page">
+        <scroll-view class="page_bd" scroll-y>
           <div style="padding-top:42rpx;"></div>
           <div class="weui-flex padding15-h padding-bottom15 ">
-            <div @click="routeTo('../income/list/main')"
-                 class="weui-flex__item home_bl">
+            <div @click="routeTo('../income/list/main')" class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">收益</div>
               <div class="home_big_fs">{{homePage.total_income}}</div>
               <div class="home_bl_small">今日：¥ {{homePage.today_income}}</div>
             </div>
             <div style="padding:15rpx;"></div>
-            <div @click="routeTo('../exchange/list/main')"
-                 class="weui-flex__item home_bl">
+            <div @click="routeTo('../exchange/list/main')" class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">兑换</div>
               <div class="home_big_fs">{{homePage.total_receives}}</div>
               <div class="home_bl_small">今日：{{homePage.today_receives}}</div>
             </div>
           </div>
           <div class="weui-flex padding15-h">
-            <div @click="routeTo('../shopScan/list/main')"
-                 class="weui-flex__item home_bl">
+            <div @click="routeTo('../shopScan/list/main')" class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">到店扫码</div>
               <div class="home_big_fs">{{homePage.total_scans}}</div>
               <div class="home_bl_small">今日：{{homePage.today_scans}}</div>
             </div>
             <div style="padding:15rpx;"></div>
-            <div @click="routeTo('../brand/list/main')"
-                 class="weui-flex__item home_bl">
+            <div @click="routeTo('../brand/list/main')" class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">品牌获赞</div>
               <div class="home_big_fs">{{homePage.total_likes}}</div>
               <div class="home_bl_small">今日：{{homePage.today_likes}}</div>
             </div>
           </div>
-          <div class="section"
-               style="padding-top:37rpx;">
+          <div class="section" style="padding-top:37rpx;">
             <div class="weui-cells__title home_title">
-              <image class="home_title_icon"
-                     src="../../static/img/home/shop_title_icon.png"></image>
+              <image class="home_title_icon" src="../../static/img/home/shop_title_icon.png"></image>
               <span>我的门店</span>
             </div>
             <div>
               <div class="weui-cells weui-cells_after-title card_cells">
-                <div v-for="(item,index) in homePage.stores"
-                     :key="index"
-                     @click="routeToShop(item)"
-                     class="weui-cell home_cell">
+                <div v-for="(item,index) in homePage.stores" :key="index" @click="routeToShop(item)" class="weui-cell home_cell">
                   <div class="weui-cell__hd">
-                    <image class="home_cell_img"
-                           :src="item.logo"></image>
+                    <image class="home_cell_img" :src="item.logo"></image>
                   </div>
                   <div class="weui-cell__bd padding-left15">
                     <p class="home_cell_title">{{item.store_name}}</p>
@@ -74,88 +62,56 @@
               </div>
             </div>
           </div>
-          <!-- <div class="section"
-               style="padding-top:40rpx;">
-            <div class="weui-cells__title home_title">
-              <image class="home_title_icon"
-                     src="../../static/img/home/shop_title_icon.png"></image>
-              <span>品牌学院</span>
-            </div>
-            <div>
-              <div class="weui-cells weui-cells_after-title card_cells">
-                <div @click="routeToShop"
-                     class="weui-cell home_cell">
-                  <div class="weui-cell__hd">
-                    <image class="home_cell_img"
-                           src="../../static/img/home/shop_icon.png"></image>
-                  </div>
-                  <div class="weui-cell__bd padding-left15">
-                    <p class="home_cell_title">品牌打造分享</p>
-                    <p class="home_cell_sub_title">打造自己的品牌，为顾客提供最好的服务</p>
-                  </div>
-                  <div class="weui-cell__ft weui-cell__ft_in-access"></div>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </scroll-view>
       </div>
       <!-- <div v-if="current === 'fabu'" class="page">
         我是发布页面
     </div> -->
-      <div v-if="tabCurr === 'my'"
-           class="page my flex flex_column">
-        <div class="weui-cells route_cell weui-cells_after-title ">
-          <div @click="routeTo('../userCenter/main')"
-               class="weui-cell my_head_cell ">
-            <div class="weui-cell__hd">
-              <image class="my_cell_img"
-                     :src="user.avatar"></image>
+      <div v-if="tabCurr === 'my'" class="page my flex flex_column">
+        <scroll-view class="page_bd" scroll-y>
+          <div class="weui-cells route_cell weui-cells_after-title ">
+            <div @click="routeTo('../userCenter/main')" class="weui-cell my_head_cell ">
+              <div class="weui-cell__hd">
+                <image class="my_cell_img" :src="user.avatar"></image>
+              </div>
+              <div class="weui-cell__bd padding-left15">
+                <p class="fs15 dark_16">{{user.nickname}}</p>
+                <p class="fs12 main_color">主账号 B302</p>
+              </div>
+              <div class="weui-cell__ft weui-cell__ft_in-access"></div>
             </div>
-            <div class="weui-cell__bd padding-left15">
-              <p class="fs15 dark_16">{{user.nickname}}</p>
-              <p class="fs12 main_color">主账号 B302</p>
+            <div @click="routeTo('../cash/main')" class="weui-cell ">
+              <div class="weui-cell__bd padding-left15">
+                <p class="home_cell_title">我的钱包</p>
+              </div>
+              <div class="weui-cell__ft weui-cell__ft_in-access"></div>
             </div>
-            <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+            <div @click="routeTo('../stock/main')" class="weui-cell ">
+              <div class="weui-cell__bd padding-left15">
+                <p class="home_cell_title">库存管理</p>
+              </div>
+              <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+            </div>
+            <div @click="routeTo('../subAcct/main')" class="weui-cell ">
+              <div class="weui-cell__bd padding-left15">
+                <p class="home_cell_title">账号管理</p>
+              </div>
+              <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+            </div>
+            <button open-type="contact" class="btn_empty weui-cell ">
+              <div class="weui-cell__bd padding-left15">
+                <p class="home_cell_title">联系客服</p>
+              </div>
+              <div class="weui-cell__ft weui-cell__ft_in-access"></div>
+            </button>
           </div>
-          <div @click="routeTo('../cash/main')"
-               class="weui-cell ">
-            <div class="weui-cell__bd padding-left15">
-              <p class="home_cell_title">我的钱包</p>
-            </div>
-            <div class="weui-cell__ft weui-cell__ft_in-access"></div>
-          </div>
-          <div @click="routeTo('../stock/main')"
-               class="weui-cell ">
-            <div class="weui-cell__bd padding-left15">
-              <p class="home_cell_title">库存管理</p>
-            </div>
-            <div class="weui-cell__ft weui-cell__ft_in-access"></div>
-          </div>
-          <div @click="routeTo('../subAcct/main')"
-               class="weui-cell ">
-            <div class="weui-cell__bd padding-left15">
-              <p class="home_cell_title">账号管理</p>
-            </div>
-            <div class="weui-cell__ft weui-cell__ft_in-access"></div>
-          </div>
-          <button open-type="contact"
-                  class="btn_empty weui-cell ">
-            <div class="weui-cell__bd padding-left15">
-              <p class="home_cell_title">联系客服</p>
-            </div>
-            <div class="weui-cell__ft weui-cell__ft_in-access"></div>
-          </button>
-        </div>
+        </scroll-view>
       </div>
     </div>
 
-    <div class="tabbar_warp"
-         style="width:100%">
+    <div class="tabbar_warp" style="width:100%">
       <!-- <card :text="tabCurr"></card> -->
-      <mytabbar :value="tabCurr"
-                @input="handleTab"
-                :list="tabList"></mytabbar>
+      <mytabbar :value="tabCurr" @input="handleTab" :list="tabList"></mytabbar>
       <!-- <i-tab-bar :current="current" @change="handleChange">
         <i-tab-bar-item key="jishi" icon="homepage" current-icon="homepage_fill" title="首页"></i-tab-bar-item>
         <i-tab-bar-item key="fabu" icon="group" current-icon="group_fill" title="兑换"></i-tab-bar-item>
@@ -219,7 +175,7 @@ export default {
         this.$wx.scanCode().then(res => {
           console.log(res, '----------')
           let url = res.result
-          wx.navigateTo({url: '/' + url})
+          wx.navigateTo({ url: '/' + url })
           // wx.navigateTo({ url: '../scanExchange/main' })
           // console.log(res)
         }).catch(e => console.log(e))
@@ -230,7 +186,7 @@ export default {
     async homePageData () {
       // mer-statistics
       let res = await merStatistics()
-      let {stores, ...other} = res
+      let { stores, ...other } = res
       this.$store.commit('setHomeTotal', other)
       this.homePage = res
     },
