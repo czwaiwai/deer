@@ -92,6 +92,11 @@ export default {
   onLoad (query) {
     this.status = parseInt(query.status)
     this.storeId = query.storeId
+    if (this.status === 1) {
+      this.$wx.setTitle('进行中的活动')
+    } else {
+      this.$wx.setTitle('已结束的活动')
+    }
   },
   mounted () {
     this.getPageData()

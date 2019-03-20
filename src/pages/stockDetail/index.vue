@@ -107,6 +107,16 @@ export default {
       this.getGiftData()
     }
   },
+  destoryed () {
+    this.page0 = 1
+    this.list0 = []
+    this.loadType0 = 'loading'
+    this.isLoading0 = false
+    this.page1 = 1
+    this.list1 = []
+    this.isLoading1 = false
+    this.loadType1 = 'loading'
+  },
   methods: {
     handleNav (index) {
       this.navIndex = index

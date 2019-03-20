@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "我的库存",
+  "disableScroll": true,
   "usingComponents": {
     "load-more": "../../static/iview/load-more/index"
   }

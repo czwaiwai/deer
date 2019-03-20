@@ -1,6 +1,9 @@
 {
     "navigationBarTitleText": "发布活动",
+    "disableScroll": true,
     "usingComponents": {
-        "van-dialog": "../../static/vant/dialog/index"
+        "van-dialog": "../../static/vant/dialog/index",
+        "van-popup": "../../static/vant/popup/index",
+        "van-datetime-picker": "../../static/vant/datetime-picker/index"
       }
 }

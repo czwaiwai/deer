@@ -43,10 +43,14 @@
           </div>
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">结束时间</div>
+            <!-- <div @click="endTimePopup = true" class="weui-flex__item form_item_bd" >
+               <div v-if="!formObj.end_time" class="span_placeholder fs15">请选择结束时间</div>
+              <div v-else class="fs15">{{formObj.end_time}}</div>
+            </div> -->
             <picker @change="handleDateEnd" class="weui-flex__item form_item_bd" mode="date" :start="formObj.start_time">
               <div v-if="!formObj.end_time" class="span_placeholder fs15">请选择结束时间</div>
               <div v-else class="fs15">{{formObj.end_time}}</div>
-            </picker>
+            </picker>         
             <div class="form_item_ft flex_item_center">
               <image class="dirt_right" src="../../static/img/other/right_icon.png"></image>
             </div>
@@ -73,6 +77,10 @@
 
       </div>
     </form>
+    <van-popup :show="endTimePopup" position="bottom" @close="endTimePopup=false" >
+      <van-datetime-picker  @cancel="endTimePopup=false" @confirm="handleDateEnd"   type="datetime" :value="formObj.end_time" />
+    </van-popup>
+    
     <van-dialog id="van-dialog" />
   </div>
 </template>
@@ -85,6 +93,7 @@ export default {
   components: {},
   data () {
     return {
+      endTimePopup: false,
       formObj: {
         active_name: '',
         image: '',
@@ -106,6 +115,19 @@ export default {
     console.log(query, 'query===')
     this.formObj.store_id = this.storeId = query.storeId
   },
+  onUnload () {
+    this.formObj = {
+      active_name: '',
+      image: '',
+      detail: '',
+      store_id: '',
+      integral: '',
+      price: '',
+      out_num: '',
+      start_time: '',
+      end_time: ''
+    }
+  },
   methods: {
     handleDateStart (e) {
       this.formObj.start_time = e.mp.detail.value
@@ -123,6 +145,8 @@ export default {
     },
     async handleSubmit (e) {
       console.log(this.formObj, '-----')
+      this.formObj.out_num = this.formObj.out_num.trim()
+      this.formObj.integral = this.formObj.integral.trim()
       let errArr = validators.validator(this.formObj, {
         active_name: 'required@奖品名称不能为空',
         image: 'required@奖品图片不能为空',

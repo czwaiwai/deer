@@ -85,11 +85,11 @@ export default {
   onLoad (query) {
     this.storeId = query.id
     console.log(query.id, 'option.query')
-  },
-  mounted (query) {
-    console.log('mounted ---', query)
     this.getPageData()
   },
+  // mounted (query) {
+
+  // },
   methods: {
     async getPageData () {
       let res = await merStoreInfo({

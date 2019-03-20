@@ -76,7 +76,7 @@
               </div>
               <div class="weui-cell__bd padding-left15">
                 <p class="fs15 dark_16">{{user.nickname}}</p>
-                <p class="fs12 main_color">主账号 B302</p>
+                <p class="fs12 main_color">主账号 {{account}}</p>
               </div>
               <div class="weui-cell__ft weui-cell__ft_in-access"></div>
             </div>
@@ -166,6 +166,7 @@ export default {
   computed: {
     ...mapGetters({
       user: 'user',
+      account: 'account',
       isLogin: 'isLogin'
     })
   },

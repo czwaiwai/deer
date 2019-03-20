@@ -105,6 +105,10 @@ export default {
         ...this.formObj
       })
       this.$toast('更新成功')
+      setTimeout(() => {
+        this.$wx.refreshPrevent()
+        this.$wx.back()
+      }, 1500)
       console.log(res)
     }
   }

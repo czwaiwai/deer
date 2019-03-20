@@ -10,7 +10,7 @@
             </div>
             <div class="weui-cell__bd padding-left15">
               <p class="fs15 dark_16" >{{user.nickname}}</p>
-              <p class="fs12 dark_8e">主账号 B302</p>
+              <p class="fs12 dark_8e">主账号 {{account}}</p>
             </div>
             <div class="weui-cell__ft ">
               <button @click="updateUser" class="user_center_update_btn">更新</button>
@@ -37,7 +37,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      user: 'user'
+      user: 'user',
+      account: 'account'
     })
   },
 

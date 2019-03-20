@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "账号管理",
+  "disableScroll": true,
   "usingComponents": {
     "van-dialog": "../../static/vant/dialog/index",
     "load-more": "../../static/iview/load-more/index"

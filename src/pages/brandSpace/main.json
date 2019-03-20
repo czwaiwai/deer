@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": " ",
   "navigationBarBackgroundColor": "#3ACFC1",
+  "disableScroll": true,
   "usingComponents": {
     "load-more": "../../static/iview/load-more/index"
   }

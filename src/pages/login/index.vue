@@ -13,8 +13,8 @@
             <input class="login_input"
                    name="username"
                    v-model="formObj.username"
-                   type="number"
-                   placeholder="请输入手机号" />
+                   type="text"
+                   placeholder="请输入账号" />
           </div>
           <div class="padding15-h">
             <input class="login_input"
@@ -39,10 +39,6 @@
                       @getuserinfo="bindGetUserInfo"
                       class="login_btn">登录</button>
             </div>
-            <!-- <div v-if="!canAuth">
-              <button class="login_btn"
-                      form-type="submit">登录</button>
-            </div> -->
           </div>
         </form>
       </div>
@@ -137,7 +133,7 @@ export default {
     },
     validator () {
       let errs = validators.validator(this.formObj, {
-        username: ['required@请输入手机号'],
+        username: ['required@请输入账号'],
         pwd: ['required@请输入密码', 'pwd|5']
       })
       if (errs && errs.length > 0) {
@@ -177,7 +173,7 @@ export default {
     loginAction () {
       if (!this.validator()) return Promise.reject(new Error('验证失败'))
       if (this.formObj.autoLogin) {
-        this.$store.commit('setAccount', this.formObj.autoLogin)
+        this.$store.commit('setAccount', this.formObj.username)
       }
       return merLogin({
         account: this.formObj.username,

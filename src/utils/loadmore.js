@@ -6,14 +6,20 @@ export default {
       loadType: 'loading'
     }
   },
-  mounted () {
+  onLoad () {
     this.page = 1
+    this.loadType = 'loading'
+    this.isLoading = false
     this.list = []
+  },
+  mounted () {
+
   },
   methods: {
     refresh () {
       this.page = 1
       this.list = []
+      this.isLoading = false
       this.getPageData()
     },
     toEnd () {

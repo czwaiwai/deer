@@ -13,7 +13,7 @@
               <li v-for="(item, index) in images" :key="index">
                 <img class="img_add" :src="item" mode="aspectFit" >
               </li>
-              <li v-if="images.length<=6" @click="uploadImg">
+              <li v-if="images.length<=9" @click="uploadImg">
                 <image class="img_add" src="../../static/img/other/img_add.png"></image>
               </li>
             </ul>
@@ -46,6 +46,8 @@ export default {
 
   created () {},
   onLoad (query) {
+    this.formObj.content = ''
+    this.images = []
     this.storeId = query.storeId
   },
   mounted () {
@@ -65,6 +67,7 @@ export default {
       })
       console.log(res)
       this.$toast('发布成功～')
+      this.$wx.refreshPrevent()
       this.$wx.back()
     }
   }

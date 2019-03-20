@@ -1,7 +1,7 @@
 <!-- index.vue -->
 <template>
   <div class="container">
-    <div class="page">
+    <div  class="page">
       <scroll-view class="page_bd bg" scroll-y @scrolltolower="lower">
         <div class="brand_hd padding15">
           <div class="brand_main_bl padding15">
@@ -22,10 +22,13 @@
           <div class="light_bg" style="padding-top: 120rpx;"></div>
           <ul>
             <li v-for="(item,index) in list" :key="index" class="brsp_item">
+              <div  v-show="item.delShow" class="hide_del_btn" @click.stop="handleDel(item)">
+                <span >删除</span>
+              </div>
               <div class="weui-flex">
                 <image class="img_72 flex_item_center" :src="item.avatar || '../../static/img/home/head.png'"></image>
                 <div class="weui-flex__item  flex_item_center fs13 padding-left15">{{item.nickname}}</div>
-                <image class="img_more flex_item_center" src="../../static/img/other/more_icon.png"></image>
+                <image @click="item.delShow=!item.delShow" class="img_more flex_item_center" src="../../static/img/other/more_icon.png"></image>
               </div>
               <div class="space_cont padding15-v">
                 <p class="fs13">{{item.context}}</p>
@@ -46,7 +49,7 @@
                 <div v-if="item.images.length === 5" class="img_mode_04">
                   <image v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
-                <div v-if="item.images.length === 6" class="img_mode_04">
+                <div v-if="[6,7,8,9].indexOf(item.images.length) > -1" class="img_mode_04">
                   <image v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
               </div>
@@ -189,10 +192,10 @@ export default {
   created () { },
   onLoad (query) {
     this.storeId = query.storeId
+    this.refresh()
   },
-  mounted () {
-    this.getPageData()
-  },
+  // mounted () {
+  // },
   methods: {
     async getPageData () {
       let res = await this.$api.spaceIndex({
@@ -203,7 +206,13 @@ export default {
       let { list, ...info } = res
       this.info = info
       // this.list = list
-      this.listProcess(list)
+      this.listProcess(list.map(item => {
+        item.delShow = false
+        return item
+      }))
+    },
+    handleDel (item) {
+
     },
     routeTo (url) {
       return wx.navigateTo({ url })
@@ -212,6 +221,15 @@ export default {
 }
 </script>
 <style scoped>
+.hide_del_btn {
+  position:absolute;
+  width:120rpx;
+  background:#8D96A9;
+  color:#FFF;
+  text-align:center;
+  right:140rpx;
+  border-radius:20rpx;
+}
 .brand_hd {
   background: #3acfc1;
   height: 330rpx;
@@ -279,6 +297,7 @@ export default {
 }
 .brsp_item {
   padding: 30rpx;
+  position:relative;
   background: #fff;
   margin-bottom: 18rpx;
 }

@@ -56,10 +56,16 @@ export default {
 
   created () {},
   onLoad (query) {
-    this.subMid = query.subMid || ''
+    this.subMid = query.subMid || 0
     this.updateType = 'create'
     if (this.subMid) {
       this.updateType = 'update'
+    }
+  },
+  onUnload () {
+    this.formObj = {
+      account: '',
+      password: ''
     }
   },
   methods: {

@@ -60,8 +60,15 @@ function back (times = 1) {
     delta: times
   })
 }
+function setTitle (title = ' ') {
+  wx.setNavigationBarTitle({
+    title: title
+  })
+}
 function refreshPrevent () {
+  console.log('返回上一页')
   var pages = getCurrentPages()
+  console.log(pages, 'pages -------')
   var prevPage = pages[pages.length - 2] // 上一个页面
   prevPage.onLoad(prevPage.options)
 }
@@ -70,6 +77,7 @@ const wxHelper = {
   uploadImg,
   scanCode,
   refreshPrevent,
+  setTitle,
   back
 }
 export default wxHelper

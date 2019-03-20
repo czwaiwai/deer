@@ -59,8 +59,11 @@ export default {
   computed: {},
 
   created () { },
-  mounted () {
+  onLoad () {
     this.getPageData()
+  },
+  onUnload () {
+    this.list = []
   },
   methods: {
     async getPageData () {
@@ -82,7 +85,7 @@ export default {
       await this.$api.merSubDel({
         sub_mid: item.sub_mid
       })
-      this.mounted()
+      this.list.splice(this.list.indexOf(item), 1)
     }
   }
 }
