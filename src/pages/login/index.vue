@@ -7,37 +7,24 @@
           <h1 style="padding-top:150rpx;font-size:66rpx;">米奇猩</h1>
           <p class="fs15 dark_8e">商户助手</p>
         </div>
-        <form @submit="handleSubmit"
-              report-submit="true">
+        <form @submit="handleSubmit" report-submit="true">
           <div class="padding15-h">
-            <input class="login_input"
-                   name="username"
-                   v-model="formObj.username"
-                   type="text"
-                   placeholder="请输入账号" />
+            <input class="login_input" name="username" v-model="formObj.username" type="text" placeholder="请输入账号" />
           </div>
           <div class="padding15-h">
-            <input class="login_input"
-                   name="pwd"
-                   v-model="formObj.pwd"
-                   password
-                   type="text"
-                   placeholder="请输入密码" />
+            <input class="login_input" name="pwd" v-model="formObj.pwd" password type="text" placeholder="请输入密码" />
           </div>
           <div class="padding15-h">
             <checkbox-group @change="handleCheck">
               <label class="checkbox login_check">
-                <checkbox  name="autoLogin"  value="1" />
+                <checkbox name="autoLogin" value="1" />
                 记住账号密码
               </label>
             </checkbox-group>
           </div>
           <div class="padding15-h padding-top15">
             <div>
-              <button form-type="submit"
-                      open-type="getUserInfo"
-                      @getuserinfo="bindGetUserInfo"
-                      class="login_btn">登录</button>
+              <button form-type="submit" open-type="getUserInfo" @getuserinfo="bindGetUserInfo" class="login_btn">登录</button>
             </div>
           </div>
         </form>

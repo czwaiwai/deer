@@ -8,7 +8,7 @@
           <div class="weui-cells no_before_border no_after_border route_cell weui-cells_after-title ">
             <div class="weui-cell my_head_cell " style="height:186rpx;">
               <div class="weui-cell__hd">
-                <image class="img_120" src="../../static/img/home/head.png"></image>
+                <image class="img_120" :src="user.avatar || '../../static/img/home/head.png'"></image>
               </div>
               <div class="weui-cell__bd padding-left15">
                 <p class="fs15 dark_16">{{item.account}}</p>
@@ -47,6 +47,7 @@
 <script>
 import Dialog from '../../../static/vant/dialog/dialog'
 import loadmore from '@/utils/loadmore'
+import { mapGetters } from 'vuex'
 export default {
   name: 'detail',
   mixins: [loadmore],
@@ -56,14 +57,15 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters({
+      user: 'user'
+    })
+  },
 
   created () { },
-  onLoad () {
+  mounted () {
     this.getPageData()
-  },
-  onUnload () {
-    this.list = []
   },
   methods: {
     async getPageData () {
@@ -85,7 +87,7 @@ export default {
       await this.$api.merSubDel({
         sub_mid: item.sub_mid
       })
-      this.list.splice(this.list.indexOf(item), 1)
+      this.mounted()
     }
   }
 }
