@@ -1,4 +1,7 @@
 {
     "navigationBarTitleText": "门店信息",
-    "disableScroll": true
+    "disableScroll": true,
+    "usingComponents": {
+        "auth-dialog": "../../static/dialog/dialog"
+    }
 }

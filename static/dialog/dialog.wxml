@@ -1,0 +1,16 @@
+ <!--components/Dialog/dialog.wxml-->
+<view class='wx_dialog_container' hidden="{{!isShow}}">
+    <view class='wx-mask'></view>
+    <view class='wx-dialog'>
+        <view class='wx-dialog-title'>{{ title }}</view>
+        <view class='wx-dialog-content'>
+          <slot></slot>
+          {{ content?content:'' }}
+        </view>
+        <view class='wx-dialog-footer'>
+          <view class='wx-dialog-btn' wx:if="{{dialogType==='confirm'}}" catchtap='_cancelEvent'>{{ cancelText }}</view>
+          <button wx:if="{{scope}}"  class='wx-dialog-btn' open-type="openSetting" bindopensetting="_confirmEvent">{{confirmText}}</button> 
+          <view wx:else class='wx-dialog-btn' catchtap='_confirmEvent'>{{ confirmText }}</view>
+        </view>
+    </view>
+</view>

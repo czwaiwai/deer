@@ -45,6 +45,11 @@
     "pages/logs/main",
     "pages/counter/main"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用填写收获地址信息"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

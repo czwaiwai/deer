@@ -35,22 +35,22 @@
               </div>
               <div v-if="item.images " class="img_show_list">
                 <div v-if="item.images.length === 1" class="img_mode_00">
-                  <image v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                  <image  lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
                 <div v-if="item.images.length === 2" class="img_mode_01">
-                  <image v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                  <image  lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
                 <div v-if="item.images.length === 3" class="img_mode_02">
-                  <image v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                  <image  lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
                 <div v-if="item.images.length === 4" class="img_mode_03">
-                  <image v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                  <image  lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
                 <div v-if="item.images.length === 5" class="img_mode_04">
-                  <image v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                  <image   lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
-                <div v-if="[6,7,8,9].indexOf(item.images.length) > -1" class="img_mode_04">
-                  <image v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                <div v-if="item.images.length === 6 || item.images.length === 7|| item.images.length === 8|| item.images.length === 9" class="img_mode_04">
+                  <image lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
               </div>
               <div class="weui-flex padding-top">

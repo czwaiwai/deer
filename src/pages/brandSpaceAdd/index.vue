@@ -13,7 +13,7 @@
               <li v-for="(item, index) in images" :key="index">
                 <img class="img_add" :src="item" mode="aspectFit" >
               </li>
-              <li v-if="images.length<=9" @click="uploadImg">
+              <li v-if="images.length < 9" @click="chooseImg">
                 <image class="img_add" src="../../static/img/other/img_add.png"></image>
               </li>
             </ul>
@@ -36,6 +36,7 @@ export default {
   data () {
     return {
       images: [],
+      tmpImages: [],
       formObj: {
         content: ''
       }
@@ -54,6 +55,15 @@ export default {
     // this.getPageData()
   },
   methods: {
+    async chooseImg () {
+      let maxUp = 9 - this.images.length
+      this.tmpImages = await this.$wx.spaceChooseImgs(maxUp)
+      this.$wx.showLoading('图片正在上传...')
+      this.tmpImages = await this.$wx.spaceUploadImgs(this.tmpImages)
+      this.images = [...this.images, ...this.tmpImages]
+      this.$wx.hideLoading()
+      console.log(this.images, 'images')
+    },
     async uploadImg () {
       let url = await this.$wx.uploadImg()
       this.images.push(url)

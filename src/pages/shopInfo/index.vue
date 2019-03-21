@@ -14,10 +14,9 @@
             <div class="weui-cell__bd "></div>
             <div class="weui-cell__ft weui-cell__ft_in-access">更换logo</div>
           </div>
-          <div  class="weui-cell ">
+          <div  @click="handleUploadBgImg" class="weui-cell ">
             <div class="weui-cell__hd">
-              <div class="color_cir"
-                   :style="{'background': info.bg_image}"></div>
+              <image v-if="formObj.bg_image" class="shop_info_cell_img" :src="formObj.bg_image"></image>
             </div>
             <div class="weui-cell__bd "></div>
             <div class="weui-cell__ft weui-cell__ft_in-access">更换背景</div>
@@ -27,9 +26,12 @@
             <div class="weui-cell__bd "><input class="store_input" v-model="formObj.store_name" type="text" placeholder="请输入门店名称" /></div>
             <div class="weui-cell__ft weui-cell__ft_in-access"></div>
           </div>
-          <div  class="weui-cell ">
+          <div  @click="handleLocation" class="weui-cell ">
             <div class="weui-cell__hd ">门店地址</div>
-            <div class="weui-cell__bd "><input class="store_input"  v-model="formObj.store_addr" type="text" placeholder="请输入门店地址" /></div>
+            <div open-type="" class="weui-cell__bd text-right">
+              {{formObj.store_addr}}
+              <!-- <input class="store_input"  v-model="formObj.store_addr" type="text" placeholder="请输入门店地址" /> -->
+              </div>
             <div class="weui-cell__ft weui-cell__ft_in-access"></div>
           </div>
           <div  class="weui-cell ">
@@ -50,6 +52,13 @@
         </form>
       </div>
     </div>
+    <auth-dialog id='myDialog' 
+      title='提示' 
+      cancelText='取消' 
+      confirmText='去开启'
+      scope='scope.userLocation'>
+        <div><span>您禁止访问"查询地址"的权限\n请开启此项权限</span></div>
+    </auth-dialog>
   </div>
 </template>
 
@@ -81,6 +90,11 @@ export default {
   },
   mounted () {
     this.getPageData()
+    // console.log(this.$wx.getPage().selectAllComponents())
+    setTimeout(() => {
+      this.dialog = this.$mp.page.selectComponent('#myDialog')
+      console.log(this.dialog, 'dialog')
+    }, 1000)
   },
   methods: {
     async getPageData () {
@@ -97,6 +111,48 @@ export default {
     handleUploadImg () {
       this.$wx.uploadImg().then(url => {
         this.formObj.logo = url
+      })
+    },
+    handleUploadBgImg () {
+      this.$wx.uploadImg().then(url => {
+        this.formObj.bg_image = url
+      })
+    },
+    handleLocation () {
+      let self = this
+      wx.getSetting({
+        success (res) {
+          if (!res.authSetting['scope.userLocation']) {
+            console.log('为什么没有弹出')
+            wx.authorize({
+              scope: 'scope.userLocation',
+              success () {
+                self.$wx.chooseLocation().then(res => {
+                  console.log(res, '-------')
+                  self.formObj.store_addr = res.address
+                })
+              },
+              fail (e) {
+                self.dialog.confirm(bool => {
+                  if (bool) {
+                    console.log('说明授权了, 可以打开chooseAddress', bool)
+                    self.$wx.chooseLocation().then(res => {
+                      console.log(res, '-------')
+                      self.formObj.store_addr = res.address
+                    })
+                  } else {
+                    console.log(bool, '用户不想授权')
+                  }
+                })
+              }
+            })
+          } else {
+            self.$wx.chooseLocation().then(res => {
+              console.log(res, '-------')
+              self.formObj.store_addr = res.address
+            })
+          }
+        }
       })
     },
     async handleSubmit (e) {
