@@ -1,7 +1,7 @@
 <!-- index.vue -->
 <template>
   <div class="container">
-    <div  class="page">
+    <div class="page">
       <scroll-view class="page_bd bg" scroll-y @scrolltolower="lower">
         <div class="brand_hd padding15">
           <div class="brand_main_bl padding15">
@@ -22,8 +22,10 @@
           <div class="light_bg" style="padding-top: 120rpx;"></div>
           <ul>
             <li v-for="(item,index) in list" :key="index" class="brsp_item">
-              <div  v-show="item.delShow" class="hide_del_btn" @click.stop="handleDel(item)">
-                <span >删除</span>
+              <div v-show="item.delShow" class="hide_del_btn" @click.stop="handleDel(item)">
+                <span>
+                  <image class="del_img" src="../../static/img/other/del_space.png"></image> 删除
+                </span>
               </div>
               <div class="weui-flex">
                 <image class="img_72 flex_item_center" :src="item.avatar || '../../static/img/home/head.png'"></image>
@@ -35,22 +37,22 @@
               </div>
               <div v-if="item.images " class="img_show_list">
                 <div v-if="item.images.length === 1" class="img_mode_00">
-                  <image  lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                  <image @click="handlePreImg(item.images, subIndex)" mode="aspectFill" lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
                 <div v-if="item.images.length === 2" class="img_mode_01">
-                  <image  lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                  <image @click="handlePreImg(item.images, subIndex)" mode="aspectFill" lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
                 <div v-if="item.images.length === 3" class="img_mode_02">
-                  <image  lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                  <image @click="handlePreImg(item.images, subIndex)" mode="aspectFill" lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
                 <div v-if="item.images.length === 4" class="img_mode_03">
-                  <image  lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                  <image @click="handlePreImg(item.images, subIndex)" mode="aspectFill" lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
                 <div v-if="item.images.length === 5" class="img_mode_04">
-                  <image   lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                  <image @click="handlePreImg(item.images, subIndex)" mode="aspectFill" lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
                 <div v-if="item.images.length === 6 || item.images.length === 7|| item.images.length === 8|| item.images.length === 9" class="img_mode_04">
-                  <image lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                  <image @click="handlePreImg(item.images, subIndex)" mode="aspectFill" lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
               </div>
               <div class="weui-flex padding-top">
@@ -211,8 +213,14 @@ export default {
         return item
       }))
     },
-    handleDel (item) {
-
+    async handleDel (item) {
+      await this.$api.suDel({
+        su_id: item.id
+      })
+      this.list.splice(this.list.indexOf(item), 1)
+    },
+    async handlePreImg (images, index) {
+      await this.$wx.previewImage(images[index], images)
     },
     routeTo (url) {
       return wx.navigateTo({ url })
@@ -222,13 +230,13 @@ export default {
 </script>
 <style scoped>
 .hide_del_btn {
-  position:absolute;
-  width:120rpx;
-  background:#8D96A9;
-  color:#FFF;
-  text-align:center;
-  right:140rpx;
-  border-radius:20rpx;
+  position: absolute;
+  width: 140rpx;
+  background: #8d96a9;
+  color: #fff;
+  text-align: center;
+  right: 140rpx;
+  border-radius: 20rpx;
 }
 .brand_hd {
   background: #3acfc1;
@@ -297,7 +305,7 @@ export default {
 }
 .brsp_item {
   padding: 30rpx;
-  position:relative;
+  position: relative;
   background: #fff;
   margin-bottom: 18rpx;
 }
@@ -309,7 +317,10 @@ export default {
   width: 79rpx;
   height: 42rpx;
 }
-
+.del_img {
+  width: 40rpx;
+  height: 40rpx;
+}
 .img_show_list {
   position: relative;
 }

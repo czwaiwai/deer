@@ -17,7 +17,7 @@
                 <image class="del_icon" src="../../static/img/other/del.png"></image>
               </div>
             </div>
-            <div class="weui-cell " @click="routeTo('../merchantUpdate/main?subMid='+ item.sub_mid)" style="height:113rpx;">
+            <div class="weui-cell " @click="routeTo('../merchantUpdate/main?subMid='+ item.sub_mid, item)" style="height:113rpx;">
               <div class="weui-cell__bd padding-left15">
                 <p class="fs15 dark_16">编辑信息</p>
               </div>
@@ -75,7 +75,10 @@ export default {
       })
       return this.listProcess(res.list)
     },
-    routeTo (url) {
+    routeTo (url, item) {
+      if (item) {
+        this.$store.commit('parentData', item)
+      }
       return wx.navigateTo({ url })
     },
     async handleDel (item) {

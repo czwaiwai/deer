@@ -33,24 +33,28 @@
           </div>
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">开始时间</div>
-            <picker @change="handleDateStart" class="weui-flex__item form_item_bd" mode="date">
+            <!-- <picker @change="handleDateStart" class="weui-flex__item form_item_bd" mode="date">
               <div v-if="!formObj.start_time" class="span_placeholder fs15">请选择开始时间</div>
               <div v-else class="fs15">{{formObj.start_time}}</div>
-            </picker>
+            </picker> -->
+            <div @click="startTimePopup = true" class="weui-flex__item form_item_bd">
+              <div v-if="!formObj.start_time" class="span_placeholder fs15">请选择结束时间</div>
+              <div v-else class="fs15">{{formObj.start_time}}</div>
+            </div>
             <div class="form_item_ft flex_item_center">
               <image class="dirt_right" src="../../static/img/other/right_icon.png"></image>
             </div>
           </div>
           <div class="form_item weui-flex">
             <div class="form_item_hd fs15 flex_item_center">结束时间</div>
-            <!-- <div @click="endTimePopup = true" class="weui-flex__item form_item_bd" >
-               <div v-if="!formObj.end_time" class="span_placeholder fs15">请选择结束时间</div>
-              <div v-else class="fs15">{{formObj.end_time}}</div>
-            </div> -->
-            <picker @change="handleDateEnd" class="weui-flex__item form_item_bd" mode="date" :start="formObj.start_time">
+            <div @click="endTimePopup = true" class="weui-flex__item form_item_bd">
               <div v-if="!formObj.end_time" class="span_placeholder fs15">请选择结束时间</div>
               <div v-else class="fs15">{{formObj.end_time}}</div>
-            </picker>         
+            </div>
+            <!-- <picker @change="handleDateEnd" class="weui-flex__item form_item_bd" mode="date" :start="formObj.start_time">
+              <div v-if="!formObj.end_time" class="span_placeholder fs15">请选择结束时间</div>
+              <div v-else class="fs15">{{formObj.end_time}}</div>
+            </picker>          -->
             <div class="form_item_ft flex_item_center">
               <image class="dirt_right" src="../../static/img/other/right_icon.png"></image>
             </div>
@@ -77,10 +81,12 @@
 
       </div>
     </form>
-    <van-popup :show="endTimePopup" position="bottom" @close="endTimePopup=false" >
-      <van-datetime-picker  @cancel="endTimePopup=false" @confirm="handleDateEnd"   type="datetime" :value="formObj.end_time" />
+    <van-popup :show="startTimePopup" position="bottom" @close="startTimePopup=false">
+      <van-datetime-picker @cancel="startTimePopup=false" :min-date="beginTime" @confirm="handleDateStart" type="datetime" :value="beginTime" />
     </van-popup>
-    
+    <van-popup :show="endTimePopup" position="bottom" @close="endTimePopup=false">
+      <van-datetime-picker @cancel="endTimePopup=false" :min-date="startTime" @confirm="handleDateEnd" type="datetime" :value="beginTime" />
+    </van-popup>
     <van-dialog id="van-dialog" />
   </div>
 </template>
@@ -88,12 +94,16 @@
 <script>
 import validators from '@/utils/validators'
 import Dialog from '../../../static/vant/dialog/dialog'
+import moment from 'moment'
 export default {
   name: 'detail',
   components: {},
   data () {
     return {
+      startTimePopup: false,
       endTimePopup: false,
+      beginTime: new Date().getTime(),
+      startTime: new Date().getTime(),
       formObj: {
         active_name: '',
         image: '',
@@ -130,12 +140,15 @@ export default {
   },
   methods: {
     handleDateStart (e) {
-      this.formObj.start_time = e.mp.detail.value
+      this.startTime = new Date(e.mp.detail)
+      this.formObj.start_time = moment(e.mp.detail).format('YYYY-MM-DD HH:mm:ss')
+      this.startTimePopup = false
     },
     handleDateEnd (e) {
       console.log(e)
-      this.formObj.end_time = e.mp.detail.value
-      console.log(this.formObj, ' date----')
+      this.formObj.end_time = moment(e.mp.detail).format('YYYY-MM-DD HH:mm:ss')
+      this.endTimePopup = false
+      // console.log(this.formObj, ' date----')
     },
     handleUploadImg () {
       console.log('执行了么')

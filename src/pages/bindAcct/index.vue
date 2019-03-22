@@ -1,32 +1,32 @@
 <!-- index.vue -->
 <template>
-<div class="container">
-  <div class="page">
-    <div class="page_bd">
-      <div class="top_bl text-center">
-        <img class="img_150" :src="info.avatar || '../../static/img/home/head.png'" />
-        <p class="fs18">{{info.nickname}}</p>
-        <p v-if="info.bind_status" class="fs13 dark_8e">已绑定</p>
-        <p v-else class="fs13 dark_8e">待绑定</p>
-      </div>
-      <form report-submit="true" @submit="handleSubmit">
+  <div class="container">
+    <div class="page">
+      <div class="page_bd">
+        <div class="top_bl text-center">
+          <img class="img_150" :src="info.avatar || '../../static/img/home/head.png'" />
+          <p class="fs18">{{info.nickname}}</p>
+          <p v-if="info.bind_status" class="fs13 dark_8e">已绑定</p>
+          <p v-else class="fs13 dark_8e">待绑定</p>
+        </div>
+        <form report-submit="true" @submit="handleSubmit">
           <div class="padding15-h">
-              <input class="login_input" name="phone" v-model="formObj.phone" type="number" placeholder="请输入手机号" />
+            <input class="login_input" name="phone" v-model="formObj.phone" type="number" placeholder="请输入手机号" />
           </div>
           <div class="padding15-h relative">
-              <input class="login_input" name="code" v-model="formObj.code"  type="text" placeholder="请输入验证码" />
-              <button @click="sendMsg" class="sms_btn main_color fs15">{{btnTxt}}</button>
+            <input class="login_input" name="code" v-model="formObj.code" type="text" placeholder="请输入验证码" />
+            <button @click="sendMsg" class="sms_btn main_color fs15">{{btnTxt}}</button>
           </div>
           <div class="padding15-h" style="padding-top:30rpx;">
-            <button form-type="submit" class="login_btn" >
+            <button form-type="submit" class="login_btn">
               <span v-if="info.bind_status">解绑</span>
               <span v-else>绑定</span>
-            </button>  
+            </button>
           </div>
-       </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -48,8 +48,12 @@ export default {
 
   computed: {},
 
-  created () {},
+  created () { },
   mounted () {
+    this.formObj = {
+      phone: '',
+      code: ''
+    }
     this.btnLock = false
     this.getPageData()
   },
@@ -104,36 +108,36 @@ export default {
 </script>
 <style scoped>
 .sms_btn {
-  position:absolute;
-  top:0;
-  right:30rpx;
-  background:transparent;
-  z-index:5;
-  height:118rpx;
-  line-height:118rpx;
+  position: absolute;
+  top: 0;
+  right: 30rpx;
+  background: transparent;
+  z-index: 5;
+  height: 118rpx;
+  line-height: 118rpx;
 }
 .sms_btn:after {
-  border:none;
+  border: none;
 }
 .top_bl {
-    height:406rpx;
-    padding-top:54rpx;
+  height: 406rpx;
+  padding-top: 54rpx;
 }
 .login_input {
-    background:#EDF1F9;
-    height:120rpx;
-    font-size:30rpx;
-    border-radius:10rpx;
-    padding-left:54rpx;
-    margin-bottom:40rpx;
+  background: #edf1f9;
+  height: 120rpx;
+  font-size: 30rpx;
+  border-radius: 10rpx;
+  padding-left: 54rpx;
+  margin-bottom: 40rpx;
 }
 .login_check {
-    font-size:24rpx;
+  font-size: 24rpx;
 }
 .login_btn {
-    background:#2ED0C1;
-    height:120rpx;
-    line-height:120rpx;
-    color:#FFF;
+  background: #2ed0c1;
+  height: 120rpx;
+  line-height: 120rpx;
+  color: #fff;
 }
 </style>

@@ -11,7 +11,11 @@ export function spaceIndex (data) {
 export function suPublish (data) {
   return http.post('/mer/su-publish', data)
 }
-
+// 品牌空间 - 删除动态
+// /mer/su-publish
+export function suDel (data) {
+  return http.post('/mer/su-del', data)
+}
 // 保存活动功能（新增和更新）
 // /mer/save-active
 export function saveActive (data) {

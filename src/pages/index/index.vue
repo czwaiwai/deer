@@ -47,18 +47,6 @@
                   </div>
                   <div class="weui-cell__ft weui-cell__ft_in-access"></div>
                 </div>
-                <!-- <div @click="routeToShop({id:2})"
-                     class="weui-cell home_cell">
-                  <div class="weui-cell__hd">
-                    <image class="home_cell_img"
-                           src="../../static/img/home/shop_icon.png"></image>
-                  </div>
-                  <div class="weui-cell__bd padding-left15">
-                    <p class="home_cell_title">鹿角巷天河北门店</p>
-                    <p class="home_cell_sub_title">天河区天河路北路99号 B302</p>
-                  </div>
-                  <div class="weui-cell__ft weui-cell__ft_in-access"></div>
-                </div> -->
               </div>
             </div>
           </div>
@@ -110,13 +98,7 @@
     </div>
 
     <div class="tabbar_warp" style="width:100%">
-      <!-- <card :text="tabCurr"></card> -->
       <mytabbar :value="tabCurr" @input="handleTab" :list="tabList"></mytabbar>
-      <!-- <i-tab-bar :current="current" @change="handleChange">
-        <i-tab-bar-item key="jishi" icon="homepage" current-icon="homepage_fill" title="首页"></i-tab-bar-item>
-        <i-tab-bar-item key="fabu" icon="group" current-icon="group_fill" title="兑换"></i-tab-bar-item>
-        <i-tab-bar-item key="my" icon="mine" current-icon="mine_fill" dot title="我的"></i-tab-bar-item>
-      </i-tab-bar> -->
     </div>
 
   </div>
@@ -181,6 +163,12 @@ export default {
           // console.log(res)
         }).catch(e => console.log(e))
       } else {
+        if (val === 'home') {
+          this.homePageData()
+        }
+        if (val === 'my') {
+          this.centerPageData()
+        }
         this.tabCurr = val
       }
     },
@@ -252,10 +240,7 @@ export default {
   },
   mounted () {
     // 调用应用实例的方法获取全局数据
-    // this.getUserInfo()
     this.homePageData()
-    this.centerPageData()
-    // this.getPageData()
   }
 }
 </script>

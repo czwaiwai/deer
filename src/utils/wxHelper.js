@@ -140,6 +140,16 @@ function setTitle (title = ' ') {
     title: title
   })
 }
+function previewImage (curr, urls) {
+  return new Promise((resolve, reject) => {
+    wx.previewImage({
+      urls: urls,
+      current: curr,
+      success: resolve,
+      fail: reject
+    })
+  })
+}
 function getPage () {
   const pages = getCurrentPages()
   return pages[pages.length - 1]
@@ -159,6 +169,7 @@ const wxHelper = {
   chooseLocation,
   spaceChooseImgs,
   spaceUploadImgs,
+  previewImage,
   scanCode,
   refreshPrevent,
   setTitle,
