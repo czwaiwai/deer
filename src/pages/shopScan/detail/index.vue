@@ -8,15 +8,15 @@
           <div class="weui-flex text-center">
             <div class="weui-flex__item">
               <p class="dark_e8 fs12">今日</p>
-              <p class="main_color main_txt">200</p>
+              <p class="main_color main_txt">{{info.today_scans}}</p>
             </div>
             <div class="weui-flex__item border_left">
               <p class="dark_e8 fs12">昨日</p>
-              <p class="main_color main_txt">200</p>
+              <p class="main_color main_txt">{{info.yesterday_scans}}</p>
             </div>
             <div class="weui-flex__item border_left">
               <p class="dark_e8 fs12">累计</p>
-              <p class="main_color main_txt">200</p>
+              <p class="main_color main_txt">{{info.total_scans}}</p>
             </div>
           </div>
         </div>
@@ -49,12 +49,14 @@ export default {
   mixins: [loadmore],
   data () {
     return {
+      info: {},
       list: []
     }
   },
 
   computed: {},
   onLoad (query) {
+    this.info = this.$store.getters.parentData
     this.storeId = query.storeId
   },
   mounted () {
@@ -65,7 +67,7 @@ export default {
       try {
         let res = await this.$api.dailyStatistics({
           store_id: this.storeId,
-          category: 'income'
+          category: 'scans'
         })
         this.listProcess(res.list)
         console.log(res)

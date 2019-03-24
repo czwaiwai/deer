@@ -3,18 +3,23 @@
   <div class="container">
     <div class="page">
       <scroll-view class="page_bd bg" scroll-y @scrolltolower="lower">
-        <div class="brand_hd padding15">
-          <div class="brand_main_bl padding15">
-            <div style="height:260rpx;">
-              <div class="brand_img_wrap">
-                <image class="img_150 img_cir" :src="info.store_logo || '../../static/img/home/head.png'"></image>
+        <div class="light_bg">
+          <div class="brand_hd padding15">
+            <div class="brand_main_bl padding15">
+              <div style="height:260rpx;">
+                <div class="brand_img_wrap">
+                  <image class="img_150 img_cir" :src="info.store_logo || '../../static/img/home/head.png'"></image>
+                </div>
+                <p class="text-center fs18">{{info.store_name}}</p>
               </div>
-              <p class="text-center fs18">{{info.store_name}}</p>
-            </div>
-            <div class="weui-flex brand_bottom lodash  ">
-              <image class="address_icon" src="../../static/img/other/address_icon.png"></image>
-              <div class="weui-flex__item padding-left15 fs12 dark_8e">{{info.store_addr}}</div>
-              <div class="fs12 dark_8e">0.6km</div>
+              <div class="weui-flex brand_bottom lodash  ">
+                <image class="address_icon" src="../../static/img/other/address_icon.png"></image>
+                <div class="weui-flex__item padding-left15 fs12 dark_8e hide_dots">{{info.store_addr}}</div>
+                <div @click="openPosi" class="fs12 dark_8e text-right" style="width:120rpx;">
+                  0.6km
+                  <image class="space_arrow_right" src="../../static/img/other/space_arrow_right.png"></image>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -22,15 +27,15 @@
           <div class="light_bg" style="padding-top: 120rpx;"></div>
           <ul>
             <li v-for="(item,index) in list" :key="index" class="brsp_item">
-              <div v-show="item.delShow" class="hide_del_btn" @click.stop="handleDel(item)">
+              <!-- <div v-show="item.delShow" class="hide_del_btn" @click.stop="handleDel(item)">
                 <span>
                   <image class="del_img" src="../../static/img/other/del_space.png"></image> 删除
                 </span>
-              </div>
+              </div> -->
               <div class="weui-flex">
-                <image class="img_72 flex_item_center" :src="item.avatar || '../../static/img/home/head.png'"></image>
+                <image class="img_72 img_cir flex_item_center" :src="item.avatar || '../../static/img/home/head.png'"></image>
                 <div class="weui-flex__item  flex_item_center fs13 padding-left15">{{item.nickname}}</div>
-                <image @click="item.delShow=!item.delShow" class="img_more flex_item_center" src="../../static/img/other/more_icon.png"></image>
+                <image @click.stop="handleDel(item)" class="img_more flex_item_center" src="../../static/img/other/more_icon.png"></image>
               </div>
               <div class="space_cont padding15-v">
                 <p class="fs13">{{item.context}}</p>
@@ -63,103 +68,6 @@
                 <div class="weui-flex__item"></div>
               </div>
             </li>
-            <!-- <li class="brsp_item">
-            <div class="weui-flex">
-              <image class="img_72 flex_item_center" src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item  flex_item_center fs13 padding-left15">Miss米奇</div>
-              <image class="img_more flex_item_center" src="../../static/img/other/more_icon.png"></image>
-            </div>
-            <div class="space_cont padding15-v" >
-              <p class="fs13">本店推出新品，首杯免费试喝，欢迎品尝，活动时间持续到11月底。</p>
-            </div>
-            <div class="img_show_list">
-              <div class="img_mode_02">
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-              </div> 
-            </div>
-            <div class="weui-flex padding-top">
-              <div>
-                <image class="img_like vertical-middle" src="../../static/img/other/like_red.png"></image>
-                <span class="dark_8e  padding-left15 vertical-middle fs13">2000</span>
-              </div>
-              <div class="weui-flex__item"></div>
-            </div>
-          </li>
-          <li class="brsp_item">
-            <div class="weui-flex">
-              <image class="img_72 flex_item_center" src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item  flex_item_center fs13 padding-left15">Miss米奇</div>
-              <image class="img_more flex_item_center" src="../../static/img/other/more_icon.png"></image>
-            </div>
-            <div class="space_cont padding15-v" >
-              <p class="fs13">本店推出新品，首杯免费试喝，欢迎品尝，活动时间持续到11月底。</p>
-            </div>
-            <div class="img_show_list">
-              <div class="img_mode_03">
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-              </div> 
-            </div>
-            <div class="weui-flex padding-top">
-              <div>
-                <image class="img_like vertical-middle" src="../../static/img/other/like_red.png"></image>
-                <span class="dark_8e  padding-left15 vertical-middle fs13">2000</span>
-              </div>
-              <div class="weui-flex__item"></div>
-            </div>
-          </li>
-          <li class="brsp_item">
-            <div class="weui-flex">
-              <image class="img_72 flex_item_center" src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item  flex_item_center fs13 padding-left15">Miss米奇</div>
-              <image class="img_more flex_item_center" src="../../static/img/other/more_icon.png"></image>
-            </div>
-            <div class="space_cont padding15-v" >
-              <p class="fs13">本店推出新品，首杯免费试喝，欢迎品尝，活动时间持续到11月底。</p>
-            </div>
-            <div class="img_show_list">
-              <div class="img_mode_01">
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-              </div> 
-            </div>
-            <div class="weui-flex padding-top">
-              <div>
-                <image class="img_like vertical-middle" src="../../static/img/other/like_red.png"></image>
-                <span class="dark_8e  padding-left15 vertical-middle fs13">2000</span>
-              </div>
-              <div class="weui-flex__item"></div>
-            </div>
-          </li>
-          <li class="brsp_item">
-            <div class="weui-flex">
-              <image class="img_72 flex_item_center" src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item  flex_item_center fs13 padding-left15">Miss米奇</div>
-              <image class="img_more flex_item_center" src="../../static/img/other/more_icon.png"></image>
-            </div>
-            <div class="space_cont padding15-v" >
-              <p class="fs13">本店推出新品，首杯免费试喝，欢迎品尝，活动时间持续到11月底。</p>
-            </div>
-            <div class="img_show_list">
-              <div class="img_mode_05">
-                <image class="img_item" src="../../static/img/other/goods_01.png"></image>
-              </div> 
-            </div>
-            <div class="weui-flex padding-top">
-              <div>
-                <image class="img_like vertical-middle" src="../../static/img/other/like_red.png"></image>
-                <span class="dark_8e  padding-left15 vertical-middle fs13">2000</span>
-              </div>
-              <div class="weui-flex__item"></div>
-            </div>
-          </li> -->
           </ul>
         </div>
         <load-more v-if="loadType==='loading'" class="dark_8e" :loading="true" tip="正在加载"></load-more>
@@ -174,6 +82,13 @@
         <button @click="routeTo('../brandSpaceAdd/main?storeId='+ storeId)" class="cir_btn_ding">发布</button>
       </div>
     </div>
+    <auth-dialog id='myDialog' 
+      title='提示' 
+      cancelText='取消' 
+      confirmText='去开启'
+      scope='scope.userLocation'>
+        <div><span>您禁止访问"查询地址"的权限\n请开启此项权限</span></div>
+    </auth-dialog>
   </div>
 </template>
 
@@ -184,6 +99,7 @@ export default {
   mixins: [loadmore],
   data () {
     return {
+      isAuthLocation: true,
       info: {},
       list: []
     }
@@ -196,9 +112,30 @@ export default {
     this.storeId = query.storeId
     this.refresh()
   },
-  // mounted () {
-  // },
+  mounted () {
+    this.dialog = this.$mp.page.selectComponent('#myDialog')
+    if (this.isAuthLocation) {
+      this.$wx.authScope('scope.userLocation', this.dialog).then(() => {
+        this.$wx.getLocation().then((res) => {
+          console.log('获取用户位置')
+          console.log(res)
+        })
+      }).catch(e => {
+        console.log(e)
+        this.isAuthLocation = false
+      })
+    }
+  },
   methods: {
+    openPosi () {
+      if (!this.info.latitude) {
+        return this.$toast('店铺经纬度未录入')
+      }
+      this.$wx.openLocation({
+        latitude: this.info.latitude || parseFloat(22.543099),
+        longitude: this.info.longitude || parseFloat(114.057868)
+      })
+    },
     async getPageData () {
       let res = await this.$api.spaceIndex({
         store_id: this.storeId,
@@ -214,10 +151,13 @@ export default {
       }))
     },
     async handleDel (item) {
-      await this.$api.suDel({
-        su_id: item.id
-      })
-      this.list.splice(this.list.indexOf(item), 1)
+      let action = await this.$wx.actionSheet(['删除'])
+      if (action.tapIndex === 0) {
+        await this.$api.suDel({
+          su_id: item.id
+        })
+        this.list.splice(this.list.indexOf(item), 1)
+      }
     },
     async handlePreImg (images, index) {
       await this.$wx.previewImage(images[index], images)
@@ -229,6 +169,11 @@ export default {
 }
 </script>
 <style scoped>
+.space_arrow_right {
+  width:15rpx;
+  height:27rpx;
+  vertical-align:middle;
+}
 .hide_del_btn {
   position: absolute;
   width: 140rpx;
@@ -241,6 +186,8 @@ export default {
 .brand_hd {
   background: #3acfc1;
   height: 330rpx;
+  border-bottom-right-radius:120rpx 30rpx;
+  border-bottom-left-radius:120rpx 30rpx;
 }
 .brand_main_bl {
   width: 690rpx;

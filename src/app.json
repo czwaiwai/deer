@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/index/main",
     "pages/login/main",
     "pages/cashDetail/main",
-    "pages/index/main",
     "pages/cash/main",
     "pages/subAcct/main",
     "pages/stock/main",

@@ -39,7 +39,7 @@
               <div class="weui-cells weui-cells_after-title card_cells">
                 <div v-for="(item,index) in homePage.stores" :key="index" @click="routeToShop(item)" class="weui-cell home_cell">
                   <div class="weui-cell__hd">
-                    <image class="home_cell_img" :src="item.logo"></image>
+                    <image class="home_cell_img" :src="item.logo || '../../static/img/logo.png'"></image>
                   </div>
                   <div class="weui-cell__bd padding-left15">
                     <p class="home_cell_title">{{item.store_name}}</p>
@@ -230,17 +230,14 @@ export default {
   },
   onLoad () {
     if (!this.isLogin) {
-      wx.navigateTo({
-        url: '../login/main'
-      })
+      wx.redirectTo({ url: '../login/main' })
+    } else {
+      // 调用应用实例的方法获取全局数据
+      this.homePageData()
     }
   },
   created () {
     console.log('是否登陆', this.isLogin)
-  },
-  mounted () {
-    // 调用应用实例的方法获取全局数据
-    this.homePageData()
   }
 }
 </script>

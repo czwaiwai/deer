@@ -7,7 +7,7 @@
         <ul class="act_list">
           <li v-for="(item,index) in list" :key="index" class="act_item">
             <div class="act_item_bd weui-flex">
-              <img class="img_150" :src="item.image || '../../static/img/other/act_goods.png'" />
+              <img class="img_150" :src="item.image || '../../static/img/logo.png'" />
               <div class="weui-flex__item padding-left15">
                 <p class="fs15 padding-bottom15">{{item.active_name}}</p>
                 <p class="dark_8e fs12">价值：¥{{item.price}}</p>

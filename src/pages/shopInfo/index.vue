@@ -74,6 +74,8 @@ export default {
         store_id: '',
         store_name: '',
         store_addr: '',
+        latitude: '',
+        longitude: '',
         logo: '',
         bg_image: '',
         contact: '',
@@ -91,10 +93,7 @@ export default {
   mounted () {
     this.getPageData()
     // console.log(this.$wx.getPage().selectAllComponents())
-    setTimeout(() => {
-      this.dialog = this.$mp.page.selectComponent('#myDialog')
-      console.log(this.dialog, 'dialog')
-    }, 1000)
+    this.dialog = this.$mp.page.selectComponent('#myDialog')
   },
   methods: {
     async getPageData () {
@@ -130,6 +129,8 @@ export default {
                 self.$wx.chooseLocation().then(res => {
                   console.log(res, '-------')
                   self.formObj.store_addr = res.address
+                  self.formObj.latitude = res.latitude
+                  self.formObj.longitude = res.longitude
                 })
               },
               fail (e) {
@@ -139,6 +140,8 @@ export default {
                     self.$wx.chooseLocation().then(res => {
                       console.log(res, '-------')
                       self.formObj.store_addr = res.address
+                      self.formObj.latitude = res.latitude
+                      self.formObj.longitude = res.longitude
                     })
                   } else {
                     console.log(bool, '用户不想授权')
@@ -150,6 +153,8 @@ export default {
             self.$wx.chooseLocation().then(res => {
               console.log(res, '-------')
               self.formObj.store_addr = res.address
+              self.formObj.latitude = res.latitude
+              self.formObj.longitude = res.longitude
             })
           }
         }

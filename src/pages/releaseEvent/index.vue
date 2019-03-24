@@ -8,7 +8,7 @@
 
           <div @click="handleUploadImg" class="form_item weui-flex">
             <div class="form_item_hd flex_item_center" style="padding-top:10rpx;">
-              <img class="img_60" :src="formObj.image" />
+              <img class="img_60" :src="formObj.image || '../../static/img/logo.png'" />
             </div>
             <div class="weui-flex__item form_item_bd">
               <div class="span_placeholder fs15">请上传活动奖品图</div>
@@ -82,7 +82,7 @@
       </div>
     </form>
     <van-popup :show="startTimePopup" position="bottom" @close="startTimePopup=false">
-      <van-datetime-picker @cancel="startTimePopup=false" :min-date="beginTime" @confirm="handleDateStart" type="datetime" :value="beginTime" />
+      <van-datetime-picker  @cancel="startTimePopup=false" :min-date="beginTime" @confirm="handleDateStart" type="datetime" :value="beginTime" />
     </van-popup>
     <van-popup :show="endTimePopup" position="bottom" @close="endTimePopup=false">
       <van-datetime-picker @cancel="endTimePopup=false" :min-date="startTime" @confirm="handleDateEnd" type="datetime" :value="beginTime" />
@@ -140,7 +140,7 @@ export default {
   },
   methods: {
     handleDateStart (e) {
-      this.startTime = new Date(e.mp.detail)
+      this.startTime = new Date(e.mp.detail).getTime()
       this.formObj.start_time = moment(e.mp.detail).format('YYYY-MM-DD HH:mm:ss')
       this.startTimePopup = false
     },

@@ -32,7 +32,7 @@
               <p class="title fs15">{{item.store_name}}</p>
               <div class="weui-flex padding42">
                 <div class="weui-flex__item fs12 dark_e8">门店编号：{{item.store_no}}</div>
-                <a @click="routeTo('../detail/main?storeId='+item.id)" class="main_color fs12">查看明细</a>
+                <a @click="routeTo('../detail/main?storeId='+item.id, item)" class="main_color fs12">查看明细</a>
               </div>
               <div class="item_nums weui-flex text-center ">
                 <div class="weui-flex__item">
@@ -93,7 +93,10 @@ export default {
       // this.list = stores
       // this.info = info
     },
-    routeTo (url) {
+    routeTo (url, item) {
+      if (item) {
+        this.$store.commit('parentData', item)
+      }
       return wx.navigateTo({ url })
     }
   }

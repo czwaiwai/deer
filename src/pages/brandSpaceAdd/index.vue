@@ -50,6 +50,7 @@ export default {
   onLoad (query) {
     this.formObj.content = ''
     this.images = []
+    this.tmpImages = []
     this.storeId = query.storeId
   },
   mounted () {
@@ -64,11 +65,8 @@ export default {
     },
     async chooseImg () {
       let maxUp = 9 - this.images.length
-      this.tmpImages = await this.$wx.spaceChooseImgs(maxUp)
-      this.$wx.showLoading('图片正在上传...')
-      this.tmpImages = await this.$wx.spaceUploadImgs(this.tmpImages)
-      this.images = [...this.images, ...this.tmpImages]
-      this.$wx.hideLoading()
+      this.tmpImages = [...this.tmpImages, ...await this.$wx.spaceChooseImgs(maxUp)]
+      this.images = this.tmpImages
       console.log(this.images, 'images')
     },
     async uploadImg () {
@@ -76,17 +74,19 @@ export default {
       this.images.push(url)
     },
     async handleSubmit (e) {
+      this.$wx.showLoading('图片正在上传...')
+      let upImgs = await this.$wx.spaceUploadImgs(this.tmpImages)
       if (this.images.length === 0) {
         return this.$toast('添加图片更吸引人哦~')
       }
       let res = await this.$api.suPublish({
         store_id: this.storeId,
         context: this.formObj.content,
-        images: this.images.join(',')
+        images: upImgs.join(',')
       })
       console.log(res)
-      this.$toast('发布成功～')
       this.$wx.refreshPrevent()
+      this.$toast('发布成功～')
       this.$wx.back()
     }
   }

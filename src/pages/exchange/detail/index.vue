@@ -8,15 +8,15 @@
           <div class="weui-flex text-center">
             <div class="weui-flex__item">
               <p class="dark_e8 fs12">今日</p>
-              <p class="main_color main_txt">200</p>
+              <p class="main_color main_txt">{{info.today_receives}}</p>
             </div>
             <div class="weui-flex__item border_left">
               <p class="dark_e8 fs12">昨日</p>
-              <p class="main_color main_txt">200</p>
+              <p class="main_color main_txt">{{info.yesterday_receives}}</p>
             </div>
             <div class="weui-flex__item border_left">
               <p class="dark_e8 fs12">累计</p>
-              <p class="main_color main_txt">200</p>
+              <p class="main_color main_txt">{{info.total_receives}}</p>
             </div>
           </div>
         </div>
@@ -24,10 +24,15 @@
           <ul>
             <li class="list_hd weui-flex text-center">
               <div class="weui-flex__item">日期</div>
+              <div class="weui-flex__item">类型</div>
               <div class="weui-flex__item">收益</div>
             </li>
             <li v-for="(item,index) in list" :key="index" class="list_item weui-flex text-center">
               <div class="weui-flex__item dark_e8">{{item.day}}</div>
+              <div class="weui-flex__item">
+                <div v-if="item.type==1" class=" dark_e8">商品兑换</div>
+                <div v-if="item.type==2" class=" dark_e8">礼品兑换</div>
+              </div>
               <div class="weui-flex__item dark_e8">{{item.value}}</div>
             </li>
           </ul>
@@ -49,12 +54,14 @@ export default {
   mixins: [loadmore],
   data () {
     return {
+      info: {},
       list: []
     }
   },
 
   computed: {},
   onLoad (query) {
+    this.info = this.$store.getters.parentData
     this.storeId = query.storeId
   },
   mounted () {
@@ -65,7 +72,7 @@ export default {
       try {
         let res = await this.$api.dailyStatistics({
           store_id: this.storeId,
-          category: 'income'
+          category: 'receives'
         })
         this.listProcess(res.list)
         console.log(res)

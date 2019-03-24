@@ -47,6 +47,22 @@ function spaceChooseImgs (count = 9) {
     })
   })
 }
+function getLocation () {
+  return new Promise((resolve, reject) => {
+    wx.getLocation({
+      type: 'gcj02', // 返回可以用于wx.openLocation的经纬度
+      success: resolve,
+      fail: reject
+    })
+  })
+}
+function openLocation ({latitude, longitude, scale}) {
+  wx.openLocation({
+    latitude,
+    longitude,
+    scale: scale || 18
+  })
+}
 function chooseLocation () {
   return new Promise((resolve, reject) => {
     wx.chooseLocation({
@@ -93,6 +109,15 @@ function fileUpload (path) {
           reject(json.msg)
         }
       },
+      fail: reject
+    })
+  })
+}
+async function actionSheet (list) {
+  return new Promise((resolve, reject) => {
+    wx.showActionSheet({
+      itemList: list,
+      success: resolve,
       fail: reject
     })
   })
@@ -159,13 +184,45 @@ function refreshPrevent () {
   var prevPage = pages[pages.length - 2] // 上一个页面
   prevPage.onLoad(prevPage.options)
 }
+function authScope (scope, dialog) {
+  return new Promise((resolve, reject) => {
+    wx.getSetting({
+      success (res) {
+        if (!res.authSetting[scope]) {
+          console.log('为什么没有弹出')
+          wx.authorize({
+            scope: scope,
+            success: resolve,
+            fail (e) {
+              dialog.confirm(bool => {
+                if (bool) {
+                  console.log('说明授权了, 可以打开chooseAddress', bool)
+                  resolve()
+                } else {
+                  console.log(bool, '用户不想授权')
+                  reject(new Error('用户不想授权'))
+                }
+              })
+            }
+          })
+        } else {
+          resolve()
+        }
+      }
+    })
+  })
+}
 const wxHelper = {
   login,
   uploadImg,
   getPage,
+  authScope,
+  actionSheet,
   hideLoading,
   showLoading,
   fileUpload,
+  getLocation,
+  openLocation,
   chooseLocation,
   spaceChooseImgs,
   spaceUploadImgs,
