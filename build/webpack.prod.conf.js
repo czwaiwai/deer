@@ -81,6 +81,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       name: 'common/manifest',
       chunks: ['common/vendor']
     }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new MpvueVendorPlugin({
       platform: process.env.PLATFORM
     })
