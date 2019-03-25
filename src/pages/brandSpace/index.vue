@@ -15,8 +15,8 @@
               <div class="weui-flex brand_bottom lodash  ">
                 <image class="address_icon" src="../../static/img/other/address_icon.png"></image>
                 <div class="weui-flex__item padding-left15 fs12 dark_8e hide_dots">{{info.store_addr}}</div>
-                <div @click="openPosi" class="fs12 dark_8e text-right" style="width:120rpx;">
-                  0.6km
+                <div @click="openPosi" class="fs12 dark_8e text-right" style="width:160rpx;">
+                  {{distanceTxt}}
                   <image class="space_arrow_right" src="../../static/img/other/space_arrow_right.png"></image>
                 </div>
               </div>
@@ -82,12 +82,8 @@
         <button @click="routeTo('../brandSpaceAdd/main?storeId='+ storeId)" class="cir_btn_ding">发布</button>
       </div>
     </div>
-    <auth-dialog id='myDialog' 
-      title='提示' 
-      cancelText='取消' 
-      confirmText='去开启'
-      scope='scope.userLocation'>
-        <div><span>您禁止访问"查询地址"的权限\n请开启此项权限</span></div>
+    <auth-dialog id='myDialog' title='提示' cancelText='取消' confirmText='去开启' scope='scope.userLocation'>
+      <div><span>您禁止访问"查询地址"的权限\n请开启此项权限</span></div>
     </auth-dialog>
   </div>
 </template>
@@ -100,6 +96,7 @@ export default {
   data () {
     return {
       isAuthLocation: true,
+      distanceTxt: '获取中...',
       info: {},
       list: []
     }
@@ -109,31 +106,61 @@ export default {
 
   created () { },
   onLoad (query) {
+    this.distanceTxt = '获取中...'
     this.storeId = query.storeId
-    this.refresh()
+    this.promise = this.refresh()
   },
   mounted () {
     this.dialog = this.$mp.page.selectComponent('#myDialog')
     if (this.isAuthLocation) {
       this.$wx.authScope('scope.userLocation', this.dialog).then(() => {
-        this.$wx.getLocation().then((res) => {
-          console.log('获取用户位置')
-          console.log(res)
+        this.promise.then(() => {
+          this.$wx.getLocation().then((res) => {
+            console.log('获取用户位置')
+            this.distanceTxt = this.formatDistance(res)
+            console.log(res)
+          })
         })
       }).catch(e => {
         console.log(e)
+        this.distanceTxt = '获取失败'
         this.isAuthLocation = false
       })
+    } else {
+      this.distanceTxt = '获取失败'
     }
   },
   methods: {
+    formatDistance (obj1) {
+      if (!this.info.latitude) {
+        return '店铺位置未知'
+      }
+      let m = this.getDistance(obj1.latitude, obj1.longitude, this.info.latitude, this.info.longitude)
+      if (m < 2000) {
+        return m + 'm'
+      } else {
+        return parseFloat(m / 1000).toFixed(2) + 'km'
+      }
+    },
+    getDistance (lat1, lng1, lat2, lng2) {
+      lat1 = lat1 || 0
+      lng1 = lng1 || 0
+      lat2 = lat2 || 0
+      lng2 = lng2 || 0
+      var rad1 = lat1 * Math.PI / 180.0
+      var rad2 = lat2 * Math.PI / 180.0
+      var a = rad1 - rad2
+      var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0
+      var r = 6378137
+      return (r * 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(rad1) * Math.cos(rad2) * Math.pow(Math.sin(b / 2), 2)))).toFixed(0)
+    },
     openPosi () {
       if (!this.info.latitude) {
         return this.$toast('店铺经纬度未录入')
       }
       this.$wx.openLocation({
-        latitude: this.info.latitude || parseFloat(22.543099),
-        longitude: this.info.longitude || parseFloat(114.057868)
+        latitude: parseFloat(this.info.latitude),
+        longitude: parseFloat(this.info.longitude)
       })
     },
     async getPageData () {
@@ -170,9 +197,9 @@ export default {
 </script>
 <style scoped>
 .space_arrow_right {
-  width:15rpx;
-  height:27rpx;
-  vertical-align:middle;
+  width: 15rpx;
+  height: 27rpx;
+  vertical-align: middle;
 }
 .hide_del_btn {
   position: absolute;
@@ -186,8 +213,8 @@ export default {
 .brand_hd {
   background: #3acfc1;
   height: 330rpx;
-  border-bottom-right-radius:120rpx 30rpx;
-  border-bottom-left-radius:120rpx 30rpx;
+  border-bottom-right-radius: 120rpx 30rpx;
+  border-bottom-left-radius: 120rpx 30rpx;
 }
 .brand_main_bl {
   width: 690rpx;

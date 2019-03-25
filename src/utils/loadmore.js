@@ -20,7 +20,7 @@ export default {
       this.page = 1
       this.list = []
       this.isLoading = false
-      this.getPageData()
+      return this.getPageData()
     },
     toEnd () {
       this.loadType = 'end'

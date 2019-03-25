@@ -37,7 +37,7 @@ function request (url, method = 'GET', data = {}, header) {
           if (code === 202) {
             store.commit('setLogin', false)
             store.commit('setToken', '')
-            wx.navigateTo({url: '/pages/login/main'})
+            wx.reLaunch({ url: '/pages/login/main' })
           }
           if ([204, 401, 111].includes(code)) {
             toast(msg)
