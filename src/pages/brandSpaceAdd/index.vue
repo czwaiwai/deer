@@ -11,7 +11,7 @@
           <div class="img_list_wrap">
             <ul>
               <li v-for="(item, index) in images" :key="index">
-                <span @click="handleDelImage(index)" class="del_test_btn"><image class="del_img" src="../../static/img/other/del_space.png" ></image></span>
+                <span @click="handleDelImage(index)" class="del_test_btn"><image class="del_img" src="../../static/img/other/close.png" ></image></span>
                 <img class="img_add" @click="handlePreImg(images, index)" mode="aspectFill"  :src="item"  >
               </li>
               <li v-if="images.length < 9" @click="chooseImg">
@@ -97,25 +97,25 @@ export default {
   width: 60rpx;
   height: 60rpx;
   position: absolute;
-  padding: 3px;
+  padding: 5rpx;
   right: 0;
-  background: rgba(236, 32, 32, 0.4);
   text-align: center;
   z-index: 2;
 }
 .del_img {
-  width: 50rpx;
-  height: 50rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
 .textarea_wrap {
   width: 690rpx;
-  height: 360rpx;
-  border: 4rpx solid rgba(237, 241, 249, 1);
+  height: 240rpx;
+  /* border: 4rpx solid rgba(237, 241, 249, 1); */
   border-radius: 20rpx;
 }
 .textarea_wrap textarea {
   font-size: 30rpx;
   width: 100%;
+  height:210rpx;
 }
 .img_list_wrap {
   padding: 30rpx 0;

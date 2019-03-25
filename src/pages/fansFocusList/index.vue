@@ -28,7 +28,7 @@
             </li>
             <!-- <li class="list_item weui-flex ">
               <image class="img_72 flex_item_center" src="../../static/img/home/head.png"></image>
-              <div class="weui-flex__item padding-left15 fs15 dark_8e">Miss米奇</div>
+              <div class="weui-flex__item padding-left15 fs15 dark_8e">Miss米多</div>
               <div class="dark_8e fs15">2019-02-10</div>
             </li> -->
 

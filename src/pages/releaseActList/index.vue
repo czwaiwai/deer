@@ -7,7 +7,7 @@
         <ul class="act_list">
           <li v-for="(item,index) in list" :key="index" class="act_item">
             <div class="act_item_bd weui-flex">
-              <img class="img_150" :src="item.image || '../../static/img/logo.png'" />
+              <img class="img_150 img_cir" :src="item.image || '../../static/img/logo.png'" />
               <div class="weui-flex__item padding-left15">
                 <p class="fs15 padding-bottom15">{{item.active_name}}</p>
                 <p class="dark_8e fs12">价值：¥{{item.price}}</p>
@@ -63,10 +63,10 @@
         </ul>
         <load-more v-if="loadType==='loading'" class="dark_8e" :loading="true" tip="正在加载"></load-more>
         <div v-if="loadType==='end'" class="padding15">
-          <p class="text-center dark_ca fs13 padding-bottom15">米奇猩让幸运伴随你</p>
+          <p class="text-center dark_ca fs13 padding-bottom15">米多猩让幸运伴随你</p>
         </div>
         <div v-if="loadType==='empty'" class="padding15">
-          <p class="text-center dark_ca fs13 padding-bottom15">米奇猩让幸运伴随你</p>
+          <p class="text-center dark_ca fs13 padding-bottom15">米多猩让幸运伴随你</p>
         </div>
       </scroll-view>
       <!-- </div> -->

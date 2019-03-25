@@ -7,7 +7,7 @@
           <li v-for="(item, index) in list" :key="index" class="rel_item">
             <div class="weui-flex stock_top padding-top15 padding15-h">
               <div>
-                <img :src="item.store_logo || '../../static/img/home/shop_icon.png'" class="img_120" />
+                <img :src="item.store_logo || '../../static/img/logo.png'" class="img_120 img_cir" />
               </div>
               <div class="weui-flex__item padding-left15 flex_item_center">
                 <p class="fs14">{{item.store_name}}</p>

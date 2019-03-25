@@ -2,8 +2,7 @@
 <template>
   <div class="container">
     <div class="page">
-      <div class="page_bd">
-        <!-- <scroll-view class="page_bd" scroll-y @scrolltolower="lower"> -->
+        <scroll-view class="page_bd bg" scroll-y >
         <div class="top_wrap">
           <div class="top_bd">
             <!-- <div style="overflow:hidden;">
@@ -50,65 +49,13 @@
                 </div>
               </div>
               <div class="weui-flex" style="padding-top:36rpx;">
-                <div class="weui-flex__item dark_8e fs12">设备编号：{{item.device_no}}</div>
+                <div class="weui-flex__item dark_8e fs12">终端编号：{{item.device_no}}</div>
                 <div class="dark_8e fs12">投放中</div>
               </div>
             </li>
-            <!-- <li class="li_item light_bg ">
-              <p class="title fs15">鹿角巷天河北总店</p>
-              <div class="weui-flex padding42">
-                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
-                <a class="main_color fs12">查看明细</a>
-              </div>
-              <div class="item_nums weui-flex text-center ">
-                <div class="weui-flex__item" >
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">今日</p>
-                </div>
-                <div class="weui-flex__item" >
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">昨日</p>
-                </div>
-                <div class="weui-flex__item" >
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">累计</p>
-                </div>
-              </div>
-              <div class="weui-flex" style="padding-top:36rpx;">
-                <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
-                <div class="dark_8e fs12">投放中</div>
-              </div>
-          </li>
-          <li class="li_item light_bg ">
-              <p class="title fs15">鹿角巷天河北总店</p>
-              <div class="weui-flex padding42">
-                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
-                <a class="main_color fs12">查看明细</a>
-              </div>
-              <div class="item_nums weui-flex text-center ">
-                <div class="weui-flex__item" >
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">今日</p>
-                </div>
-                <div class="weui-flex__item" >
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">昨日</p>
-                </div>
-                <div class="weui-flex__item" >
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">累计</p>
-                </div>
-              </div>
-              <div class="weui-flex" style="padding-top:36rpx;">
-                <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
-                <div class="dark_8e fs12">投放中</div>
-              </div>
-          </li> -->
           </ul>
-
         </div>
-        <!-- </scroll-view> -->
-      </div>
+        </scroll-view>
     </div>
   </div>
 </template>
@@ -148,6 +95,7 @@ export default {
 <style scoped>
 .top_wrap {
   padding-bottom: 72rpx;
+  background:#FFF;
 }
 .top_bd {
   width: 750rpx;

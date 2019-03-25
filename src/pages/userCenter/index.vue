@@ -6,7 +6,7 @@
         <div class="weui-cells  weui-cells_after-title ">
           <div class="weui-cell my_head_cell ">
             <div class="weui-cell__hd">
-              <img class="my_cell_img" :src="user.avatar || '../../static/img/home/head.png'" />
+              <img class="my_cell_img img_cir" :src="user.avatar || '../../static/img/home/head.png'" />
             </div>
             <div class="weui-cell__bd padding-left15">
               <p class="fs15 dark_16">{{user.nickname}}</p>

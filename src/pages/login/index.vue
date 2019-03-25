@@ -4,7 +4,7 @@
     <div class="page">
       <div class="page_bd">
         <div class="top_bl text-center">
-          <h1 style="padding-top:150rpx;font-size:66rpx;">米奇猩</h1>
+          <h1 style="padding-top:150rpx;font-size:66rpx;">米多猩</h1>
           <p class="fs15 dark_8e">商户助手</p>
         </div>
         <form @submit="handleSubmit" report-submit="true">

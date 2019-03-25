@@ -5,7 +5,7 @@
       <div class="page_bd">
         <div class="shop_mg_top_bl text-center">
           <div>
-            <image :src="info.logo?info.logo:'../../static/img/shopManage/head.png'" class="shop_mg_head_img img_cir"></image>
+            <image :src="info.logo?info.logo:'../../static/img/logo.png'" class="shop_mg_head_img img_cir"></image>
           </div>
           <h3 class="fs18  dark_18">{{info.store_name}}</h3>
           <p class="fs13 dark_8e">{{info.store_addr}}</p>

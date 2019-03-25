@@ -7,7 +7,7 @@
           <div @click="routeTo('../stockDetail/main?storeId='+ item.store_id)" class="stock_wrap ">
             <div class="weui-flex stock_top">
               <div>
-                <img :src="item.store_image || '../../static/img/home/shop_icon.png'" class="img_120" />
+                <img :src="item.store_image || '../../static/img/logo.png'" class="img_120 img_cir" />
               </div>
               <div class="weui-flex__item padding-left15 flex_item_center">
                 <p class="fs14">{{item.store_name}}</p>
@@ -61,12 +61,7 @@ export default {
         page: this.page,
         per_page: this.pageSize
       })
-      // this.list = res.list
       return this.listProcess(res.list)
-      // stockGoodsList({
-      //   page: 1,
-      //   per_page: 10
-      // })
     },
     routeTo (url) {
       return wx.navigateTo({ url })

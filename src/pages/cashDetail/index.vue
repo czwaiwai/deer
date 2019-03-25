@@ -19,7 +19,7 @@
               <image class="img_90" src="../../static/img/home/head.png"></image>
             </div>
             <div class="weui-cell__bd padding-left15">
-              <p class="fs15 dark_16">Miss米奇</p>
+              <p class="fs15 dark_16">Miss米多</p>
               <p class="fs12 dark_8e">2018-10-10 16:00:00</p>
             </div>
             <div class="weui-cell__ft error_color">-100</div>
@@ -29,7 +29,7 @@
               <image class="img_90" src="../../static/img/home/head.png"></image>
             </div>
             <div class="weui-cell__bd padding-left15">
-              <p class="fs15 dark_16">Miss米奇</p>
+              <p class="fs15 dark_16">Miss米多</p>
               <p class="fs12 dark_8e">2018-10-10 16:00:00</p>
             </div>
             <div class="weui-cell__ft error_color">-100</div>

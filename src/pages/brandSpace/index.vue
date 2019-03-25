@@ -56,7 +56,16 @@
                 <div v-if="item.images.length === 5" class="img_mode_04">
                   <image @click="handlePreImg(item.images, subIndex)" mode="aspectFill" lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
-                <div v-if="item.images.length === 6 || item.images.length === 7|| item.images.length === 8|| item.images.length === 9" class="img_mode_04">
+                <div v-if="item.images.length === 6 " class="img_mode_05">
+                  <image @click="handlePreImg(item.images, subIndex)" mode="aspectFill" lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                </div>
+                <div v-if="item.images.length === 7" class="img_mode_06">
+                  <image @click="handlePreImg(item.images, subIndex)" mode="aspectFill" lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                </div>
+                <div v-if="item.images.length === 8" class="img_mode_07">
+                  <image @click="handlePreImg(item.images, subIndex)" mode="aspectFill" lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
+                </div>
+                <div v-if="item.images.length === 9" class="img_mode_08">
                   <image @click="handlePreImg(item.images, subIndex)" mode="aspectFill" lazy-load="true" v-for="(img,subIndex) in item.images" :key="subIndex" class="img_item" :src="img ||'../../static/img/other/goods_01.png'"></image>
                 </div>
               </div>
@@ -72,10 +81,10 @@
         </div>
         <load-more v-if="loadType==='loading'" class="dark_8e" :loading="true" tip="正在加载"></load-more>
         <div v-if="loadType==='end'" class="padding15">
-          <p class="text-center dark_ca fs13 padding-bottom15">米奇猩让幸运伴随你</p>
+          <p class="text-center dark_ca fs13 padding-bottom15">米多猩让幸运伴随你</p>
         </div>
         <div v-if="loadType==='empty'" class="padding15">
-          <p class="text-center dark_ca fs13 padding-bottom15">米奇猩让幸运伴随你</p>
+          <p class="text-center dark_ca fs13 padding-bottom15">米多猩让幸运伴随你</p>
         </div>
       </scroll-view>
       <div>
@@ -262,13 +271,16 @@ export default {
   background-repeat: repeat-x;
 }
 .cir_btn_ding {
-  width: 119rpx;
-  height: 119rpx;
+  width: 127rpx;
+  height: 127rpx;
   background: #2ed0c1;
+  border:8rpx solid #FFF;
+  box-shadow:0rpx 8rpx 30rpx 3rpx #2ed0c1;
   border-radius: 50%;
-  font-size: 30rpx;
+  font-size: 32rpx;
   color: #fff;
-  line-height: 119rpx;
+  font-weight:bold;
+  line-height: 110rpx;
   position: absolute;
   bottom: 100rpx;
   right: 30rpx;
@@ -308,7 +320,6 @@ export default {
   width: 456rpx;
   height: 456rpx;
 }
-
 .img_mode_01 {
   display: flex;
   position: relative;
@@ -316,9 +327,9 @@ export default {
   flex-basis: auto;
   justify-content: space-between;
 }
-.img_mode_01 .img_item:first-child {
-  width: 456rpx;
-  height: 456rpx;
+.img_mode_01 .img_item {
+  width:342rpx;
+  height:456rpx;
 }
 .img_mode_02 {
   display: flex;
@@ -330,6 +341,7 @@ export default {
 .img_mode_02 .img_item:first-child {
   width: 456rpx;
   height: 456rpx;
+  margin-bottom: 6rpx;
 }
 .img_mode_02 .img_item:last-child {
   position: absolute;
@@ -347,13 +359,79 @@ export default {
   padding-right: 233rpx;
 }
 
+
 .img_mode_04 {
   display: flex;
   flex-wrap: wrap;
   flex-basis: auto;
   justify-content: space-between;
 }
+.img_mode_04 .img_item:first-child {
+  width:458rpx;
+  height:227rpx;
+  margin-bottom: 6rpx;
+}
 .img_mode_04 .img_item {
+  width: 227rpx;
+  height: 227rpx;
+  margin-bottom: 6rpx;
+}
+
+.img_mode_05 {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  justify-content: space-between;
+}
+.img_mode_05 .img_item {
+  width: 227rpx;
+  height: 227rpx;
+  margin-bottom: 6rpx;
+}
+.img_mode_06 {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  justify-content: space-between;
+}
+.img_mode_06 .img_item {
+  width: 227rpx;
+  height: 227rpx;
+  margin-bottom: 6rpx;
+}
+.img_mode_06 .img_item:first-child {
+  width: 458rpx;
+  height: 227rpx;
+  margin-bottom: 6rpx;
+}
+.img_mode_06 .img_item:last-child {
+  width: 458rpx;
+  height: 227rpx;
+  margin-bottom: 6rpx;
+}
+.img_mode_07 {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  justify-content: space-between;
+}
+.img_mode_07 .img_item {
+  width: 227rpx;
+  height: 227rpx;
+  margin-bottom: 6rpx;
+}
+.img_mode_07 .img_item:first-child {
+  width: 458rpx;
+  height: 227rpx;
+  margin-bottom: 6rpx;
+}
+.img_mode_08 {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  justify-content: space-between;
+}
+.img_mode_08 .img_item {
   width: 227rpx;
   height: 227rpx;
   margin-bottom: 6rpx;
