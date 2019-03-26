@@ -2,12 +2,9 @@
 <template>
   <div class="container">
     <div class="page">
-      <div class="page_bd">
-        <div class="top_wrap">
-          <div class="top_bd">
-            <!-- <div style="overflow:hidden;">
-            <div style="height:69rpx;border-radius:0 0 750rpx 750rpx;background:#FFF;"></div>
-          </div> -->
+      <scroll-view class="page_bd bg" scroll-y>
+        <div class="top_wrap light_bg">
+          <div class="top_bd ">
           </div>
           <div class="top_main">
             <div class="weui-flex">
@@ -50,9 +47,8 @@
               </div>
             </li>
           </ul>
-
         </div>
-      </div>
+      </scroll-view>
     </div>
   </div>
 </template>

@@ -7,26 +7,26 @@
           <div class="weui-flex padding15-h padding-bottom15 ">
             <div @click="routeTo('../income/list/main')" class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">收益</div>
-              <div class="home_big_fs">{{homePage.total_income}}</div>
+              <div class="home_big_fs  weui-cell__ft_in-access">{{homePage.total_income}}</div>
               <div class="home_bl_small">今日：¥ {{homePage.today_income}}</div>
             </div>
             <div style="padding:15rpx;"></div>
             <div @click="routeTo('../exchange/list/main')" class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">兑换</div>
-              <div class="home_big_fs">{{homePage.total_receives}}</div>
+              <div class="home_big_fs weui-cell__ft_in-access">{{homePage.total_receives}}</div>
               <div class="home_bl_small">今日：{{homePage.today_receives}}</div>
             </div>
           </div>
           <div class="weui-flex padding15-h">
             <div @click="routeTo('../shopScan/list/main')" class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">到店扫码</div>
-              <div class="home_big_fs">{{homePage.total_scans}}</div>
+              <div class="home_big_fs weui-cell__ft_in-access">{{homePage.total_scans}}</div>
               <div class="home_bl_small">今日：{{homePage.today_scans}}</div>
             </div>
             <div style="padding:15rpx;"></div>
             <div @click="routeTo('../brand/list/main')" class="weui-flex__item home_bl">
               <div class="home_bl_top_fs">品牌获赞</div>
-              <div class="home_big_fs">{{homePage.total_likes}}</div>
+              <div class="home_big_fs weui-cell__ft_in-access">{{homePage.total_likes}}</div>
               <div class="home_bl_small">今日：{{homePage.today_likes}}</div>
             </div>
           </div>
@@ -263,16 +263,15 @@ button.btn_empty {
 .home_big_fs {
   color: #162641;
   font-size: 60rpx;
+
   line-height: 80rpx;
   font-weight: 600;
 }
 .home_bl_small {
-  background: rgba(237, 241, 249, 1);
-  border-radius: 10rpx;
   font-size: 26rpx;
   height: 54rpx;
+  padding-top: 15rpx;
   color: rgba(142, 151, 168, 1);
-  padding: 0 30rpx;
   line-height: 54rpx;
 }
 .home_bl_top_fs {
@@ -293,6 +292,7 @@ button.btn_empty {
   color: rgba(22, 38, 65, 1);
 }
 .home_cell_sub_title {
+  padding-top: 10rpx;
   font-size: 24rpx;
   color: rgba(142, 151, 169, 1);
 }
