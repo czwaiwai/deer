@@ -2,7 +2,49 @@
 <template>
   <div class="container">
     <div class="page">
-      <scroll-view class="page_bd bg" scroll-y>
+      <scroll-view v-if="list.length ===1" class="page_bd single_view" scroll-y>
+        <div class="single_top_wrap weui-flex">
+          <div class="weui-flex__item">
+            <h1 class="fs24">{{info.store_name}}</h1>
+            <p class="fs12 dark_8e">门店编号：{{info.store_no}}</p>
+          </div>
+          <div>
+            <a @click="routeTo('../detail/main?storeId='+info.id, info)" class="main_color fs12">查看明细</a>
+          </div>
+        </div>
+        <div class="padding15-h">
+          <div class="section">
+            <div class="weui-flex padding-bottom72 ">
+              <div class="hd">
+                <image class="img_84" src="../../../static/img/center/today.png"></image>
+              </div>
+              <div class="padding-left15 weui-flex__item flex_item_center bd fs24">{{info.today_likes}}</div>
+              <div class="ft fs13 dark_8e flex_item_center">今日获赞</div>
+            </div>
+            <div class="weui-flex padding-bottom72 ">
+              <div class="hd">
+                <image class="img_84" src="../../../static/img/center/yesterday.png"></image>
+              </div>
+              <div class="padding-left15 weui-flex__item flex_item_center bd fs24">{{info.yesterday_likes}}</div>
+              <div class="ft fs13 dark_8e flex_item_center">明日获赞</div>
+            </div>
+            <div class="weui-flex">
+              <div class="hd">
+                <image class="img_84" src="../../../static/img/center/total.png"></image>
+              </div>
+              <div class="padding-left15 weui-flex__item  flex_item_center bd fs24">{{info.total_likes}}</div>
+              <div class="ft fs13 dark_8e flex_item_center">累计获赞</div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="padding15" style="padding-top:130rpx;">
+          <p class="fs12 dark_8e padding-bottom5" v-for="(sub,index) in info.devices" :key="index">设备编号：{{sub.device_no}}
+            <span v-if="sub.is_display" class="float_right">投放中</span>
+            <span v-if="!sub.is_display" class="float_right">待投放</span>
+          </p>
+        </div> -->
+      </scroll-view>
+      <scroll-view v-if="list.length>1" class="page_bd bg" scroll-y>
         <div class="top_wrap light_bg">
           <div class="top_bd ">
           </div>
@@ -81,6 +123,7 @@ export default {
         category: 'likes'
       })
       this.list = res
+      this.info = this.list[0]
       // let {stores, ...info} = res
       // this.list = stores
       // this.info = info
@@ -95,6 +138,20 @@ export default {
 }
 </script>
 <style scoped>
+.float_right {
+  float: right;
+}
+.single_top_wrap {
+  padding: 50rpx 30rpx 80rpx 30rpx;
+}
+.padding-bottom72 {
+  padding-bottom: 72rpx;
+}
+.single_view .section {
+  padding: 75rpx 0;
+  border-top: 1rpx solid #eceef2;
+  border-bottom: 1rpx solid #eceef2;
+}
 .top_wrap {
   padding-bottom: 72rpx;
 }

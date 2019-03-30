@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "积分礼品"
+  "navigationBarTitleText": "积分礼品",
+  "usingComponents": {
+    "load-more": "../../../static/iview/load-more/index"
+  }
 }

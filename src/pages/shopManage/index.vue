@@ -23,7 +23,7 @@
               <div>
                 <image class="shop_mg_icon" src="../../static/img/shopManage/icon_07.png"></image>
               </div>
-              <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">品牌动态</div>
+              <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">品牌空间</div>
             </div>
           </div>
           <div class="weui-flex padding15-h padding-bottom15 ">
@@ -38,7 +38,7 @@
               <div>
                 <image class="shop_mg_icon" src="../../static/img/shopManage/icon_04.png"></image>
               </div>
-              <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">积分礼物</div>
+              <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">积分礼品</div>
             </div>
           </div>
           <div class="weui-flex padding15-h padding-bottom15 ">
@@ -46,7 +46,7 @@
               <div>
                 <image class="shop_mg_icon" src="../../static/img/shopManage/icon_01.png"></image>
               </div>
-              <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">运营活动</div>
+              <div class="weui-flex__item padding-left15 item_center shop_mg_big_fs">本店活动</div>
             </div>
             <div style="padding:15rpx;"></div>
             <div @click="routeTo('../fansFocusList/main?storeId='+ storeId)" class="weui-flex__item weui-flex shop_mg_bl">

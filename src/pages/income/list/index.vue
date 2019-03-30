@@ -2,7 +2,49 @@
 <template>
   <div class="container">
     <div class="page">
-        <scroll-view class="page_bd bg" scroll-y >
+      <scroll-view v-if="list.length ===1" class="page_bd single_view" scroll-y>
+        <div class="single_top_wrap weui-flex">
+          <div class="weui-flex__item">
+            <h1 class="fs24">{{single.store_name}}</h1>
+            <p class="fs12 dark_8e">门店编号：{{single.store_no}}</p>
+          </div>
+          <div>
+            <a @click="routeTo('../detail/main?storeId='+single.id, single)" class="main_color fs12">查看明细</a>
+          </div>
+        </div>
+        <div class="padding15-h">
+          <div class="section">
+            <div class="weui-flex padding-bottom72 ">
+              <div class="hd">
+                <image class="img_84" src="../../../static/img/center/today.png"></image>
+              </div>
+              <div class="padding-left15 weui-flex__item flex_item_center bd fs24">{{single.today_income}}</div>
+              <div class="ft fs13 dark_8e flex_item_center">今日收益</div>
+            </div>
+            <div class="weui-flex padding-bottom72 ">
+              <div class="hd">
+                <image class="img_84" src="../../../static/img/center/yesterday.png"></image>
+              </div>
+              <div class="padding-left15 weui-flex__item flex_item_center bd fs24">{{single.yesterday_income}}</div>
+              <div class="ft fs13 dark_8e flex_item_center">昨日收益</div>
+            </div>
+            <div class="weui-flex">
+              <div class="hd">
+                <image class="img_84" src="../../../static/img/center/total.png"></image>
+              </div>
+              <div class="padding-left15 weui-flex__item  flex_item_center bd fs24">{{single.total_income}}</div>
+              <div class="ft fs13 dark_8e flex_item_center">累计收益</div>
+            </div>
+          </div>
+        </div>
+        <div class="padding15" style="padding-top:130rpx;">
+          <p class="fs12 dark_8e padding-bottom5" v-for="(sub,index) in single.devices" :key="index">终端编号：{{sub.device_no}}
+            <span v-if="sub.is_display" class="float_right">投放中</span>
+            <span v-if="!sub.is_display" class="float_right">待投放</span>
+          </p>
+        </div>
+      </scroll-view>
+      <scroll-view v-if="list.length >1" class="page_bd bg" scroll-y>
         <div class="top_wrap">
           <div class="top_bd">
             <!-- <div style="overflow:hidden;">
@@ -48,14 +90,19 @@
                   <p class="sub_txt dark_8e fs12">累计</p>
                 </div>
               </div>
-              <div class="weui-flex" style="padding-top:36rpx;">
-                <div class="weui-flex__item dark_8e fs12">终端编号：{{item.device_no}}</div>
-                <div class="dark_8e fs12">投放中</div>
+              <div style="padding-top:36rpx;">
+                <div class="weui-flex" v-for="(sub,subIndex) in item.devices" :key="subIndex">
+                  <div class="weui-flex__item dark_8e fs12">终端编号：{{sub.device_no}}</div>
+                  <div class="dark_8e fs12">
+                    <span v-if="sub.is_display">投放中</span>
+                    <span v-if="!sub.is_display">待投放</span>
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
         </div>
-        </scroll-view>
+      </scroll-view>
     </div>
   </div>
 </template>
@@ -81,6 +128,7 @@ export default {
       let res = await this.$api.merIncomeStatistics()
       let { stores, ...info } = res
       this.list = stores
+      this.single = this.list[0]
       this.info = info
     },
     routeTo (url, item) {
@@ -93,9 +141,23 @@ export default {
 }
 </script>
 <style scoped>
+.float_right {
+  float: right;
+}
+.single_top_wrap {
+  padding: 50rpx 30rpx 80rpx 30rpx;
+}
+.padding-bottom72 {
+  padding-bottom: 72rpx;
+}
+.single_view .section {
+  padding: 75rpx 0;
+  border-top: 1rpx solid #eceef2;
+  border-bottom: 1rpx solid #eceef2;
+}
 .top_wrap {
   padding-bottom: 72rpx;
-  background:#FFF;
+  background: #fff;
 }
 .top_bd {
   width: 750rpx;

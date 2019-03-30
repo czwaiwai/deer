@@ -2,123 +2,40 @@
 <template>
   <div class="container">
     <div class="page">
-      <div class="page_bd">
-        <div class="top_wrap">
-          <div class="top_bd">
-            <!-- <div style="overflow:hidden;">
-            <div style="height:69rpx;border-radius:0 0 750rpx 750rpx;background:#FFF;"></div>
-          </div> -->
-          </div>
-          <!-- <div class="top_main">
-            <div class="weui-flex">
-              <div class="weui-flex__item">
-                <p class="small_txt">待提收益</p>
-                <p class="big_txt">{{info.aa}}</p>
-              </div>
-              <div class="weui-flex__item">
-                <p class="small_txt">已提收益</p>
-                <p class="big_txt">{{info.aa}}</p>
-              </div>
-              <div class="weui-flex__item">
-                <p class="small_txt">收益预期</p>
-                <p class="big_txt">{{info.aa}}</p>
-              </div>
-            </div>
-          </div> -->
-        </div>
-        <div class="section">
-          <ul class="ul_list "
-              style="padding-bottom:40rpx;">
-            <li class="li_item light_bg ">
-              <p class="title fs15">鹿角巷天河北总店</p>
-              <div class="weui-flex padding42">
-                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
-                <a @click="routeTo('../detail/main')"
-                   class="main_color fs12">查看明细</a>
-              </div>
-              <div class="item_nums weui-flex text-center ">
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">今日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">昨日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">累计</p>
+      <scroll-view class="page_bd bg" scroll-y @scrolltolower="lower">
+        <div class="padding15">
+          <ul class="goods">
+            <li v-for="(item, index) in list" :key="index" class="goods_item">
+              <div class="weui-flex goods_bd">
+                <img class="img_150" :src="item.image || '../../static/img/other/good.png'" />
+                <div class="weui-flex__item padding-left15">
+                  <p class="fs14">{{item.gift_name}}</p>
+                  <p class="dark_8e fs14 padding-bottom">收益: {{item.price}}元/件</p>
+                  <p class="dark_8e fs12">闯关积分: {{item.need_integral}}</p>
                 </div>
               </div>
-              <div class="weui-flex"
-                   style="padding-top:36rpx;">
-                <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
-                <div class="dark_8e fs12">投放中</div>
-              </div>
-            </li>
-            <li class="li_item light_bg ">
-              <p class="title fs15">鹿角巷天河北总店</p>
-              <div class="weui-flex padding42">
-                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
-                <a class="main_color fs12">查看明细</a>
-              </div>
-              <div class="item_nums weui-flex text-center ">
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">今日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">昨日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">累计</p>
-                </div>
-              </div>
-              <div class="weui-flex"
-                   style="padding-top:36rpx;">
-                <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
-                <div class="dark_8e fs12">投放中</div>
-              </div>
-            </li>
-            <li class="li_item light_bg ">
-              <p class="title fs15">鹿角巷天河北总店</p>
-              <div class="weui-flex padding42">
-                <div class="weui-flex__item fs12 dark_e8">门店编号：MQX009001</div>
-                <a class="main_color fs12">查看明细</a>
-              </div>
-              <div class="item_nums weui-flex text-center ">
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">今日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">昨日</p>
-                </div>
-                <div class="weui-flex__item">
-                  <p class="main_txt">30</p>
-                  <p class="sub_txt dark_8e fs12">累计</p>
-                </div>
-              </div>
-              <div class="weui-flex"
-                   style="padding-top:36rpx;">
-                <div class="weui-flex__item dark_8e fs12">门店编号：MQX009001</div>
-                <div class="dark_8e fs12">投放中</div>
+              <div class="goods_ft weui-flex text-center">
+                <div class="weui-flex__item dark_8e fs12">可兑换: {{item.stock}}</div>
+                <div class="weui-flex__item dark_8e fs12">已兑换: {{item.received_num}}</div>
+                <div class="weui-flex__item dark_8e fs12">累计库存: {{item.allot_num}}</div>
               </div>
             </li>
           </ul>
-
         </div>
-      </div>
+        <load-more v-if="loadType==='loading'" :loading="true" tip="正在加载"></load-more>
+        <load-more v-if="loadType==='end'" :loading="false" tip="没有更多数据"></load-more>
+        <load-more v-if="loadType==='empty'" :loading="false" tip="暂无数据"></load-more>
+
+      </scroll-view>
     </div>
   </div>
 </template>
 
 <script>
+import loadmore from '@/utils/loadmore'
 export default {
-  name: 'detail',
+  name: 'storeGift',
+  mixins: [loadmore],
   components: {},
   data () {
     return {
@@ -138,9 +55,14 @@ export default {
   },
   methods: {
     async getPageData () {
-      let {devices, ...info} = await this.$api.storeGift({ store_id: this.storeId })
+      let res = await this.$api.giftDetail({
+        store_id: this.storeId,
+        page: this.page,
+        per_page: this.pageSize
+      })
+      let { list, ...info } = res
       this.info = info
-      this.list = devices
+      return this.listProcess(list)
     },
     routeTo (url) {
       return wx.navigateTo({ url })
@@ -149,54 +71,38 @@ export default {
 }
 </script>
 <style scoped>
-.top_wrap {
-  padding-bottom: 72rpx;
+.stock_btn {
+  width: 180rpx;
+  height: 66rpx;
+  color: #8e97a8;
+  border: 1rpx solid #8e97a8;
+  background: transparent;
+  line-height: 66rpx;
+  border-radius: 33rpx;
 }
-.top_bd {
-  width: 750rpx;
-  height: 180rpx;
-  background: rgba(58, 207, 193, 1);
+.stock_btn:after {
+  border: none;
 }
-.top_main {
-  margin: -110rpx auto 0 auto;
-  width: 690rpx;
-  height: 222rpx;
+.stock_btn.active {
+  border: 1rpx solid #3acfc1;
+  color: #fff;
+  background: #3acfc1;
+}
+.goods_item {
   background: #fff;
-  box-shadow: 0px 13px 24px 0px rgba(202, 204, 219, 0.3);
-  border-radius: 30rpx;
-  padding: 66rpx 0;
-  text-align: center;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
 }
-.top_main .small_txt {
-  font-size: 26rpx;
-  color: rgba(142, 151, 168, 1);
+.goods_item .weui-flex__item p + p {
+  padding-top: 10rpx;
 }
-.top_main .big_txt {
-  font-size: 48rpx;
-  font-weight: bold;
-  color: rgba(22, 38, 65, 1);
+.goods_bd {
+  padding: 40rpx 30rpx;
 }
-.main_txt {
-  font-size: 42rpx;
-}
-.ul_list {
-  background: #edf1f9;
-}
-.li_item {
-  padding: 36rpx 30rpx;
-  margin-bottom: 20rpx;
-}
-.li_item .title {
-  line-height: 36rpx;
-  padding-bottom: 20rpx;
-}
-.li_item .item_nums {
-  height: 144rpx;
-  padding: 22rpx 0;
-  background: rgba(247, 249, 252, 1);
-  border-radius: 10rpx;
-}
-.li_item .padding42 {
-  padding-bottom: 36rpx;
+.goods_ft {
+  border-top: 1rpx solid #eceef2;
+  line-height: 1;
+  padding: 30rpx 0;
+  /* padding: 0 30 */
 }
 </style>

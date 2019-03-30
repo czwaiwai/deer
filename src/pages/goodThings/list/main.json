@@ -1,4 +1,6 @@
 {
-    "navigationBarTitleText": "好物推荐",
-    "navigationBarBackgroundColor": "#3ACFC1"
+  "navigationBarTitleText": "好物推荐",
+  "usingComponents": {
+    "load-more": "../../../static/iview/load-more/index"
+  }
 }

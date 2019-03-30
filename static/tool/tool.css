@@ -102,7 +102,7 @@ view {
 }
 .hide_dots {
   overflow: hidden;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 .dark_line {
@@ -115,6 +115,10 @@ view {
 .relative {
   position: relative;
 }
+.img_48 {
+  width: 48rpx;
+  height: 48rpx;
+}
 .img_54 {
   width: 54rpx;
   height: 54rpx;
@@ -126,6 +130,11 @@ view {
 .img_72 {
   width: 72rpx;
   height: 72rpx;
+}
+.img_84 {
+  width: 84rpx;
+  vertical-align: top;
+  height: 84rpx;
 }
 .img_90 {
   width: 90rpx;

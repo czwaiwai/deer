@@ -14,7 +14,7 @@
               <div class="weui-cell__hd">
                 <img class="img_54 img_cir" :src="info.avatar || '../../static/img/home/head.png'">
               </div>
-              <div class="weui-cell__bd padding-left15 fs15">{{info.nickname}}</div>
+              <div class="weui-cell__bd padding-left15 fs15">{{user.nickname}}</div>
               <div v-if="info.bind_status" class="weui-cell__ft  weui-cell__ft_in-access fs15">已绑定</div>
               <div v-else class="weui-cell__ft  weui-cell__ft_in-access fs15">待绑定</div>
             </div>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'detail',
   components: {},
@@ -58,7 +59,11 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters({
+      user: 'user'
+    })
+  },
 
   created () { },
   mounted () {

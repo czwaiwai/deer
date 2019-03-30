@@ -69,24 +69,36 @@
               <div class="weui-cell__ft weui-cell__ft_in-access"></div>
             </div>
             <div @click="routeTo('../cash/main')" class="weui-cell ">
+              <div class="weui-cell__hd flex_item_center">
+                <image class="img_48  vertical-middle" src="../../static/img/center/cash.png"></image>
+              </div>
               <div class="weui-cell__bd padding-left15">
                 <p class="home_cell_title">我的钱包</p>
               </div>
               <div class="weui-cell__ft weui-cell__ft_in-access"></div>
             </div>
             <div @click="routeTo('../stock/main')" class="weui-cell ">
+              <div class="weui-cell__hd flex_item_center">
+                <image class="img_48 vertical-middle" src="../../static/img/center/stock.png"></image>
+              </div>
               <div class="weui-cell__bd padding-left15">
                 <p class="home_cell_title">库存管理</p>
               </div>
               <div class="weui-cell__ft weui-cell__ft_in-access"></div>
             </div>
             <div @click="routeTo('../subAcct/main')" class="weui-cell ">
+              <div class="weui-cell__hd flex_item_center">
+                <image class="img_48  vertical-middle" src="../../static/img/center/account.png"></image>
+              </div>
               <div class="weui-cell__bd padding-left15">
                 <p class="home_cell_title">账号管理</p>
               </div>
               <div class="weui-cell__ft weui-cell__ft_in-access"></div>
             </div>
             <button open-type="contact" class="btn_empty weui-cell ">
+              <div class="weui-cell__hd flex_item_center">
+                <image class="img_48  vertical-middle" src="../../static/img/center/contact.png"></image>
+              </div>
               <div class="weui-cell__bd padding-left15">
                 <p class="home_cell_title">联系客服</p>
               </div>
@@ -177,6 +189,7 @@ export default {
       let res = await merStatistics()
       let { stores, ...other } = res
       this.$store.commit('setHomeTotal', other)
+      console.log('设置home')
       this.homePage = res
     },
     async centerPageData () {
