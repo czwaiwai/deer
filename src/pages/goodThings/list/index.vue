@@ -15,8 +15,8 @@
                 </div>
               </div>
               <div class="goods_ft weui-flex text-center">
-                <div class="weui-flex__item dark_8e fs12">可兑换: {{item.lave_stock}}</div>
-                <div class="weui-flex__item dark_8e fs12">已兑换: {{item.received_num}}</div>
+                <div class="weui-flex__item dark_8e fs12">可兑换: {{item.stock}}</div>
+                <div class="weui-flex__item dark_8e fs12">已兑换: {{item.sales}}</div>
                 <div class="weui-flex__item dark_8e fs12">预计收益: {{item.total_incomde}}</div>
               </div>
             </li>

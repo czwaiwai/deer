@@ -245,6 +245,7 @@ export default {
     if (!this.isLogin) {
       wx.redirectTo({ url: '../login/main' })
     } else {
+      this.tabCurr = 'home'
       // 调用应用实例的方法获取全局数据
       this.homePageData()
     }

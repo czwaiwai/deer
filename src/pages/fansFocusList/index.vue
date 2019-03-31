@@ -22,7 +22,7 @@
         <div class="section light_bg">
           <ul>
             <li v-for="(item, index) in list" :key="index" class="list_item weui-flex ">
-              <image class="img_72 flex_item_center" :src="item.avatar || '../../static/img/home/head.png'"></image>
+              <image class="img_72 img_cir flex_item_center" :src="item.avatar || '../../static/img/home/head.png'"></image>
               <div class="weui-flex__item padding-left15 fs15 dark_8e">{{item.nickname}}</div>
               <div class="dark_8e fs15">{{item.scan_date}}</div>
             </li>

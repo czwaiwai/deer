@@ -4,7 +4,7 @@
     <div class="page">
       <div class="page_bd">
         <div class="top_bl text-center">
-          <img class="img_150" :src="info.avatar || '../../static/img/home/head.png'" />
+          <img class="img_150 img_cir" :src="info.avatar || '../../static/img/home/head.png'" />
           <p class="fs18">{{info.nickname}}</p>
           <p v-if="info.bind_status" class="fs13 dark_8e">已绑定</p>
           <p v-else class="fs13 dark_8e">待绑定</p>

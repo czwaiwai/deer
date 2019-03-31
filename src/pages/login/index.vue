@@ -79,8 +79,21 @@ export default {
     // })
     this.formObj.username = this.account
   },
-  created () { },
-
+  onShareAppMessage () {
+    return {
+      title: '米多猩商户平台',
+      path: '/pages/login/main',
+      imageUrl: '../../static/img/logo.png',
+      success: (res) => {
+        this.$toast('分享成功')
+        console.log('转发成功', res)
+      },
+      fail: (res) => {
+        // console.log("转发失败", res);
+      }
+    }
+  },
+  created () {},
   methods: {
     // 检查本地token是否有效
     checkLocalToken () {
