@@ -6,11 +6,11 @@
         <div class="weui-cells  weui-cells_after-title ">
           <div class="weui-cell my_head_cell ">
             <div class="weui-cell__hd">
-              <img class="my_cell_img img_cir" :src="user.avatar || '../../static/img/home/head.png'" />
+              <img class="my_cell_img img_cir" :src="info.avatar || '../../static/img/home/head.png'" />
             </div>
             <div class="weui-cell__bd padding-left15">
-              <p class="fs15 dark_16">{{user.nickname}}</p>
-              <p class="fs12 dark_8e">主账号 {{account}}</p>
+              <p class="fs15 dark_16">{{info.nickname}}</p>
+              <p class="fs12 dark_8e">主账号 {{info.account}}</p>
             </div>
             <div class="weui-cell__ft ">
               <button @click="updateUser" class="user_center_update_btn">更新</button>
@@ -32,6 +32,7 @@ export default {
   components: {},
   data () {
     return {
+      info: {}
     }
   },
 
@@ -43,7 +44,15 @@ export default {
   },
 
   created () { },
+  mounted () {
+    this.getPageData()
+  },
   methods: {
+    async getPageData () {
+      let res = await this.$api.merCenter()
+      res.bind_status = parseInt(res.bind_status)
+      this.info = res
+    },
     updateUser () {
       let that = this
       wx.getUserInfo({

@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'detail',
   components: {},
@@ -46,7 +47,11 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters({
+      user: 'user'
+    })
+  },
 
   created () { },
   mounted () {

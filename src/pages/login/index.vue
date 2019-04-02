@@ -93,7 +93,7 @@ export default {
       }
     }
   },
-  created () {},
+  created () { },
   methods: {
     // 检查本地token是否有效
     checkLocalToken () {
@@ -148,6 +148,7 @@ export default {
         console.log('未允许授权')
         this.$toast('未允许授权')
       } else {
+        this.$wx.showLoading()
         console.log(this.user, this.token)
         // if (this.user && this.token) {
         //   if (!this.validator()) return
@@ -160,13 +161,17 @@ export default {
           .then(code => maKey({ code }))
           .then(res => maOauth({
             encryptedData: e.mp.detail.encryptedData,
-            iv: e.mp.detail.iv
+            iv: encodeURIComponent(e.mp.detail.iv)
           }))
           .then(user => {
             this.$store.commit('setUser', user)
             return this.loginAction()
           })
           .then(res => this.loginSucc(res))
+          .catch(err => {
+            console.log(err)
+            this.$wx.hideLoading()
+          })
         // }
       }
     },

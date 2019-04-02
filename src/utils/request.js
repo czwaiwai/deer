@@ -39,7 +39,7 @@ function request (url, method = 'GET', data = {}, header) {
             store.commit('setToken', '')
             wx.reLaunch({ url: '/pages/login/main' })
           }
-          if ([204, 401, 111].includes(code)) {
+          if ([0, 204, 401, 111].includes(code)) {
             toast(msg)
           }
           reject(msg)

@@ -60,11 +60,11 @@
           <div class="weui-cells route_cell weui-cells_after-title ">
             <div @click="routeTo('../userCenter/main')" class="weui-cell my_head_cell ">
               <div class="weui-cell__hd">
-                <image class="my_cell_img" :src="user.avatar"></image>
+                <image class="my_cell_img" :src="centerPage.avatar"></image>
               </div>
               <div class="weui-cell__bd padding-left15">
-                <p class="fs15 dark_16">{{user.nickname}}</p>
-                <p class="fs12 main_color">主账号 {{account}}</p>
+                <p class="fs15 dark_16">{{centerPage.nickname}}</p>
+                <p class="fs12 main_color">主账号 {{centerPage.account}}</p>
               </div>
               <div class="weui-cell__ft weui-cell__ft_in-access"></div>
             </div>
