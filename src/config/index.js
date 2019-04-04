@@ -1,4 +1,4 @@
 export default {
-  baseUrl: 'https://api.midoai.com',
+  baseUrl: 'https://dev.midoai.com',
   secret: '0f4432df49'
 }
