@@ -16,7 +16,7 @@
         </ul>
       </div>
       <div class="page_ft">
-        <button @click="routeTo('../releaseEvent/main?storeId='+ storeId)"
+        <button :hover="true" hover-class="btnhover" @click="routeTo('../releaseEvent/main?storeId='+ storeId)"
                 class="ft_btn">发布活动</button>
       </div>
     </div>

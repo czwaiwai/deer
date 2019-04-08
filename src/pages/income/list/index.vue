@@ -113,6 +113,7 @@ export default {
   data () {
     return {
       info: {},
+      single: {},
       list: []
     }
   },

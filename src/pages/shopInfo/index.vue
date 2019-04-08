@@ -48,7 +48,7 @@
       </div>
       <div class="page_ft">
         <form  @submit="handleSubmit" report-submit="true">
-          <button  form-type="submit"  class="ft_btn">更新门店信息</button>
+          <button  :hover="true" hover-class="btnhover" form-type="submit"  class="ft_btn">更新门店信息</button>
         </form>
       </div>
     </div>

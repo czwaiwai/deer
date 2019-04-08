@@ -42,6 +42,7 @@ export default {
 .flex_item {
   flex:1;
 }
+
 /* this rule will be remove */
 * {
   transition: width 2s;

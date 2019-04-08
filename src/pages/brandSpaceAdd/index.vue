@@ -23,7 +23,7 @@
       
     </div>
     <div class="page_ft">
-      <button  form-type="submit" class="ft_btn">立即发布</button>
+      <button  :hover="true" hover-class="btnhover" form-type="submit" class="ft_btn">立即发布</button>
     </div>
   </div>
   </form>

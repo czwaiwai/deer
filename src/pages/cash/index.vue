@@ -36,7 +36,7 @@
           </div>
           <div class="weui-cells__tips padding-top15">待体现金额： ¥{{info.balance || '0.00' }}</div>
           <div class="padding15">
-            <button form-type="submit" class="cash_submit_btn">提现</button>
+            <button form-type="submit" :hover="true" hover-class="btnhover"  class="cash_submit_btn">提现</button>
           </div>
           <div class="weui-cells__tips">每笔提现需要收取1%的手续费</div>
         </form>

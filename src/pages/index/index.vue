@@ -86,7 +86,7 @@
               </div>
               <div class="weui-cell__ft weui-cell__ft_in-access"></div>
             </div>
-            <div @click="routeTo('../subAcct/main')" class="weui-cell ">
+            <!-- <div @click="routeTo('../subAcct/main')" class="weui-cell ">
               <div class="weui-cell__hd flex_item_center">
                 <image class="img_48  vertical-middle" src="../../static/img/center/account.png"></image>
               </div>
@@ -94,7 +94,7 @@
                 <p class="home_cell_title">账号管理</p>
               </div>
               <div class="weui-cell__ft weui-cell__ft_in-access"></div>
-            </div>
+            </div> -->
             <button open-type="contact" class="btn_empty weui-cell ">
               <div class="weui-cell__hd flex_item_center">
                 <image class="img_48  vertical-middle" src="../../static/img/center/contact.png"></image>
@@ -193,10 +193,10 @@ export default {
       this.homePage = res
     },
     async centerPageData () {
-      if (!this.centerPage.user_id) {
-        let res = await merCenter()
-        this.centerPage = res
-      }
+      // if (!this.centerPage.user_id) {
+      let res = await merCenter()
+      this.centerPage = res
+      // }
     },
     handleChange (e) {
       console.log(e.mp.detail)

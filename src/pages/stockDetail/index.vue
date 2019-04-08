@@ -4,10 +4,10 @@
     <div class="page ">
       <div class="weui-flex padding15 text-center bg">
         <div class="weui-flex__item">
-          <button @click="handleNav(0)" :class="{active:navIndex===0}" class="stock_btn">商品</button>
+          <button :hover="true" hover-class="btnhover" @click="handleNav(0)" :class="{active:navIndex===0}" class="stock_btn">商品</button>
         </div>
         <div class="weui-flex__item">
-          <button @click="handleNav(1)" :class="{active:navIndex===1}" class="stock_btn">礼品</button>
+          <button  :hover="true" hover-class="btnhover" @click="handleNav(1)" :class="{active:navIndex===1}" class="stock_btn">礼品</button>
         </div>
       </div>
       <scroll-view v-if="navIndex===0" class="page_bd bg" scroll-y @scrolltolower="lower0">

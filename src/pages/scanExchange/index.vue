@@ -37,7 +37,7 @@
     </div>
     <div class="page_ft">
       <form v-if="info.status===0" @submit="handleSubmit" report-submit="true" >
-        <button form-type="submit"   class="ft_btn">确定兑换</button>
+        <button  :hover="true" hover-class="btnhover" form-type="submit"   class="ft_btn">确定兑换</button>
       </form>
       <button v-else disabled class="ft_btn">确认兑换</button>
     </div>

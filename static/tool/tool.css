@@ -168,9 +168,15 @@ view {
   background: #1cd1c2;
   color: #fff;
   border: none;
+  font-size:36rpx;
   border-radius: 0;
+  height:120rpx;
+  line-height:120rpx;
 }
 .ft_btn:after {
   border: none;
   border-radius: 0;
+}
+.btnhover {
+  opacity: 0.5;
 }

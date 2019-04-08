@@ -10,7 +10,7 @@
                 <img class="img_150" :src="item.image || '../../static/img/other/good.png'" />
                 <div class="weui-flex__item padding-left15">
                   <p class="fs14">{{item.gift_name}}</p>
-                  <p class="dark_8e fs14 padding-bottom">收益: {{item.price}}元/件</p>
+                  <p class="dark_8e fs14 padding-bottom">售价: ¥{{item.price}}</p>
                   <p class="dark_8e fs12">闯关积分: {{item.need_integral}}</p>
                 </div>
               </div>

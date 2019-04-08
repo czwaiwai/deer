@@ -24,7 +24,7 @@
           </div>
           <div class="padding15-h padding-top15">
             <div>
-              <button form-type="submit" open-type="getUserInfo" @getuserinfo="bindGetUserInfo" class="login_btn">登录</button>
+              <button :hover="true" hover-class="btnhover" form-type="submit" open-type="getUserInfo" @getuserinfo="bindGetUserInfo" class="login_btn">登录</button>
             </div>
           </div>
         </form>

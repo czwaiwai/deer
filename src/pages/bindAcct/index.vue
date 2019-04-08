@@ -15,10 +15,10 @@
           </div>
           <div class="padding15-h relative">
             <input class="login_input" name="code" v-model="formObj.code" type="text" placeholder="请输入验证码" />
-            <button @click="sendMsg" class="sms_btn main_color fs15">{{btnTxt}}</button>
+            <button  :hover="true" hover-class="btnhover" @click="sendMsg" class="sms_btn main_color fs15">{{btnTxt}}</button>
           </div>
           <div class="padding15-h" style="padding-top:30rpx;">
-            <button form-type="submit" class="login_btn">
+            <button :hover="true" hover-class="btnhover" form-type="submit" class="login_btn">
               <span v-if="info.bind_status">解绑</span>
               <span v-else>绑定</span>
             </button>

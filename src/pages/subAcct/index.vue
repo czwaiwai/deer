@@ -37,7 +37,7 @@
       </sroll-view>
 
       <div class="page_ft">
-        <button @click="routeTo('../merchantUpdate/main')" class="ft_btn">创建子账号</button>
+        <button :hover="true" hover-class="btnhover" @click="routeTo('../merchantUpdate/main')" class="ft_btn">创建子账号</button>
       </div>
     </div>
     <van-dialog id="van-dialog" />

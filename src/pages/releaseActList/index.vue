@@ -21,7 +21,7 @@
             <div class="act_item_line weui-flex " style="height:95rpx;">
               <div class="weui-flex__item flex_item_center text-left dark_8e fs12">送出数量：{{item.out_num}}</div>
               <!-- <button @click="handleUpDown(item)" v-if="status===0" class="act_btn flex_item_center">上线</button> -->
-              <button @click="handleUpDown(item)" v-if="status===1" class="act_btn flex_item_center">下线</button>
+              <button :hover="true" hover-class="btnhover" @click="handleUpDown(item)" v-if="status===1" class="act_btn flex_item_center">下线</button>
             </div>
           </li>
           <!-- <li class="act_item">

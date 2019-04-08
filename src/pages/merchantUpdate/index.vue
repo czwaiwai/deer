@@ -20,13 +20,13 @@
           </div>
         </div>
         <div class="page_ft">
-          <button v-if="updateType==='create'" form-type="submit" class="ft_btn">确定关联</button>
+          <button :hover="true" hover-class="btnhover" v-if="updateType==='create'" form-type="submit" class="ft_btn">确定关联</button>
           <div v-if="updateType==='update'" class="weui-flex">
             <div class="weui-flex__item">
-              <button @click="handleDel" class="ft_btn del_btn">删除账号</button>
+              <button :hover="true" hover-class="btnhover" @click="handleDel" class="ft_btn del_btn">删除账号</button>
             </div>
             <div class="weui-flex__item">
-              <button form-type="submit" class="ft_btn">确定编辑</button>
+              <button  :hover="true" hover-class="btnhover" form-type="submit" class="ft_btn">确定编辑</button>
             </div>
           </div>
         </div>

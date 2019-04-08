@@ -13,13 +13,13 @@
               <p class="fs12 dark_8e">主账号 {{info.account}}</p>
             </div>
             <div class="weui-cell__ft ">
-              <button @click="updateUser" class="user_center_update_btn">更新</button>
+              <button :hover="true" hover-class="btnhover" @click="updateUser" class="user_center_update_btn">更新</button>
             </div>
           </div>
         </div>
       </div>
       <div class="page_ft">
-        <button @click="HandleLogout" class="logout_btn">退出</button>
+        <button @click="HandleLogout" :hover="true" hover-class="btnhover" class="logout_btn">退出</button>
       </div>
     </div>
   </div>

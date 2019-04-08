@@ -88,7 +88,7 @@
         </div>
       </scroll-view>
       <div>
-        <button @click="routeTo('../brandSpaceAdd/main?storeId='+ storeId)" class="cir_btn_ding">发布</button>
+        <button :hover="true" hover-class="btnhover" @click="routeTo('../brandSpaceAdd/main?storeId='+ storeId)" class="cir_btn_ding">发布</button>
       </div>
     </div>
     <auth-dialog id='myDialog' title='提示' cancelText='取消' confirmText='去开启' scope='scope.userLocation'>
@@ -271,11 +271,11 @@ export default {
   background-repeat: repeat-x;
 }
 .cir_btn_ding {
-  width: 127rpx;
-  height: 127rpx;
+  width: 122rpx;
+  height: 122rpx;
   background: #2ed0c1;
   border:8rpx solid #FFF;
-  box-shadow:0rpx 8rpx 30rpx 3rpx #2ed0c1;
+  box-shadow:0rpx 8rpx 20rpx 3rpx #2ed0c1;
   border-radius: 50%;
   font-size: 32rpx;
   color: #fff;
