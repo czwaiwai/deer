@@ -1,22 +1,19 @@
-<!-- index.vue -->
+<!-- pageItem.vue -->
 <template>
-  <div class="container">
-    <div class="page">
-      <!-- <div class="page_bd" style=""> -->
-      <scroll-view class="page_bd" scroll-y @scrolltolower="lower">
+    <scroll-view class="page_bd" scroll-y @scrolltolower="lower">
         <div class="detail_top">
           <div class="weui-flex text-center">
             <div class="weui-flex__item">
               <p class="dark_e8 fs12">今日</p>
-              <p class="main_color main_txt">{{info.today_scans}}</p>
+              <p class="main_color main_txt">{{info.today_receives}}</p>
             </div>
             <div class="weui-flex__item border_left">
               <p class="dark_e8 fs12">昨日</p>
-              <p class="main_color main_txt">{{info.yesterday_scans}}</p>
+              <p class="main_color main_txt">{{info.yesterday_receives}}</p>
             </div>
             <div class="weui-flex__item border_left">
               <p class="dark_e8 fs12">累计</p>
-              <p class="main_color main_txt">{{info.total_scans}}</p>
+              <p class="main_color main_txt">{{info.total_receives}}</p>
             </div>
           </div>
         </div>
@@ -24,10 +21,13 @@
           <ul>
             <li class="list_hd weui-flex text-center">
               <div class="weui-flex__item">日期</div>
-              <div class="weui-flex__item">扫码</div>
+              <div class="weui-flex__item">数量</div>
+              <div class="weui-flex__item">累计</div>
             </li>
             <li v-for="(item,index) in list" :key="index" class="list_item weui-flex text-center">
               <div class="weui-flex__item dark_e8">{{item.day}}</div>
+              <div class="weui-flex__item">
+              </div>
               <div class="weui-flex__item dark_e8">{{item.value}}</div>
             </li>
           </ul>
@@ -35,39 +35,71 @@
         <load-more v-if="loadType==='loading'" :loading="true" tip="正在加载"></load-more>
         <load-more v-if="loadType==='end'" :loading="false" tip="没有更多数据"></load-more>
         <load-more v-if="loadType==='empty'" :loading="false" tip="暂无数据"></load-more>
-      </scroll-view>
-      <!-- </div> -->
-    </div>
-  </div>
+    </scroll-view>
 </template>
 
 <script>
-
 import loadmore from '@/utils/loadmore'
 export default {
-  name: 'detail',
+  // name: 'pageItem',
   mixins: [loadmore],
+  components: {},
   data () {
     return {
       info: {},
       list: []
     }
   },
-
-  computed: {},
-  onLoad (query) {
-    this.info = this.$store.getters.parentData
-    this.storeId = query.storeId
+  props: {
+    storeId: {
+      type: String,
+      default: '1'
+    },
+    tab: {
+      type: Number,
+      default: 1
+    },
+    cate: {
+      type: String,
+      default: 'receives'
+    }
   },
+  watch: {
+    tab (val) {
+      if (val) {
+        console.log(val, 'val')
+        this.init()
+      }
+    }
+  },
+  computed: {},
+  // onLoad (query) {
+  //   this.info = this.$store.getters.parentData
+  //   this.storeId = query.storeId
+  // },
   mounted () {
-    this.getPageData()
+    console.log('我执行了么')
+    this.init()
   },
   methods: {
+    init () {
+      this.page = 1
+      this.pageSize = 10
+      this.loadType = 'loading'
+      this.isLoading = false
+      this.list = []
+      this.info = this.$store.getters.parentData
+      this.getPageData()
+    },
     async getPageData () {
       try {
         let res = await this.$api.dailyStatistics({
+          // store_id: this.storeId,
+          // category: 'receives'
+          page: this.page,
+          per_page: this.pageSize,
           store_id: this.storeId,
-          category: 'scans'
+          category: this.cate
         })
         this.listProcess(res.list)
         console.log(res)

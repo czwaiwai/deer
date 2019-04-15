@@ -60,12 +60,17 @@ export default {
     this.info = this.$store.getters.parentData
   },
   mounted () {
+    this.page = 1
+    this.pageSize = 20
+    this.list = []
     this.getPageData()
   },
   methods: {
     async getPageData () {
       try {
         let res = await this.$api.dailyStatistics({
+          page: this.page,
+          per_page: this.pageSize,
           store_id: this.storeId,
           category: 'income'
         })

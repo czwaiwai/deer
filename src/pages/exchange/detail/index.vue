@@ -2,8 +2,22 @@
 <template>
   <div class="container">
     <div class="page">
+      <div class="my_nav_bar weui-flex text-center">
+        <div @click="navChange(1)" class="weui-flex__item " :class="tabIndex===1?'active':''">
+          <span class="nav_txt">商品</span>
+        </div>
+        <div @click="navChange(2)" class="weui-flex__item"  :class="tabIndex===2?'active':''">
+          <span  class="nav_txt">礼品</span>
+        </div>
+        <div @click="navChange(3)" class="weui-flex__item"  :class="tabIndex===3?'active':''">
+          <span class="nav_txt">活动</span>
+        </div>
+      </div>
+      <page-item v-if="tabIndex===1" :tab="tabIndex" cate="receives" :storeId="storeId"></page-item>
+      <page-item v-if="tabIndex===2" :tab="tabIndex" cate="receives" :storeId="storeId"></page-item>
+      <page-item v-if="tabIndex===3" :tab="tabIndex" cate="receives"  :storeId="storeId"></page-item>
       <!-- <div class="page_bd" style=""> -->
-      <scroll-view class="page_bd" scroll-y @scrolltolower="lower">
+      <!-- <scroll-view class="page_bd" scroll-y @scrolltolower="lower">
         <div class="detail_top">
           <div class="weui-flex text-center">
             <div class="weui-flex__item">
@@ -40,7 +54,7 @@
         <load-more v-if="loadType==='loading'" :loading="true" tip="正在加载"></load-more>
         <load-more v-if="loadType==='end'" :loading="false" tip="没有更多数据"></load-more>
         <load-more v-if="loadType==='empty'" :loading="false" tip="暂无数据"></load-more>
-      </scroll-view>
+      </scroll-view> -->
       <!-- </div> -->
     </div>
   </div>
@@ -49,11 +63,17 @@
 <script>
 
 import loadmore from '@/utils/loadmore'
+import pageItem from '@/components/pageItem'
 export default {
   name: 'detail',
   mixins: [loadmore],
+  components: {
+    pageItem
+  },
   data () {
     return {
+      storeId: '',
+      tabIndex: 1,
       info: {},
       list: []
     }
@@ -61,25 +81,36 @@ export default {
 
   computed: {},
   onLoad (query) {
+    this.tabIndex = 1
     this.info = this.$store.getters.parentData
     this.storeId = query.storeId
   },
   mounted () {
-    this.getPageData()
+    // this.page = 1
+    // this.list = []
+    // this.getPageData()
+  },
+  onUnload () {
+    this.tabIndex = -1
   },
   methods: {
-    async getPageData () {
-      try {
-        let res = await this.$api.dailyStatistics({
-          store_id: this.storeId,
-          category: 'receives'
-        })
-        this.listProcess(res.list)
-        console.log(res)
-      } catch (e) {
-        this.toEnd()
-      }
+    navChange (index) {
+      this.tabIndex = index
     }
+    // async getPageData () {
+    //   try {
+    //     let res = await this.$api.dailyStatistics({
+    //       page: this.page,
+    //       per_page: 20,
+    //       store_id: this.storeId,
+    //       category: 'receives'
+    //     })
+    //     this.listProcess(res.list)
+    //     console.log(res)
+    //   } catch (e) {
+    //     this.toEnd()
+    //   }
+    // }
   }
 }
 </script>
@@ -122,5 +153,18 @@ export default {
   color: #8e97a8;
   line-height: 107rpx;
   border-bottom: 1rpx solid #eceef2;
+}
+.my_nav_bar {
+  height:80rpx;
+  font-size:32rpx;
+  border-bottom:1rpx solid #eceef2;
+}
+.my_nav_bar .nav_txt {
+  display:inline-block;
+  line-height:74rpx;
+  border-bottom:4rpx solid #FFF;
+}
+.my_nav_bar .active .nav_txt {
+  border-bottom:6rpx solid #2ed0c1;
 }
 </style>
