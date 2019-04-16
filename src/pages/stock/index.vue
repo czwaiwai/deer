@@ -2,7 +2,7 @@
 <template>
   <div class="container">
     <div class="page">
-      <sroll-view class="page_bd bg" scroll-y @scrolltolower="lower">
+      <scroll-view class="page_bd bg" scroll-y @scrolltolower="lower">
         <div v-for="(item, index) in list" :key="index" class="padding15-h padding-top15">
           <div @click="routeTo('../stockDetail/main?storeId='+ item.store_id)" class="stock_wrap ">
             <div class="weui-flex stock_top">
@@ -33,7 +33,7 @@
         <load-more v-if="loadType==='loading'" class="dark_8e" :loading="true" tip="正在加载"></load-more>
         <load-more v-if="loadType==='end'" class="dark_8e" :loading="false" tip="没有更多数据"></load-more>
         <load-more v-if="loadType==='empty'" class="dark_8e" :loading="false" tip="暂无数据"></load-more>
-      </sroll-view>
+      </scroll-view>
     </div>
   </div>
 </template>
@@ -41,7 +41,7 @@
 <script>
 import loadmore from '@/utils/loadmore'
 export default {
-  name: 'detail',
+  name: 'stock',
   mixins: [loadmore],
   data () {
     return {

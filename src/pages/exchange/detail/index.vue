@@ -6,16 +6,16 @@
         <div @click="navChange(1)" class="weui-flex__item " :class="tabIndex===1?'active':''">
           <span class="nav_txt">商品</span>
         </div>
-        <div @click="navChange(2)" class="weui-flex__item"  :class="tabIndex===2?'active':''">
-          <span  class="nav_txt">礼品</span>
+        <div @click="navChange(2)" class="weui-flex__item" :class="tabIndex===2?'active':''">
+          <span class="nav_txt">礼品</span>
         </div>
-        <div @click="navChange(3)" class="weui-flex__item"  :class="tabIndex===3?'active':''">
+        <div @click="navChange(3)" class="weui-flex__item" :class="tabIndex===3?'active':''">
           <span class="nav_txt">活动</span>
         </div>
       </div>
-      <page-item v-if="tabIndex===1" :tab="tabIndex" cate="receives" :storeId="storeId"></page-item>
-      <page-item v-if="tabIndex===2" :tab="tabIndex" cate="receives" :storeId="storeId"></page-item>
-      <page-item v-if="tabIndex===3" :tab="tabIndex" cate="receives"  :storeId="storeId"></page-item>
+      <page-item v-if="tabIndex===1" :tab="tabIndex" type="goods" cate="receives" :storeId="storeId"></page-item>
+      <page-item v-if="tabIndex===2" :tab="tabIndex" type="gift" cate="receives" :storeId="storeId"></page-item>
+      <page-item v-if="tabIndex===3" :tab="tabIndex" type="active" cate="receives" :storeId="storeId"></page-item>
       <!-- <div class="page_bd" style=""> -->
       <!-- <scroll-view class="page_bd" scroll-y @scrolltolower="lower">
         <div class="detail_top">
@@ -155,16 +155,16 @@ export default {
   border-bottom: 1rpx solid #eceef2;
 }
 .my_nav_bar {
-  height:80rpx;
-  font-size:32rpx;
-  border-bottom:1rpx solid #eceef2;
+  height: 80rpx;
+  font-size: 32rpx;
+  border-bottom: 1rpx solid #eceef2;
 }
 .my_nav_bar .nav_txt {
-  display:inline-block;
-  line-height:74rpx;
-  border-bottom:4rpx solid #FFF;
+  display: inline-block;
+  line-height: 74rpx;
+  border-bottom: 4rpx solid #fff;
 }
 .my_nav_bar .active .nav_txt {
-  border-bottom:6rpx solid #2ed0c1;
+  border-bottom: 6rpx solid #2ed0c1;
 }
 </style>

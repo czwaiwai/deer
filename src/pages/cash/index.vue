@@ -10,13 +10,19 @@
               <div class="weui-cell__hd fs15">提现至</div>
               <div class="weui-cell__bd "></div>
             </div>
-            <div class="weui-cell " style="height:150rpx;">
+            <div v-if="info.bind_status" class="weui-cell " style="height:150rpx;">
+              <div class="weui-cell__hd">
+                <img class="img_54 img_cir" :src="info.bind_avatar || '../../static/img/home/head.png'">
+              </div>
+              <div class="weui-cell__bd padding-left15 fs15">{{info.bind_nickname}}</div>
+              <div class="weui-cell__ft  weui-cell__ft_in-access fs15">已绑定</div>
+            </div>
+            <div v-else class="weui-cell " style="height:150rpx;">
               <div class="weui-cell__hd">
                 <img class="img_54 img_cir" :src="info.avatar || '../../static/img/home/head.png'">
               </div>
-              <div class="weui-cell__bd padding-left15 fs15">{{user.nickname}}</div>
-              <div v-if="info.bind_status" class="weui-cell__ft  weui-cell__ft_in-access fs15">已绑定</div>
-              <div v-else class="weui-cell__ft  weui-cell__ft_in-access fs15">待绑定</div>
+              <div class="weui-cell__bd padding-left15 fs15">{{info.nickname}}</div>
+              <div class="weui-cell__ft  weui-cell__ft_in-access fs15">待绑定</div>
             </div>
           </div>
           <div class="dark_line"></div>
@@ -36,7 +42,7 @@
           </div>
           <div class="weui-cells__tips padding-top15">待体现金额： ¥{{info.balance || '0.00' }}</div>
           <div class="padding15">
-            <button form-type="submit" :hover="true" hover-class="btnhover"  class="cash_submit_btn">提现</button>
+            <button form-type="submit" :hover="true" hover-class="btnhover" class="cash_submit_btn">提现</button>
           </div>
           <div class="weui-cells__tips">每笔提现需要收取1%的手续费</div>
         </form>

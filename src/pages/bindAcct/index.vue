@@ -3,11 +3,17 @@
   <div class="container">
     <div class="page">
       <div class="page_bd">
-        <div class="top_bl text-center">
+        <div v-if="info.bind_status" class="top_bl text-center">
+          <img class="img_150 img_cir" :src="info.bind_avatar || '../../static/img/home/head.png'" />
+          <p class="fs18">{{info.bind_nickname}}</p>
+          <p class="fs13 dark_8e">已绑定</p>
+          <!-- <p v-else class="fs13 dark_8e">待绑定</p> -->
+        </div>
+        <div v-else class="top_bl text-center">
           <img class="img_150 img_cir" :src="info.avatar || '../../static/img/home/head.png'" />
           <p class="fs18">{{info.nickname}}</p>
-          <p v-if="info.bind_status" class="fs13 dark_8e">已绑定</p>
-          <p v-else class="fs13 dark_8e">待绑定</p>
+          <!-- <p v-if="info.bind_status" class="fs13 dark_8e">已绑定</p> -->
+          <p class="fs13 dark_8e">待绑定</p>
         </div>
         <form report-submit="true" @submit="handleSubmit">
           <div class="padding15-h">
@@ -15,7 +21,7 @@
           </div>
           <div class="padding15-h relative">
             <input class="login_input" name="code" v-model="formObj.code" type="text" placeholder="请输入验证码" />
-            <button  :hover="true" hover-class="btnhover" @click="sendMsg" class="sms_btn main_color fs15">{{btnTxt}}</button>
+            <button :hover="true" hover-class="btnhover" @click="sendMsg" class="sms_btn main_color fs15">{{btnTxt}}</button>
           </div>
           <div class="padding15-h" style="padding-top:30rpx;">
             <button :hover="true" hover-class="btnhover" form-type="submit" class="login_btn">

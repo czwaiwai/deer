@@ -1,41 +1,41 @@
 <!-- pageItem.vue -->
 <template>
-    <scroll-view class="page_bd" scroll-y @scrolltolower="lower">
-        <div class="detail_top">
-          <div class="weui-flex text-center">
-            <div class="weui-flex__item">
-              <p class="dark_e8 fs12">今日</p>
-              <p class="main_color main_txt">{{info.today_receives}}</p>
-            </div>
-            <div class="weui-flex__item border_left">
-              <p class="dark_e8 fs12">昨日</p>
-              <p class="main_color main_txt">{{info.yesterday_receives}}</p>
-            </div>
-            <div class="weui-flex__item border_left">
-              <p class="dark_e8 fs12">累计</p>
-              <p class="main_color main_txt">{{info.total_receives}}</p>
-            </div>
-          </div>
+  <scroll-view class="page_bd" scroll-y @scrolltolower="lower">
+    <div class="detail_top">
+      <div class="weui-flex text-center">
+        <div class="weui-flex__item">
+          <p class="dark_e8 fs12">今日</p>
+          <p class="main_color main_txt">{{info.today_receives}}</p>
         </div>
-        <div class="section light_bg">
-          <ul>
-            <li class="list_hd weui-flex text-center">
-              <div class="weui-flex__item">日期</div>
-              <div class="weui-flex__item">数量</div>
-              <div class="weui-flex__item">累计</div>
-            </li>
-            <li v-for="(item,index) in list" :key="index" class="list_item weui-flex text-center">
-              <div class="weui-flex__item dark_e8">{{item.day}}</div>
-              <div class="weui-flex__item">
-              </div>
-              <div class="weui-flex__item dark_e8">{{item.value}}</div>
-            </li>
-          </ul>
+        <div class="weui-flex__item border_left">
+          <p class="dark_e8 fs12">昨日</p>
+          <p class="main_color main_txt">{{info.yesterday_receives}}</p>
         </div>
-        <load-more v-if="loadType==='loading'" :loading="true" tip="正在加载"></load-more>
-        <load-more v-if="loadType==='end'" :loading="false" tip="没有更多数据"></load-more>
-        <load-more v-if="loadType==='empty'" :loading="false" tip="暂无数据"></load-more>
-    </scroll-view>
+        <div class="weui-flex__item border_left">
+          <p class="dark_e8 fs12">累计</p>
+          <p class="main_color main_txt">{{info.total_receives}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="section light_bg">
+      <ul>
+        <li class="list_hd weui-flex text-center">
+          <div class="weui-flex__item">日期</div>
+          <!-- <div class="weui-flex__item">数量</div> -->
+          <div class="weui-flex__item">累计</div>
+        </li>
+        <li v-for="(item,index) in list" :key="index" class="list_item weui-flex text-center">
+          <div class="weui-flex__item dark_e8">{{item.day}}</div>
+          <!-- <div class="weui-flex__item">
+          </div> -->
+          <div class="weui-flex__item dark_e8">{{item.value}}</div>
+        </li>
+      </ul>
+    </div>
+    <load-more v-if="loadType==='loading'" :loading="true" tip="正在加载"></load-more>
+    <load-more v-if="loadType==='end'" :loading="false" tip="没有更多数据"></load-more>
+    <load-more v-if="loadType==='empty'" :loading="false" tip="暂无数据"></load-more>
+  </scroll-view>
 </template>
 
 <script>
@@ -54,6 +54,10 @@ export default {
     storeId: {
       type: String,
       default: '1'
+    },
+    type: {
+      type: String,
+      defalut: 'goods'
     },
     tab: {
       type: Number,
@@ -98,6 +102,7 @@ export default {
           // category: 'receives'
           page: this.page,
           per_page: this.pageSize,
+          type: this.type,
           store_id: this.storeId,
           category: this.cate
         })

@@ -40,7 +40,9 @@ function request (url, method = 'GET', data = {}, header) {
             wx.reLaunch({ url: '/pages/login/main' })
           }
           if ([0, 204, 401, 111].includes(code)) {
-            toast(msg)
+            if (msg !== '解密失败') {
+              toast(msg)
+            }
           }
           reject(msg)
         }

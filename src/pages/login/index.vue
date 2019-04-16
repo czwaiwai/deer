@@ -81,9 +81,9 @@ export default {
   },
   onShareAppMessage () {
     return {
-      title: '米多猩商户平台',
+      title: '门店一站式运营管理平台',
       path: '/pages/login/main',
-      imageUrl: '../../static/img/logo.png',
+      imageUrl: 'https://static.midoai.com/1554797869X51pA1OH.jpg',
       success: (res) => {
         this.$toast('分享成功')
         console.log('转发成功', res)
